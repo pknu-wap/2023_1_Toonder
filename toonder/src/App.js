@@ -1,4 +1,4 @@
-import Findid from "./TO-23/findid";
+import Findid from "./findid";
 
 function App() {
   return (
