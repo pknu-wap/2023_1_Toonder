@@ -1,25 +1,25 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0; /* body의 기본 margin 제거 */
-    background-image: url("./images/backgroundimg.png");
-    background-position: center 200px;
-    background-repeat: no-repeat;
-    background-size: 318px 265px;
+.find_background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* 추가 */
+  margin: 0;
+  background-image: url('./images/backgroundimg.png');
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  background-size: 318px 265px;
+  height: 500px;
 }
 
-.findid{
-    margin-top: 100px;
-    font-size: 35px;
+.find_logo{
+  font-size: 35px;
+  margin-bottom: 20px;
 }
 
 .findid_body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top:60px;
+    margin-top: 50px; /* 상단 마진 수정 */
 }
+
   .findid_body form {
     display: flex;
     flex-direction: column;
