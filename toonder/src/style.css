@@ -12,12 +12,16 @@
 }
 
 .find_logo{
-  font-size: 35px;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  color: rgb(255, 147, 147);
+  margin-top: 40px;
+
 }
 
 .findid_body {
-    margin-top: 50px; /* 상단 마진 수정 */
+  margin-top: 50px; /* 상단 마진 수정 */
 }
 
   .findid_body form {
@@ -35,6 +39,7 @@
   }
 
   .findid_body button {
+    margin-top: 15px;
     padding: 12px 24px;
     border: none;
     background-color: rgb(255, 147, 147);
@@ -45,10 +50,9 @@
     transition: background-color 0.3s ease;
   }
   #enter_name {
-    margin-bottom: 10px;
     height: 30px;
   }
   #enter_id {
-    margin-top: 10px;
+    margin-top: 20px;
     height: 30px;
   }
