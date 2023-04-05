@@ -1,6 +1,6 @@
 import React from "react";
-import styles from './style.css';
-import logo from "./images/logoimage.png"
+import styles from '../style.css';
+import logo from "../images/logoimage.png"
 
 function Findid() {
   return (
