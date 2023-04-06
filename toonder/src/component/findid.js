@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
 import styles from '../style.css';
-import IDBackground from "./ID_background";
+import IDBackground from './ID_background';
 
 function Findid() {
   return (
-    <IDBackground>
+    <IDBackground text="Find">
       <div className="findid_body">
         <form>
           <input id="enter_name" type="text" placeholder="Enter your name" />
           <input id="enter_id" type="text" placeholder="Enter your ID" />
-          <button type="submit"><strong>Find</strong></button>
+          <button type="submit">
+            <strong>Find</strong>
+          </button>
         </form>
       </div>
     </IDBackground>
