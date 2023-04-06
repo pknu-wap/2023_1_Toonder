@@ -1,12 +1,12 @@
-import Findid from "./component/findid";
-import { BrowserRouter, Route , Switch } from 'react-router-dom';
-
 import React from "react";
+import Findid from "./component/findid";
+import FindidAfter from "./component/findid_after";
+
 function App() {
   return (
-      <div className="App">
-        <Findid/>
-      </div>
+    <div className="App">
+      <Findid />
+    </div>
   );
 }
 
