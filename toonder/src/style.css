@@ -11,7 +11,13 @@
   height: 500px;
 }
 
-.find_logo {
+
+.find_logo{
+
+  position: absolute;
+  top:70px;
+
+
   display: flex;
   align-items: center;
   font-size: 50px;
@@ -20,7 +26,10 @@
 }
 
 .findid_body {
-  margin-top: 50px; /* 상단 마진 수정 */
+
+  position: relative;
+  top:100px;
+
 }
 
 .findid_body form {
