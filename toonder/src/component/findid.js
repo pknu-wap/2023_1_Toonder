@@ -1,6 +1,8 @@
+
 import React, { useState } from "react";
+
 import styles from '../style.css';
-import IDBackground from "./ID_background";
+import IDBackground from './ID_background';
 
 import Findid_after from "./findid_after";
 
@@ -13,6 +15,7 @@ function Findid() {
   }
 
   return (
+
     <IDBackground>
 
       {isFindid ? (
