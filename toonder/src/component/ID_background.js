@@ -3,9 +3,9 @@ import styles from '../style.css';
 import logo from "../images/logoimage.png"
 import { Link } from "react-router-dom";
 
-function FindidBackground(props) {
+function IDBackground(props) {
   return (
-    <div className="find_background">
+    <div className="id_background">
       <div className="find_logo">
         <img src={logo} width="84px" height="93px" alt="image error"/><strong>Find ID</strong>
       </div>
@@ -14,4 +14,4 @@ function FindidBackground(props) {
   );
 }
 
-export default FindidBackground;
+export default IDBackground;
