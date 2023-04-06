@@ -1,11 +1,10 @@
 import React from "react";
 import styles from '../style.css';
-import FindidBackground from "./findid_background";
-import logo from "../images/logoimage.png"
+import IDBackground from "./ID_background";
 
 function Findid() {
   return (
-    <FindidBackground>
+    <IDBackground>
       <div className="findid_body">
         <form>
           <input id="enter_name" type="text" placeholder="Enter your name" />
@@ -13,7 +12,7 @@ function Findid() {
           <button type="submit"><strong>Find</strong></button>
         </form>
       </div>
-    </FindidBackground>
+    </IDBackground>
   );
 }
 
