@@ -1,4 +1,4 @@
-.find_background {
+.id_background {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,8 +12,10 @@
 }
 
 .find_logo{
+
   position: absolute;
   top:70px;
+
   display: flex;
   align-items: center;
   font-size: 50px;
@@ -23,8 +25,10 @@
 }
 
 .findid_body {
+
   position: relative;
   top:100px;
+
 }
 
   .findid_body form {
