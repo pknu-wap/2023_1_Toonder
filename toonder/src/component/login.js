@@ -29,9 +29,9 @@ function Login() {
               <strong>Login</strong>
             </button>
           </form>
-          <form>
-            <button onClick={switchToFindid}>아이디 찾기</button> <button>비밀번호 찾기</button> <button>회원가입</button>
-          </form>
+          <button onClick={switchToFindid} id="find_id_button">아이디 찾기</button>
+          <button id="find_pw_button">비밀번호 찾기</button>
+          <button id="sign_in">회원가입</button>
         </div>
         </IDBackground>
         ) : (
