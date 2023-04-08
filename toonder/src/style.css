@@ -13,11 +13,8 @@
 
 
 .find_logo{
-
   position: absolute;
   top:70px;
-
-
   display: flex;
   align-items: center;
   font-size: 50px;
