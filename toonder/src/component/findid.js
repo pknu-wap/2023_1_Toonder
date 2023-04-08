@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-
 import styles from '../style.css';
 import IDBackground from './ID_background';
-
 import Findid_after from './findid_after';
 
 function Findid() {
-  const [isFindid, setIsFindid] = useState(true);
+  const [isFindidAfter, setIsFindid] = useState(true);
 
   function switchToFindidAfter() {
     setIsFindid(false);
   }
 
   return (
-    <IDBackground text="Find">
-      {isFindid ? (
+    <IDBackground text="Find ID">
+      {isFindidAfter ? (
         <div className="findid_body">
           <form>
             <input id="enter_name" type="text" placeholder="Enter your name" />
