@@ -1,13 +1,17 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Findid from './component/findid';
 import Login from './component/login';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import FindidAfter from './component/findid_after';
-
 import React from 'react';
+
 function App() {
   return (
     <div className="App">
-      <Login />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/findid" element={<Findid />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
