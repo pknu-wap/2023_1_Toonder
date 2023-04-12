@@ -4,11 +4,11 @@ import Findid_after from './findid_after';
 import { useNavigate } from 'react-router-dom';
 import "../style.css";
 
-function Findid() {
+function Findpw() {
   const navigate = useNavigate();
 
   return (
-    <IDBackground text="Find ID">
+    <IDBackground text="Find PW">
         <div className="findid_body">
           <form>
             <input id="enter_name" type="text" placeholder="Enter your name" />
@@ -23,8 +23,8 @@ function Findid() {
             </button>
           </form>
         </div>
-      </IDBackground>
+    </IDBackground>
   );
 }
 
-export default Findid;
+export default Findpw;
