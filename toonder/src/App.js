@@ -4,6 +4,7 @@ import Login from './component/login';
 import Findpw from './component/findpw';
 import React from 'react';
 import Findid_after from './component/findid_after';
+import Findpw_after from './component/findpw_after';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/findid" element={<Findid />} />
           <Route path="/findpw" element={<Findpw />} />
           <Route path="/findid_after" element={<Findid_after />} />
+          <Route path="/findpw_after" element={<Findpw_after />} />
         </Routes>
       </BrowserRouter>
     </div>
