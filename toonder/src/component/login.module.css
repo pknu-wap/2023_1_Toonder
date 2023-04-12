@@ -1,0 +1,65 @@
+.Login {
+  position: relative;
+  top: 100px;
+}
+
+.Login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login input {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+}
+
+.Login input:first-child {
+  position: relative;
+  top: -20px;
+}
+
+.Login button {
+  position: relative;
+  padding: 12px 24px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  top: 15px;
+}
+
+.FindnSign {
+  position: relative;
+  top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: rgb(255, 147, 147);
+}
+
+.FindnSign button {
+  border: none;
+  background-color: transparent;
+  position: relative;
+  top: -0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: rgb(255, 147, 147);
+}
+
+.FindnSign button:hover {
+  background-color: rgb(255, 147, 147);
+  color: white;
+}
