@@ -11,11 +11,13 @@
   height: 500px;
 }
 
-
-.find_logo{
+.find_logo {
   position: absolute;
-  top:70px;
-  left: 42%;
+  top: 70px;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /*창 화면의 크기가 바뀌면 로고가 한쪽으로 쏠리는 현상을 없애고 가운데정렬을 유지하도록 함 */
   display: flex;
   align-items: center;
   font-size: 50px;
@@ -24,10 +26,8 @@
 }
 
 .findid_body {
-
   position: relative;
-  top:100px;
-
+  top: 100px;
 }
 
 .findid_body form {
