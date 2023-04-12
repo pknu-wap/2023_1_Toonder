@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import styles from '../style.css';
+import React from 'react';
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
+import "../style.css";
+
 
 function Login() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
       <IDBackground text="Login">
