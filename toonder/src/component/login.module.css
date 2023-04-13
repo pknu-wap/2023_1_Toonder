@@ -34,6 +34,7 @@
   font-size: 20px;
   transition: background-color 0.3s ease;
   top: 15px;
+  font-family: 'BMHANNAPro' !important;
 }
 
 .FindnSign {
@@ -57,6 +58,8 @@
   font-size: 24px;
   cursor: pointer;
   color: rgb(255, 147, 147);
+  border-radius: 4px;
+  font-family: 'BMHANNAPro' !important;
 }
 
 .FindnSign button:hover {
