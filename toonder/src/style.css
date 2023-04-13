@@ -10,17 +10,7 @@
   background-size: 318px 265px;
   height: 500px;
 }
-.background /*signIn에서 쓸 뒷배경 css*/ {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column; /* 추가 */
-  margin: 0;
-  background-image: url('./images/backgroundimg.png');
-  background-position: center 200px;
-  background-repeat: no-repeat;
-  height: 700px;
-}
+
 .find_logo {
   position: absolute;
   top: 70px;
@@ -40,21 +30,33 @@
   top: 100px;
 }
 
-.findid_body form {
+.findid_body form,
+.login_body form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.login_body input,
 .findid_body input {
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
   box-sizing: border-box;
 }
 
-.findid_body button {
+.buttonSet button {
+  position: relative;
+  top: 50px;
+  border: none;
+  background-color: #fff;
+  color: rgb(255, 147, 147);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.findid_body button,
+#loginButton {
   margin-top: 15px;
   padding: 12px 24px;
   border: none;
