@@ -29,7 +29,14 @@ function Login() {
           아이디 찾기
         </button>
         <button id="find_pw_button">비밀번호 찾기</button>
-        <button id="sign_in">회원가입</button>
+        <button
+          onClick={() => {
+            navigate('/signin');
+          }}
+          id="sign_in"
+        >
+          회원가입
+        </button>
       </div>
     </div>
   );

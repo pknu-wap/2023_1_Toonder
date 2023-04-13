@@ -10,7 +10,17 @@
   background-size: 318px 265px;
   height: 500px;
 }
-
+.background /*signIn에서 쓸 뒷배경 css*/ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* 추가 */
+  margin: 0;
+  background-image: url('./images/backgroundimg.png');
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  height: 700px;
+}
 .find_logo {
   position: absolute;
   top: 70px;
