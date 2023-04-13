@@ -4,58 +4,38 @@ import { useNavigate } from 'react-router-dom';
 import styles from './signIn.module.css';
 
 function Signin() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }; //디폴트로 페이지가 랜더링되는거 막아주는 기능
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // 회원가입 데이터 서버로 전송 로직 구현
+    setIsValidEmail(event.target.checkValidity());
   };
 
   return (
     <Background text="Join" backgroundSize="600px 500px">
-      <div className={styles.name}>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={handleFirstNameChange}
-          />
-        </form>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={handleLastNameChange}
-        />
-      </div>
-
-      <div className={styles.email}>
-        <form>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.name}>
+          <input type="text" id="firstName" placeholder="이름" />
+          <input type="text" id="lastName" placeholder="성" />
+        </div>
+        <div className={styles.email}>
           <input
             type="email"
             id="email"
             value={email}
             onChange={handleEmailChange}
+            placeholder="이메일 입력"
           />
-
           <button type="button">중복 확인</button>
-        </form>
-      </div>
+        </div>
+        <div>
+          <input type="password" id="confirmPassword" v />
+        </div>
+      </form>
     </Background>
   );
 }

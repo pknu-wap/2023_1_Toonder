@@ -1,12 +1,11 @@
 .Login {
   position: relative;
-  top: 100px;
-}
-
-.Login form {
+  top: 85px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 14px;
+  color: white;
 }
 
 .Login input {
@@ -16,25 +15,22 @@
   width: 100%;
   box-sizing: border-box;
   height: 30px;
-}
-
-.Login input:first-child {
-  position: relative;
-  top: -20px;
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .Login button {
   position: relative;
-  padding: 12px 24px;
   border: none;
   background-color: transparent;
   color: #fff;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 20px;
+  font-size: 28px;
   transition: background-color 0.3s ease;
-  top: 15px;
   font-family: 'BMHANNAPro' !important;
+  width: 100px;
 }
 
 .FindnSign {

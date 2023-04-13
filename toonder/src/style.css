@@ -2,6 +2,9 @@
   font-family: 'BMHANNAPro';
   src: url('./fonts/BMHANNAPro.woff') format('woff');
 }
+button:disabled {
+  opacity: 0.5;
+} /*회원가입이나 로그인에서 예를들어 이메일 양식이 맞지않는등 입력을 다 안하면 흐리게만드는 기능*/
 body {
   font-family: 'BMHANNAPro', sans-serif;
 }
