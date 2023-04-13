@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import styles from '../style.css';
+import React from 'react';
 import IDBackground from './ID_background';
-import Findid_after from './findid_after';
+import { useNavigate } from 'react-router-dom';
+import '../style.css';
 
 function Findid() {
-  const [isFindidAfter, setIsFindid] = useState(true);
-
-  function switchToFindidAfter() {
-    setIsFindid(false);
-  }
+  const navigate = useNavigate();
 
   return (
     <IDBackground text="Find ID">
-      {isFindidAfter ? (
-        <div className="findid_body">
-          <form>
-            <input id="enter_name" type="text" placeholder="Enter your name" />
-            <input id="enter_id" type="text" placeholder="Enter your ID" />
-            <button type="button" onClick={switchToFindidAfter}>
-              <strong>Find</strong>
-            </button>
-          </form>
-        </div>
-      ) : (
-        <Findid_after />
-      )}
+      <div className="findid_body">
+        <form>
+          {/*설명: email과 이름을 넣는 입력창*/}
+          <input id="enter_name" type="text" placeholder="Enter your name" />
+          <input id="enter_id" type="text" placeholder="Enter your E-mail" />
+          {/*구현 필요: DB와 연동하여 find 버튼응 눌렀을때 아이디를 알려주는 기능 필요*/}
+          <button
+            onClick={() => {
+              navigate('/findid_after');
+            }}
+            id="find_id_after_button"
+          >
+            <strong>Find</strong>
+          </button>
+        </form>
+      </div>
     </IDBackground>
   );
 }
