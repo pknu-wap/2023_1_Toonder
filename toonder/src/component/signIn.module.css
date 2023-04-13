@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'BMHANNAPro';
-  src: url('../fonts/BMHANNAPro.woff') format('woff');
-}
-
 .name {
   display: flex;
   position: relative;
@@ -27,7 +22,7 @@
 }
 
 .email input {
-  right: 17.5px;
+  right: 0px;
   display: inline-block;
   position: relative;
   border: 1px solid #ccc;
@@ -38,7 +33,7 @@
 }
 
 .email button {
-  left: 20px;
+  left: 19px;
   display: inline-block;
   position: relative;
   border: none;
@@ -46,7 +41,7 @@
   color: #fff;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 20px;
+  font-size: 25px;
   transition: background-color 0.3s ease;
   padding: 0px;
   font-family: 'BMHANNAPro' !important;
