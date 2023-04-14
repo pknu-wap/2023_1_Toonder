@@ -1,7 +1,7 @@
 import React from 'react';
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
-import "../style.css";
+import '../style.css';
 
 function Findid_after() {
   return (
@@ -10,7 +10,6 @@ function Findid_after() {
         <h1>이거 보이면 됨 제발 ㅜㅜ</h1>
       </div>
     </IDBackground>
->
   );
 }
 
