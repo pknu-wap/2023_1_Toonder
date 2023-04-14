@@ -1,0 +1,26 @@
+.logo {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /*창 화면의 크기가 바뀌면 로고가 한쪽으로 쏠리는 현상을 없애고 가운데정렬을 유지하도록 함 */
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  color: rgb(255, 147, 147);
+  margin-top: 40px;
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  background-image: url('../images/backgroundimg.png');
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  background-size: 318px 265px;
+  height: 800px;
+}
