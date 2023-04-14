@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'BMHANNAPro';
+  src: url('./fonts/BMHANNAPro.woff') format('woff');
+}
+button:disabled {
+  opacity: 0.5;
+} /*회원가입이나 로그인에서 예를들어 이메일 양식이 맞지않는등 입력을 다 안하면 흐리게만드는 기능*/
+body {
+  font-family: 'BMHANNAPro', sans-serif;
+}
 .id_background {
   display: flex;
   align-items: center;
@@ -11,11 +21,14 @@
   height: 500px;
 }
 
-
-.find_logo{
+.find_logo {
   position: absolute;
-  top:70px;
-  left: 42%;
+  top: 70px;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /*창 화면의 크기가 바뀌면 로고가 한쪽으로 쏠리는 현상을 없애고 가운데정렬을 유지하도록 함 */
+
   display: flex;
   align-items: center;
   font-size: 50px;
@@ -23,16 +36,19 @@
   margin-top: 40px;
 }
 
+
 .findid_body , .login_body{
   position: relative;
   top:100px;
 }
 
 .findid_body form , .login_body form{
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 
 .login_body input , .findid_body input{
   padding: 30px;
@@ -40,6 +56,7 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 
 .buttonSet button{
   position: relative;
@@ -61,6 +78,7 @@
   cursor: pointer;
   border-radius: 4px;
   font-size: 20px;
+  font-family: 'BMHANNAPro' !important;
   transition: background-color 0.3s ease;
 }
 #enter_name {
@@ -70,4 +88,3 @@
   margin-top: 20px;
   height: 30px;
 }
-
