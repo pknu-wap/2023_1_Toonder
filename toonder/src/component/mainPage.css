@@ -1,4 +1,74 @@
-.mainLogo h1{
+.mainPage{
+    display: flex;
+    margin-left: 86px;
+    margin-top: 102px;
+}
+.mainLogo{
+    display: flex;
+    /* 가로축 가운데 정렬 */
+    justify-content : center;
+    /* 세로축 가운데 정렬 */
+    height: auto;
+    float: left;
     color: rgb(255, 147, 147);
+    margin-right: 20px;
+}
+.mainLogo h1{
+    margin-left: 20px;
+}
+.mainSearch{
+    display : flex;
+    /* 가로축 가운데 정렬 */
+    justify-content : center;
+    /* 세로축 가운데 정렬 */
+    align-items : center;
+    width: 953px;
+    height: 84px;
+    background-color: rgb(255, 147, 147);
+    background-size: 953px 84px;
+    border-radius: 10px;
+}
+.mainSearch input{
+    border-radius: 10px;
+    width: 806px;
+    height: 64px;
+    font-size: 24px;
+}
+.mainSearch button{
+    border-radius: 10px;
+    margin-left: 13px;
+    width: 90px;
+    height: 45px;
+    background-color: white;
+    color: rgb(255, 147, 147);
+}
 
+.mainTemp {
+    display: flex;
+    position: absolute;
+    top: 256px;
+    align-items : center;
+    justify-content : center;
+}
+
+.mainInfo{
+    background-color: rgb(255, 147, 147);
+    width: 199px;
+    height: 293px;
+}
+.mainInfo button{
+    color: white;
+    background-color: rgb(255, 147, 147);
+}
+
+.mainButtonSet{
+    position: absolute;
+    top: 583px;
+
+}
+.mainButtonSet button{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color:rgb(255, 147, 147);
 }
