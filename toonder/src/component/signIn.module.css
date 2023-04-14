@@ -1,0 +1,48 @@
+.name {
+  display: flex;
+  position: relative;
+  top: -100px;
+}
+
+.name input {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+}
+.name input:first-child {
+  margin-right: 50px;
+}
+.email {
+  display: flex;
+  position: relative;
+  top: -80px;
+}
+
+.email input {
+  right: 0px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 13px;
+  box-sizing: border-box;
+  width: 380px;
+}
+
+.email button {
+  left: 19px;
+  display: inline-block;
+  position: relative;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 25px;
+  transition: background-color 0.3s ease;
+  padding: 0px;
+  font-family: 'BMHANNAPro' !important;
+}
