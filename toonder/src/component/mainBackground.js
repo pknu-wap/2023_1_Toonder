@@ -15,12 +15,10 @@ function MainBackgorund() {
             <input id="mainSearchInput" type="text" placeholder="찾고싶은 웹툰 검색!" />
             <button id="mainSearchButton">검색</button>
         </div>
-        <div className='mainTemp'>{/*임시 클라스 이름 추후 변경 필요*/}
-            <div className='mainInfo'>
-                <img></img>
-                <h2>이름</h2>
-                <button id='changeImfo'>정보수정</button>
-            </div>
+        <div className='mainInfo'>
+            <img></img>
+            <h2>이름</h2>
+            <button id='changeInfo'><h3>정보수정</h3></button>
         </div>
         <div className='mainButtonSet'>
                 <button id="webtoonList">웹툰 목록</button>
