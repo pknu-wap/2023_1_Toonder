@@ -1,8 +1,16 @@
+/*모든 입력창과 버튼에 라운드 처리를 해주고 경계선을 없앴습니다.*/
+button, input{
+    border: none;
+    border-radius: 10px;
+}
+
 .mainPage{
     display: flex;
     margin-left: 86px;
     margin-top: 102px;
+    border-radius: 10px;
 }
+
 .mainLogo{
     display: flex;
     /* 가로축 가운데 정렬 */
@@ -13,10 +21,13 @@
     color: rgb(255, 147, 147);
     margin-right: 20px;
 }
+
 .mainLogo h1{
     margin-left: 20px;
 }
+
 .mainSearch{
+    border-radius: 10px;
     display : flex;
     /* 가로축 가운데 정렬 */
     justify-content : center;
@@ -26,14 +37,14 @@
     height: 84px;
     background-color: rgb(255, 147, 147);
     background-size: 953px 84px;
-    border-radius: 10px;
 }
+
 .mainSearch input{
-    border-radius: 10px;
     width: 806px;
     height: 64px;
     font-size: 24px;
 }
+
 .mainSearch button{
     border-radius: 10px;
     margin-left: 13px;
@@ -43,22 +54,29 @@
     color: rgb(255, 147, 147);
 }
 
-.mainTemp {
-    display: flex;
+.mainInfo{
     position: absolute;
     top: 256px;
-    align-items : center;
-    justify-content : center;
-}
-
-.mainInfo{
+    border-radius: 10px;
     background-color: rgb(255, 147, 147);
     width: 199px;
     height: 293px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mainInfo h2{
+    position: absolute;
+    top: 187px;
+
 }
 .mainInfo button{
+    position: absolute;
+    top: 242px;
     color: white;
     background-color: rgb(255, 147, 147);
+    height: 20px;
 }
 
 .mainButtonSet{
@@ -71,4 +89,8 @@
     align-items: center;
     background-color: white;
     color:rgb(255, 147, 147);
+    width: 160px;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
 }
