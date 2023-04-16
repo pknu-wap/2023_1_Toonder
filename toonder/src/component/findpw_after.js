@@ -8,7 +8,6 @@ function Findpw_after() {
     <IDBackground text="Find ID">
       <div className="findid_body">
         <h1>~로 </h1>
-
       </div>
     </IDBackground>
   );

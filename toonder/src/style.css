@@ -2,12 +2,23 @@
   font-family: 'BMHANNAPro';
   src: url('./fonts/BMHANNAPro.woff') format('woff');
 }
+
+button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+
 button:disabled {
   opacity: 0.5;
 } /*회원가입이나 로그인에서 예를들어 이메일 양식이 맞지않는등 입력을 다 안하면 흐리게만드는 기능*/
+
 body {
   font-family: 'BMHANNAPro', sans-serif;
 }
+
 .id_background {
   display: flex;
   align-items: center;
@@ -67,9 +78,11 @@ body {
   font-family: 'BMHANNAPro' !important;
   transition: background-color 0.3s ease;
 }
+
 #enter_name {
   height: 30px;
 }
+
 #enter_id {
   margin-top: 20px;
   height: 30px;

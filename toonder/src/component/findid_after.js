@@ -10,20 +10,23 @@ function Findid_after() {
     <IDBackground text="Find ID">
       <div className="findid_body">
         <h1>이거 보이면 됨 제발 ㅜㅜ</h1>
-        <button
+        <div className="findIdAfterButtonset">
+          <button
             onClick={() => {
               navigate('/findpw');
             }}
             id="find_pw_button">
               비밀번호 찾기
           </button>
+
           <button
             onClick={() => {
               navigate('/');
             }}
             id="loginButton">
               확인
-          </button>
+            </button>
+          </div>
       </div>
     </IDBackground>
   );

@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
 import Findid from './component/findid';
 import Findpw from './component/findpw';
 import Login from './component/login';
-import Mainpage from './component/main_page';
-import React from 'react';
-import Background from './component/backGround';
+import Mainpage from './component/main_page'
 import Findid_after from './component/findid_after';
 import Findpw_after from './component/findpw_after';
 import Signin from './component/signIn';
+
 function App() {
   return (
     <div className="App">
