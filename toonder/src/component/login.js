@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음 C
 import IDBackground from './ID_background';
@@ -57,7 +56,6 @@ function Login() {
     //클래스를 설정할땐 styles객체안에 있는 값을 참조하는 방식
     <div>
       <IDBackground text="Login">
-
         <form>
           <div className={styles.Login}>
             <div>
@@ -112,8 +110,6 @@ function Login() {
           회원가입
         </button>
       </div>
-
-        
     </div>
   );
 }

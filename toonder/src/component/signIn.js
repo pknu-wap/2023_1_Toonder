@@ -32,8 +32,12 @@ function Signin() {
           />
           <button type="button">중복 확인</button>
         </div>
-        <div>
-          <input type="password" id="confirmPassword" v />
+        <div className={styles.password}>
+          <input type="password" id="pw" placeholder="비밀번호" />
+          <input type="password" id="pwConfirm" placeholder="비밀번호 확인" />
+        </div>
+        <div className={styles.textBox}>
+          <input type="textarea"></input>
         </div>
       </form>
     </Background>

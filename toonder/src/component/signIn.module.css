@@ -1,7 +1,8 @@
 .name {
+  transform: translateX(4.5%);
   display: flex;
   position: relative;
-  top: -100px;
+  top: -110px;
 }
 
 .name input {
@@ -11,14 +12,14 @@
   padding: 13px;
   width: 220px;
   box-sizing: border-box;
-}
-.name input:first-child {
   margin-right: 50px;
 }
+
 .email {
+  transform: translateX(4.5%);
   display: flex;
   position: relative;
-  top: -80px;
+  top: -93px;
 }
 
 .email input {
@@ -45,4 +46,36 @@
   transition: background-color 0.3s ease;
   padding: 0px;
   font-family: 'BMHANNAPro' !important;
+}
+
+.password {
+  transform: translateX(4.5%);
+  display: flex;
+  position: absolute;
+  top: 374px;
+}
+
+.password input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+  margin-right: 50px;
+}
+
+.textBox {
+  transform: translateX(5%);
+  display: flex;
+  position: absolute;
+  top: 430px;
+}
+
+.textBox input {
+  width: 490px;
+  height: 200px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding-top: 10px;
 }
