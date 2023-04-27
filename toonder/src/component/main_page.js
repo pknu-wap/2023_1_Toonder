@@ -9,6 +9,7 @@ function Mainpage() {
   return (
     <MainBackgorund>
       <div className='mainPage'>
+
       </div>
     </MainBackgorund>
   );
