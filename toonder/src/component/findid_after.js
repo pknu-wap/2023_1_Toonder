@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import IDBackground from './ID_background';
 import styles from '../style.css';
 
+
 function Findid_after() {
   const navigate = useNavigate();
 
