@@ -100,7 +100,14 @@ function Login() {
         >
           아이디 찾기
         </button>
-        <button id="find_pw_button">비밀번호 찾기</button>
+        <button
+          onClick={() => {
+            navigate('/findpw');
+          }}
+          id="find_pw_button"
+        >
+          비밀번호 찾기
+        </button>
         <button
           onClick={() => {
             navigate('/signin');

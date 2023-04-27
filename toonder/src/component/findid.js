@@ -1,16 +1,13 @@
 import React from 'react';
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
-
 import "../style.css";
-
 
 function Findid() {
   const navigate = useNavigate();
 
   return (
     <IDBackground text="Find ID">
-
         <div className="findid_body">
           <form>
             {/*설명: email과 이름을 넣는 입력창*/}
