@@ -4,8 +4,8 @@ import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
 
 const User = {
-  email: 'test@example.com',
-  pw: 't12341234',
+  email: 'abc@gmail.com',
+  pw: '12341234a',
 }; //가상의 유저가 있다고 치는 더미데이터
 
 function Login() {
@@ -18,6 +18,7 @@ function Login() {
     //유저 정보와 비교해서 로그인 성공여부 알려주는 함수
     if (email === User.email && pw === User.pw) {
       alert('로그인에 성공했습니다.');
+      navigate('/main_page');
     } else {
       alert('등록되지 않은 유저입니다.');
     }
