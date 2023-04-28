@@ -1,12 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음 C
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
 
 const User = {
-  email: 'test@example.com',
-  pw: 't12341234',
+  email: 'abc@gmail.com',
+  pw: '12341234a',
 }; //가상의 유저가 있다고 치는 더미데이터
 
 function Login() {
@@ -19,6 +18,7 @@ function Login() {
     //유저 정보와 비교해서 로그인 성공여부 알려주는 함수
     if (email === User.email && pw === User.pw) {
       alert('로그인에 성공했습니다.');
+      navigate('/main_page');
     } else {
       alert('등록되지 않은 유저입니다.');
     }
@@ -57,7 +57,6 @@ function Login() {
     //클래스를 설정할땐 styles객체안에 있는 값을 참조하는 방식
     <div>
       <IDBackground text="Login">
-
         <form>
           <div className={styles.Login}>
             <div>
@@ -102,7 +101,14 @@ function Login() {
         >
           아이디 찾기
         </button>
-        <button id="find_pw_button">비밀번호 찾기</button>
+        <button
+          onClick={() => {
+            navigate('/findpw');
+          }}
+          id="find_pw_button"
+        >
+          비밀번호 찾기
+        </button>
         <button
           onClick={() => {
             navigate('/signin');
@@ -112,8 +118,6 @@ function Login() {
           회원가입
         </button>
       </div>
-
-        
     </div>
   );
 }
