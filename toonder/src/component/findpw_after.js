@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import IDBackground from './ID_background';
-import { useNavigate } from 'react-router-dom';
-import '../style.css';
+import styles from '../style.css';
 
 function Findpw_after() {
+
   return (
-    <IDBackground text="Find PW">
+    <IDBackground text="Find ID">
       <div className="findid_body">
-        <p>임시 비밀번호가 ~~로 보내졌습니다.</p>
+        <h1>~로 </h1>
       </div>
     </IDBackground>
   );
