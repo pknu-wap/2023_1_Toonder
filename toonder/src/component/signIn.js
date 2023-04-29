@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Background from './backGround';
-import { useNavigate } from 'react-router-dom';
+
 import styles from './signIn.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const User = {
   email: 'abc@gmail.com',
@@ -9,29 +10,40 @@ const User = {
 }; //가상의 유저가 있다고 치는 더미데이터
 
 function Signin() {
-  const [pw, setPw] = useState('');
-  const [pwc, setPwc] = useState('');
-  const [isPwCheck, setIsPwCheck] = useState(false);
-  const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [notAllow, setNotAllow] = useState(true); //로그인 (submit)버튼 활성화 여부
-  const [isValidEmail, setEmailValid] = useState(false);
+  const [pw, setPw] = useState(''); //비밀번호 값
+  const [pwc, setPwc] = useState(''); //비밀번호 확인 값
+  const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
+  const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
+  const [firstName, setFirstName] = useState(''); //이름 값
+  const [lastName, setLastName] = useState(''); //성씨 값
+  const [email, setEmail] = useState(''); //이메일 값
+  const [isEmailDufCheck, setEmailDufCheck] = useState(false); //이메일 중복성 여부
+  const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
+  const [isValidEmail, setEmailValid] = useState(false); //이메일 유효성 여부
+  const navigate = useNavigate();
+
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    //이메일 유효성과 비밀번호 유효성이 바꼈을때 둘다 유효한 경우만 login버튼 활성화 해주는 기능
     if (
       isValidEmail &&
       isPwCheck &&
       isPwValid &&
+      isEmailDufCheck &&
       firstName.length > 0 &&
       lastName.length > 0
     )
       setNotAllow(false);
     else setNotAllow(true);
     return;
-  }, [isValidEmail, isPwValid, isPwCheck, firstName, lastName]);
+  }, [
+    isValidEmail,
+    isPwValid,
+    isPwCheck,
+    firstName,
+    lastName,
+    isEmailDufCheck,
+  ]);
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -42,7 +54,6 @@ function Signin() {
   };
 
   const handlePW = (e) => {
-    //위와 마찬가지 비밀번호인 경우
     setPw(e.target.value);
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
     if (regex.test(pw)) {
@@ -59,9 +70,9 @@ function Signin() {
   };
 
   const handleEmail = (e) => {
-    //이메일 값을 value에 state
     setEmail(e.target.value);
-    const regex = //이메일 유효성검사 하기위한 객체
+    setEmailDufCheck(false);
+    const regex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     if (regex.test(email)) {
       setEmailValid(true);
@@ -83,7 +94,20 @@ function Signin() {
     e.preventDefault();
   }; //디폴트로 페이지가 랜더링되는거 막아주는 기능
 
-  const CheckDuplicateEmail = () => {};
+  const CheckDuplicateEmail = () => {
+    if (email === User.email) {
+      alert('중복된 이메일 입니다.');
+      setEmailDufCheck(false);
+    } else {
+      alert('사용가능한 이메일 입니다.');
+      setEmailDufCheck(true);
+    }
+  };
+
+  const onClickConfirm = () => {
+    alert('회원가입에 성공했습니다.');
+    navigate('/');
+  };
 
   return (
     <Background text="Join" backgroundSize="600px 500px">
@@ -103,19 +127,18 @@ function Signin() {
           />
         </div>
         <div className={styles.email}>
-          {!isValidEmail &&
-            email.length > 0 && ( //이메일이 유효하지 않고 이메일을 입력하기 시작하면 에러 메세지가 뜸
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-20px',
-                  color: 'white',
-                  fontSize: '15px',
-                }}
-              >
-                올바른 이메일을 입력해주세요
-              </div>
-            )}
+          {!isValidEmail && email.length > 0 && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '-20px',
+                color: 'white',
+                fontSize: '15px',
+              }}
+            >
+              올바른 이메일을 입력해주세요
+            </div>
+          )}
           <input
             type="email"
             id="email"
@@ -126,7 +149,7 @@ function Signin() {
           <button
             type="button"
             disabled={!isValidEmail}
-            onclick={CheckDuplicateEmail}
+            onClick={CheckDuplicateEmail}
           >
             중복 확인
           </button>
@@ -176,7 +199,12 @@ function Signin() {
           <textarea rows="4" cols="50"></textarea>
         </div>
         <div>
-          <button className={styles.submit} disabled={notAllow} type="submit">
+          <button
+            className={styles.submit}
+            disabled={notAllow}
+            type="submit"
+            onClick={onClickConfirm}
+          >
             <strong>Join</strong>
           </button>
         </div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음 C
+import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
 
 const User = {
   email: 'abc@gmail.com',
-  pw: '12341234a',
+  pw: '1234a1234',
 }; //가상의 유저가 있다고 치는 더미데이터
 
 function Login() {
