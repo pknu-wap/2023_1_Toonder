@@ -44,7 +44,7 @@ function Login() {
   const handlePW = (e) => {
     //위와 마찬가지 비밀번호인 경우
     setPw(e.target.value);
-    const regex = /^[\da-zA-Z!@#]{8,}$/;
+    const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
     if (regex.test(pw)) {
       setPwValid(true);
     } else {
@@ -75,7 +75,7 @@ function Login() {
             </div>
             <div>
               {!pwValid && pw.length > 0 && (
-                <div>영문, 숫자 포함 8자 이상 입력해주세요</div> //비밀번호가 유효하지 않고 비밀번호를 입력하기 시작하면 에러 메세지가 뜸
+                <div>영문, 숫자 포함 8~10자 입력해주세요</div> //비밀번호가 유효하지 않고 비밀번호를 입력하기 시작하면 에러 메세지가 뜸
               )}
             </div>
             <div>
