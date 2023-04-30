@@ -8,6 +8,8 @@ public class HelloWorldController {
 
     @GetMapping("/api/hello")
     public String test() {
-        return "Hello, world!";
+        return "승엽님 환영합니다";
+
+        // 대충 DB에서 가져온 데이터를 보내줍니당
     }
 }
