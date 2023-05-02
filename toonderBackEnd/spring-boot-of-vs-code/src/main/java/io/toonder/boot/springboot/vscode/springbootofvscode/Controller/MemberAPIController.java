@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
  
-@RequestMapping("/member")
+@RequestMapping("/api/member")
 @RestController
 public class MemberAPIController {
     @Autowired
