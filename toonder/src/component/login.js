@@ -2,27 +2,50 @@ import React, { useState, useEffect } from 'react';
 import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
-
-const User = {
-  email: 'abc@gmail.com',
-  pw: '1234a1234',
-}; //가상의 유저가 있다고 치는 더미데이터
+import { createClient } from '@supabase/supabase-js';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+const supabase = createClient(
+  'https://fsxogdtxxerrzpdgyyac.supabase.co/',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzeG9nZHR4eGVycnpwZGd5eWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODI4NzA4NTQsImV4cCI6MTk5ODQ0Njg1NH0.4ayoRXi9Z0745i2dyqIjvm23CSBRK--iAFspUAy6pOw'
+);
 
 function Login() {
+  useEffect(() => {
+    document.title = 'Toonder 로그인';
+  }, []);
   const [email, setEmail] = useState(''); //이메일 값
-  const [pw, setPw] = useState(''); //비밀번호 값
+  const [password, setPw] = useState(''); //비밀번호 값
   const [emailValid, setEmailValid] = useState(false); //이메일 유효성
   const [pwValid, setPwValid] = useState(false); //비밀번호 유효성
   const [notAllow, setNotAllow] = useState(true); //로그인 (submit)버튼 활성화 여부
-  const onClickConfirm = () => {
-    //유저 정보와 비교해서 로그인 성공여부 알려주는 함수
-    if (email === User.email && pw === User.pw) {
-      alert('로그인에 성공했습니다.');
-      navigate('/main_page');
-    } else {
-      alert('등록되지 않은 유저입니다.');
+  const [error, setError] = useState(null); // 에러 상태 추가
+
+  const onClickConfirm = async (e) => {
+    setError(null); // 에러 메시지 초기화
+    e.preventDefault();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert('로그인에 실패했습니다.');
+        console.log(error);
+      } else if (data) {
+        // 사용자 정보가 할당되어 있는 경우
+        console.log(data.user);
+        alert('로그인 되었습니다.');
+
+        navigate('/main_page'); // 로그인 성공 시 대시보드 페이지로 이동
+      }
+    } catch (error) {
+      setError(error.message);
     }
   };
+
   useEffect(() => {
     //이메일 유효성과 비밀번호 유효성이 바꼈을때 둘다 유효한 경우만 login버튼 활성화 해주는 기능
     if (emailValid && pwValid) setNotAllow(false);
@@ -45,7 +68,7 @@ function Login() {
     //위와 마찬가지 비밀번호인 경우
     setPw(e.target.value);
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(pw)) {
+    if (regex.test(password)) {
       setPwValid(true);
     } else {
       setPwValid(false);
@@ -74,14 +97,14 @@ function Login() {
               />
             </div>
             <div>
-              {!pwValid && pw.length > 0 && (
+              {!pwValid && password.length > 0 && (
                 <div>영문, 숫자 포함 8~10자 입력해주세요</div> //비밀번호가 유효하지 않고 비밀번호를 입력하기 시작하면 에러 메세지가 뜸
               )}
             </div>
             <div>
               <input
                 type="password"
-                value={pw}
+                value={password}
                 onChange={handlePW}
                 placeholder="Enter your password"
               />
