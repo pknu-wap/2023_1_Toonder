@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.Member;
@@ -20,7 +21,7 @@ public class MemberAPIController {
     @Autowired
     private MemberRepository memberRepository;
  
-    @RequestMapping(value = "/select", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
     public List<Member> selectAll() {
         return memberRepository.findAll();
     }
@@ -40,7 +41,7 @@ public class MemberAPIController {
         result.put("mem_name", member.getMem_name());
         result.put("mem_hashtag", member.getMem_hashtag());
         return result;
-}
+    }
 
 
     
