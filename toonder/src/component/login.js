@@ -3,8 +3,6 @@ import styles from './login.module.css'; //CSS Module 이라는 기술을 사용
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js';
-import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 const supabase = createClient(
   'https://fsxogdtxxerrzpdgyyac.supabase.co/',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzeG9nZHR4eGVycnpwZGd5eWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODI4NzA4NTQsImV4cCI6MTk5ODQ0Njg1NH0.4ayoRXi9Z0745i2dyqIjvm23CSBRK--iAFspUAy6pOw'
