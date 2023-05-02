@@ -4,12 +4,10 @@ import Background from './backGround';
 import styles from './signIn.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const User = {
-  email: 'abc@gmail.com',
-  pw: '1234a1234',
-}; //가상의 유저가 있다고 치는 더미데이터
-
 function Signin() {
+  useEffect(() => {
+    document.title = 'Toonder 회원가입';
+  }, []);
   const [pw, setPw] = useState(''); //비밀번호 값
   const [pwc, setPwc] = useState(''); //비밀번호 확인 값
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
@@ -95,7 +93,7 @@ function Signin() {
   }; //디폴트로 페이지가 랜더링되는거 막아주는 기능
 
   const CheckDuplicateEmail = () => {
-    if (email === User.email) {
+    if (email) {
       alert('중복된 이메일 입니다.');
       setEmailDufCheck(false);
     } else {
@@ -151,7 +149,7 @@ function Signin() {
             disabled={!isValidEmail}
             onClick={CheckDuplicateEmail}
           >
-            중복 확인
+            이메일 확인
           </button>
         </div>
 
