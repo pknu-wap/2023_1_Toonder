@@ -7,6 +7,7 @@ import Login from './component/login';
 import Mainpage from './component/main_page';
 import Findid_after from './component/findid_after';
 import Findpw_after from './component/findpw_after';
+import MainWebtoonList from './component/mainWebtoonList';
 
 import axios from 'axios';
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/findpw" element={<Findpw />} />
           <Route path="/findid_after" element={<Findid_after />} />
           <Route path="/findpw_after" element={<Findpw_after />} />
+          <Route path="/mainWebtoonList" element={<MainWebtoonList />} />
         </Routes>
       </BrowserRouter>
     </div>
