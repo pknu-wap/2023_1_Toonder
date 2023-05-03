@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Background from './backGround';
 import supabase from './supabase';
 import styles from './signIn.module.css';
@@ -8,7 +8,7 @@ function Signin() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
   }, []);
-
+  const inputRef = useRef(null);
   const [pw, setPw] = useState(''); //비밀번호 값
   const [pwc, setPwc] = useState(''); //비밀번호 확인 값
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
@@ -31,6 +31,7 @@ function Signin() {
     '다',
     '라',
     '마',
+    '드라마',
   ];
 
   const onKeyPress = (e) => {
@@ -216,7 +217,11 @@ function Signin() {
 
         <div className={styles.textBox}>
           <WholeBox>
-            <TagBox>
+            <TagBox
+              onClick={() => {
+                inputRef.current.focus();
+              }}
+            >
               <div
                 style={{
                   color: 'grey',
@@ -226,14 +231,14 @@ function Signin() {
                   borderRadius: '10px',
                 }}
               >
-                -----------좋아하는 장르를 엔터로 추가해주세요
-                [액션,판타지,멜로,코믹]-----------
+                -----좋아하는 장르를 엔터로 추가해주세요
+                [액션,판타지,멜로,코믹,드라마]------
               </div>
               {tagList.map((tagItem, index) => {
                 return (
                   <TagItem key={index}>
                     <Text>{tagItem}</Text>
-                    <Button onClick={deleteTagItem}>X</Button>
+                    <Button onClick={deleteTagItem}>❌</Button>
                   </TagItem>
                 );
               })}
@@ -243,6 +248,7 @@ function Signin() {
                 onChange={(e) => setTagItem(e.target.value)}
                 value={tagItem}
                 onKeyPress={onKeyPress}
+                ref={inputRef}
               />
             </TagBox>
           </WholeBox>
@@ -296,6 +302,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   width: 15px;
+
   height: 15px;
   margin-left: 5px;
   background-color: white;
