@@ -223,15 +223,17 @@ function Signin() {
               }}
             >
               <div
+                onClick={() => {
+                  inputRef.current.focus();
+                }}
                 style={{
                   color: 'grey',
                   background: 'white',
                   fontSize: '14px',
                   height: '14px',
-                  borderRadius: '10px',
                 }}
               >
-                -----좋아하는 장르를 엔터로 추가해주세요
+                ------좋아하는 장르를 엔터로 추가해주세요
                 [액션,판타지,멜로,코믹,드라마]------
               </div>
               {tagList.map((tagItem, index) => {
@@ -264,10 +266,11 @@ function Signin() {
 }
 
 const WholeBox = styled.div`
-  padding: 10px;
-  width: 510px;
-  transform: translateX(-4.2%);
-  background-color: rgb(255, 147, 147);
+  padding: 0px;
+  width: 490px;
+  height: 180px;
+  transform: translateX(0%);
+  background-color: white;
   border-radius: 10px;
 `;
 
@@ -275,12 +278,13 @@ const TagBox = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  min-height: 50px;
+  height: 30px;
   margin: 10px;
   padding: 0 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: red;
+  background-color: white;
+  border-color: white;
 `;
 
 const TagItem = styled.span`
@@ -302,10 +306,10 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   width: 15px;
-
+  font-size: 15px;
   height: 15px;
   margin-left: 5px;
-  background-color: white;
+  background-color: rgb(255, 147, 147);
   border-radius: 50%;
   color: red;
 `;
@@ -313,7 +317,8 @@ const Button = styled.button`
 const TagInput = styled.input`
   display: inline-flex;
   width: 35px;
-  height: 14px;
+  height: 15px;
+
   border-radius: 10px;
   background: white;
   border: none;
