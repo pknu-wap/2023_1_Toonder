@@ -8,12 +8,9 @@ function MainBackgorund(props) {
 
   return (
     <div className='mainPageBack'>
+      <nav> {/* 좌우구분용 네브 */}
         <div className='mainLogo'>
           <img src={logo} width="84px" height="93px" alt="image error" /><h1>Toonder</h1>
-        </div>
-        <div className='mainSearch'>
-          <input id="mainSearchInput" type="text" placeholder="찾고싶은 웹툰 검색!" />
-          <button id="mainSearchButton">검색</button>
         </div>
         <div className='mainInfo'>
           <img></img>
@@ -26,7 +23,14 @@ function MainBackgorund(props) {
           <button id="freeBoard">자유게시판</button>
           <button id="logOut">로그아웃</button>
         </div>
+      </nav>
+      <section>{/* 좌우 구분용 섹션 */}
+        <div className='mainSearch'>
+          <input id="mainSearchInput" type="text" placeholder="    찾고싶은 웹툰 검색!" />
+          <button id="mainSearchButton">검색</button>
+        </div>
         {props.children} {/* props.children 렌더링 */}
+      </section>
     </div>
 
   );
