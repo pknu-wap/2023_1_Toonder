@@ -27,18 +27,25 @@ button, input{
 }
 
 /* 좌측 nav 부분*/
+#main_page {
+    display: flex;
+    align-items: center;
+  }
 
 .mainLogo{
     display: flex;
-    align-items: center;
     height: auto;
-    color: rgb(255, 147, 147);
     margin-right: 20px;
-}
+    width: 257px;
 
+}
+.mainLogo button{
+    background-color:white;
+}
 .mainLogo h1{
     font-size: 40px;
     margin-left: 20px;
+    color: rgb(255, 147, 147);
 }
 
 /*이름, 정보수정 */

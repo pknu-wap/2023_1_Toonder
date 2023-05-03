@@ -10,7 +10,12 @@ function MainBackgorund(props) {
     <div className='mainPageBack'>
       <nav className='sidePart'> {/* 좌우구분용 네브 */}
         <div className='mainLogo'>
-          <img src={logo} width="84px" height="93px" alt="image error" /><h1>Toonder</h1>
+          <button id="main_page"
+            onClick={() => {
+              navigate('/main_page');
+            }}>
+            <img src={logo} width="84px" height="93px" alt="image error" /><h1>Toonder</h1>
+          </button>
         </div>
         <div className='mainInfo'>
           <img></img>
@@ -25,7 +30,11 @@ function MainBackgorund(props) {
           >웹툰 목록</button>
           <button id="mypage">마이페이지</button>
           <button id="freeBoard">자유게시판</button>
-          <button id="logOut">로그아웃</button>
+          <button id="logOut"
+          onClick={() => {
+            navigate('/');
+          }}
+          >로그아웃</button>{/*로그아웃 시 세션 만료했음을 나타내는 기능 필요함 */}
         </div>
       </nav>
       <section className='mainPart'>{/* 좌우 구분용 섹션 */}
