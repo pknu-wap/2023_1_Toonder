@@ -4,6 +4,9 @@ import supabase from './supabase';
 import styles from './signIn.module.css';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
+
+
 function Signin() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
@@ -116,11 +119,25 @@ function Signin() {
     if (pw === e.target.value) {
       setIsPwCheck(true);
     } else {
-      setIsPwCheck(false);
+      setIsPwCheck('false');
     }
   };
 
   const handleSubmit = async (e) => {
+
+    
+    axios
+    .post('api/member/insert',
+      {
+        mem_id:email,
+        mem_name:firstName + lastName,
+        mem_hashtag:''
+      })
+    .catch(function(){
+      console.log('Error for sending user data to Spring - creating member')
+    })
+  
+
     e.preventDefault();
 
     const { data, error } = await supabase.auth.signUp({
