@@ -33,7 +33,7 @@ function Login() {
         console.log(data.user);
         alert('로그인 되었습니다.');
 
-        sessionStorage.setItem('loggedUserEmail',email); // 로그인 하면 sessionStorage에 email이 저장됨
+        sessionStorage.setItem('loggedUserEmail', email); // 로그인 하면 sessionStorage에 email이 저장됨
         navigate('/main_page'); // 로그인 성공 시 대시보드 페이지로 이동
       }
     } catch (error) {
@@ -119,6 +119,7 @@ function Login() {
         >
           아이디 찾기
         </button>
+        &nbsp;&nbsp;
         <button
           onClick={() => {
             navigate('/findpw');
@@ -127,6 +128,7 @@ function Login() {
         >
           비밀번호 찾기
         </button>
+        &nbsp;&nbsp;
         <button
           onClick={() => {
             navigate('/signin');
