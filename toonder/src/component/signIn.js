@@ -91,7 +91,7 @@ function Signin() {
         mem_hashtag:''
       })
     .catch(function(){
-      console.log('Error for sending user data')
+      console.log('Error for sending user data to Spring - creating member')
     })
   
 
