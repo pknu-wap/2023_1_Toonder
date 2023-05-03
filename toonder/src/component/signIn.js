@@ -3,7 +3,7 @@ import Background from './backGround';
 import supabase from './supabase';
 import styles from './signIn.module.css';
 import { useNavigate } from 'react-router-dom';
-
+import styled from 'styled-components';
 function Signin() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
@@ -19,7 +19,48 @@ function Signin() {
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
   const [isValidEmail, setEmailValid] = useState(false); //이메일 유효성 여부
   const navigate = useNavigate();
+  const [tagItem, setTagItem] = useState('');
+  const [tagList, setTagList] = useState([]);
+  const whitelist = [
+    '액션',
+    '멜로',
+    '판타지',
+    '코믹',
+    '가',
+    '나',
+    '다',
+    '라',
+    '마',
+  ];
 
+  const onKeyPress = (e) => {
+    e.preventDefault();
+    if (e.target.value.length !== 0 && e.key === 'Enter') {
+      const tagValue = e.target.value.trim();
+      if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
+        // whitelist에 지정된 단어들만 입력 가능하도록 검사
+        submitTagItem();
+      } else {
+        e.target.value = '';
+      }
+    }
+  };
+
+  const submitTagItem = () => {
+    let updatedTagList = [...tagList];
+    updatedTagList.push(tagItem);
+    setTagList(updatedTagList);
+    setTagItem('');
+  };
+
+  const deleteTagItem = (e) => {
+    e.preventDefault();
+    const deleteTagItem = e.target.parentElement.firstChild.innerText;
+    const filteredTagList = tagList.filter(
+      (tagItem) => tagItem !== deleteTagItem
+    );
+    setTagList(filteredTagList);
+  };
   useEffect(() => {
     if (
       isValidEmail &&
@@ -80,6 +121,7 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: pw,
@@ -158,6 +200,7 @@ function Signin() {
                 color: 'white',
                 fontSize: '15px',
                 left: '270px',
+                fontWeight: 'normal',
               }}
             >
               비밀번호를 한번 더 정확히 입력해주세요
@@ -172,7 +215,37 @@ function Signin() {
         </div>
 
         <div className={styles.textBox}>
-          <textarea rows="4" cols="50"></textarea>
+          <WholeBox>
+            <TagBox>
+              <div
+                style={{
+                  color: 'grey',
+                  background: 'white',
+                  fontSize: '14px',
+                  height: '14px',
+                  borderRadius: '10px',
+                }}
+              >
+                -----------좋아하는 장르를 엔터로 추가해주세요
+                [액션,판타지,멜로,코믹]-----------
+              </div>
+              {tagList.map((tagItem, index) => {
+                return (
+                  <TagItem key={index}>
+                    <Text>{tagItem}</Text>
+                    <Button onClick={deleteTagItem}>X</Button>
+                  </TagItem>
+                );
+              })}
+              <TagInput
+                type="text"
+                tabIndex={2}
+                onChange={(e) => setTagItem(e.target.value)}
+                value={tagItem}
+                onKeyPress={onKeyPress}
+              />
+            </TagBox>
+          </WholeBox>
         </div>
         <div>
           <button className={styles.submit} disabled={notAllow} type="submit">
@@ -183,5 +256,62 @@ function Signin() {
     </Background>
   );
 }
+
+const WholeBox = styled.div`
+  padding: 10px;
+  width: 510px;
+  transform: translateX(-4.2%);
+  background-color: rgb(255, 147, 147);
+  border-radius: 10px;
+`;
+
+const TagBox = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 50px;
+  margin: 10px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: red;
+`;
+
+const TagItem = styled.span`
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(255, 147, 147);
+
+  color: white;
+  font-size: 13px;
+`;
+
+const Text = styled.span``;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background-color: white;
+  border-radius: 50%;
+  color: red;
+`;
+
+const TagInput = styled.input`
+  display: inline-flex;
+  width: 35px;
+  height: 14px;
+  border-radius: 10px;
+  background: white;
+  border: none;
+  outline: none;
+  cursor: text;
+`;
 
 export default Signin;
