@@ -159,12 +159,17 @@ main{
     margin-left: 17px;
 
 }
-.mainPage img ,.mainPage td{
+.mainPage td{
     width: 207px;
     height: 314px;
-    margin-left: 17px;
     border-radius: 10px;
+    padding-left: 17px;
+}
 
+.mainPage img ,.mainPage button{
+    width: 207px;
+    height: 314px;
+    border-radius: 10px;
 }
 
 /*밑의 부분이 나타날 부분*/

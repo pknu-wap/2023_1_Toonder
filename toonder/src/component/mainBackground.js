@@ -28,7 +28,11 @@ function MainBackgorund(props) {
             navigate('/mainWebtoonList');
           }}
           >웹툰 목록</button>
-          <button id="mypage">마이페이지</button>
+          <button id="mypage"
+            onClick={() => {
+              navigate('/mainBackSmall');
+            }}
+          >마이페이지</button>
           <button id="freeBoard">자유게시판</button>
           <button id="logOut"
           onClick={() => {
