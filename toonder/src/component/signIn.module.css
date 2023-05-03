@@ -32,23 +32,8 @@
   border-radius: 10px;
   padding: 13px;
   box-sizing: border-box;
-  width: 380px;
+  width: 490px;
   font-family: sans-serif;
-}
-
-.email button {
-  left: 19px;
-  display: inline-block;
-  position: relative;
-  border: none;
-  background-color: transparent;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 25px;
-  transition: background-color 0.3s ease;
-  padding: 0px;
-  font-family: 'BMHANNAPro' !important;
 }
 
 .password {
