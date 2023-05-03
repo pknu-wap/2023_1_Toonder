@@ -19,10 +19,14 @@ button, input{
 /*mainBackground*/
 .mainPageBack{
     display: flex;
-    margin-left: 86px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 102px;
+    width:1224px;
     border-radius: 10px;
 }
+
+/* 좌측 nav 부분*/
 
 .mainLogo{
     display: flex;
@@ -33,37 +37,11 @@ button, input{
 }
 
 .mainLogo h1{
+    font-size: 40px;
     margin-left: 20px;
 }
 
-.mainSearch{
-    border-radius: 10px;
-    display : flex;
-    /* 가로축 가운데 정렬 */
-    justify-content : center;
-    /* 세로축 가운데 정렬 */
-    align-items : center;
-    width: 953px;
-    height: 84px;
-    background-color: rgb(255, 147, 147);
-    background-size: 953px 84px;
-}
-
-.mainSearch input{
-    width: 806px;
-    height: 64px;
-    font-size: 24px;
-}
-
-.mainSearch button{
-    border-radius: 10px;
-    margin-left: 13px;
-    width: 90px;
-    height: 45px;
-    background-color: white;
-    color: rgb(255, 147, 147);
-    font-size: 20px;
-}
+/*이름, 정보수정 */
 
 .mainInfo{
     position: absolute;
@@ -90,6 +68,8 @@ button, input{
     background-color: rgb(255, 147, 147);
 }
 
+
+/*버튼 세트 */
 .mainButtonSet{
     display: flex;
     position: absolute;
@@ -112,6 +92,39 @@ button, input{
     justify-content: center;
 }
 
+/* 우측 section 부분*/
+.mainSearch{
+    border-radius: 10px;
+    display : flex;
+    /* 가로축 가운데 정렬 */
+    justify-content : center;
+    /* 세로축 가운데 정렬 */
+    align-items : center;
+    width: 953px;
+    height: 84px;
+    background-color: rgb(255, 147, 147);
+    background-size: 953px 84px;
+}
+
+/* 검색 하는 부분*/
+.mainSearch input{
+    width: 806px;
+    height: 64px;
+    font-size: 24px;
+}
+
+.mainSearch button{
+    border-radius: 10px;
+    margin-left: 13px;
+    width: 90px;
+    height: 45px;
+    background-color: white;
+    color: rgb(255, 147, 147);
+    font-size: 20px;
+}
+
+
+
 /*main_page*/
 .mainPage{
     display: flex;
@@ -126,6 +139,10 @@ button, input{
     color:white;
 }
 
+/* main 콘텐츠가 나타날 부분*/
+.mainPart{
+    margin-left: 20px;
+}
 main{
     margin-left: 11px;
     margin-right: 38px;
@@ -143,6 +160,7 @@ main{
 
 }
 
+/*밑의 부분이 나타날 부분*/
 .botPage{
     position: absolute;
     top:552px;
@@ -169,7 +187,7 @@ main{
     margin-right: auto;
 }
 
-.botPage h1{
+.botPage li{
     margin-left: 30px;
     font-style: normal;
     font-weight: 700;
@@ -177,4 +195,30 @@ main{
     line-height: 19px;
     display: flex;
     align-items: center;
+}
+
+/*웹툰 목록*/
+.mainWebtoonList{
+    position: absolute;
+    margin-top: 61px;
+    width: 953px;
+    height: 715px;
+    background-color: rgb(255, 147, 147);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color:white;
+}
+
+.mainWebtoonList table{
+    height: 645px;
+    width: 873px;
+}
+
+.mainWebtoonList td,.mainWebtoonList img{
+    height: 314px;
+    width: 207px;
+    border-radius: 10px;
 }
