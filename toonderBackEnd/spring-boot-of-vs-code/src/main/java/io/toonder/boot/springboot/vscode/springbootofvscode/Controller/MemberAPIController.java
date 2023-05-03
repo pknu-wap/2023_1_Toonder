@@ -27,9 +27,6 @@ public class MemberAPIController {
  
     @RequestMapping(value = "/insert", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
     public Member insert(@RequestBody Map<String, String> map) {
-        System.out.println(map.get("mem_id"));
-        System.out.println(map.get("mem_name"));
-        System.out.println(map.get("mem_hashtag"));
         return memberRepository.save(new Member(map.get("mem_id"), map.get("mem_name"), map.get("mem_hashtag")));
     }
 
