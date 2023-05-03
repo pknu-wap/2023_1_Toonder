@@ -7,7 +7,7 @@ import Login from './component/login';
 import Mainpage from './component/main_page';
 import Findid_after from './component/findid_after';
 import Findpw_after from './component/findpw_after';
-
+import Tag from './component/tag';
 import axios from 'axios';
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
           <Route path="/findpw" element={<Findpw />} />
           <Route path="/findid_after" element={<Findid_after />} />
           <Route path="/findpw_after" element={<Findpw_after />} />
+          <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>
     </div>
