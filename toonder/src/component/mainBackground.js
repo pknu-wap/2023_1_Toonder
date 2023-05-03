@@ -1,10 +1,20 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logoimage.png';
 import "./mainPage.css";
+import axios from 'axios';
 
 function MainBackgorund(props) {
   const navigate = useNavigate();
+  const [loggedUserName, setLoggedUserName] = useState('지금 로그인하세요!');
+  useEffect(() => {
+    axios
+      .get('api/member/select/'+sessionStorage.getItem('loggedUserEmail'))
+      .then(loggedUserData => {
+        setLoggedUserName(loggedUserData.data.mem_name);
+      })
+      .catch(error => console.log(error))
+  },[])
 
   return (
     <div className='mainPageBack'>
@@ -14,7 +24,7 @@ function MainBackgorund(props) {
         </div>
         <div className='mainInfo'>
           <img></img>
-          <h2>이름</h2>
+          <h2>{loggedUserName}</h2>
           <button id='changeInfo'><h3>정보수정</h3></button>
         </div>
         <div className='mainButtonSet'>
