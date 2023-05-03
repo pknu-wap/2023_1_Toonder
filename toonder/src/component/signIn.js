@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-
 function Signin() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
@@ -124,19 +123,15 @@ function Signin() {
   };
 
   const handleSubmit = async (e) => {
-
-    
     axios
-    .post('api/member/insert',
-      {
-        mem_id:email,
-        mem_name:firstName + lastName,
-        mem_hashtag:''
+      .post('api/member/insert', {
+        mem_id: email,
+        mem_name: firstName + lastName,
+        mem_hashtag: '',
       })
-    .catch(function(){
-      console.log('Error for sending user data to Spring - creating member')
-    })
-  
+      .catch(function () {
+        console.log('Error for sending user data to Spring - creating member');
+      });
 
     e.preventDefault();
 
@@ -233,7 +228,11 @@ function Signin() {
         </div>
 
         <div className={styles.textBox}>
-          <WholeBox>
+          <WholeBox
+            onClick={() => {
+              inputRef.current.focus();
+            }}
+          >
             <TagBox
               onClick={() => {
                 inputRef.current.focus();
@@ -336,7 +335,7 @@ const TagInput = styled.input`
   width: 35px;
   height: 15px;
 
-  border-radius: 10px;
+  border-radius: 0px;
   background: white;
   border: none;
   outline: none;

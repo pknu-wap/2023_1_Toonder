@@ -119,3 +119,7 @@ input::placeholder {
   font-size: 14px;
   font-weight: normal;
 }
+
+* {
+  outline: none; /* 모든 요소의 outline 제거 */
+}
