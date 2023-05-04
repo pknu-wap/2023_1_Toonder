@@ -253,10 +253,24 @@ function Signin() {
                 [액션,판타지,멜로,코믹,드라마]------
               </div>
               {tagList.map((tagItem, index) => {
+                const backgroundColor =
+                  index % 3 === 0
+                    ? 'rgb(255, 147, 147)'
+                    : index % 3 === 1
+                    ? 'rgb(219, 235, 170)'
+                    : 'rgb(248, 249, 176)';
                 return (
-                  <TagItem key={index}>
+                  <TagItem
+                    style={{ backgroundColor: backgroundColor }}
+                    key={index}
+                  >
                     <Text>{tagItem}</Text>
-                    <Button onClick={deleteTagItem}>❌</Button>
+                    <Button
+                      style={{ backgroundColor: backgroundColor }}
+                      onClick={deleteTagItem}
+                    >
+                      ❌
+                    </Button>
                   </TagItem>
                 );
               })}
@@ -309,10 +323,9 @@ const TagItem = styled.span`
   border-radius: 5px;
   margin: 5px;
   padding: 5px;
-  background-color: rgb(255, 147, 147);
-
-  color: white;
-  font-size: 13px;
+  color: black;
+  font-size: 15px;
+  height: 45px;
 `;
 
 const Text = styled.span``;
@@ -325,16 +338,17 @@ const Button = styled.button`
   font-size: 15px;
   height: 15px;
   margin-left: 5px;
-  background-color: rgb(255, 147, 147);
+
   border-radius: 50%;
   color: red;
 `;
 
 const TagInput = styled.input`
   display: inline-flex;
-  width: 35px;
+  width: 45px;
   height: 15px;
-
+  font-family: 'Sans-serif';
+  font-weight: 500;
   border-radius: 0px;
   background: white;
   border: none;
