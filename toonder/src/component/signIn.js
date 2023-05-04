@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Background from './backGround';
 import supabase from './supabase';
 import styles from './signIn.module.css';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import axios from 'axios';
 
 function Signin() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
   }, []);
-
+  const inputRef = useRef(null);
   const [pw, setPw] = useState(''); //비밀번호 값
   const [pwc, setPwc] = useState(''); //비밀번호 확인 값
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
@@ -19,7 +21,49 @@ function Signin() {
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
   const [isValidEmail, setEmailValid] = useState(false); //이메일 유효성 여부
   const navigate = useNavigate();
+  const [tagItem, setTagItem] = useState('');
+  const [tagList, setTagList] = useState([]);
+  const whitelist = [
+    '액션',
+    '멜로',
+    '판타지',
+    '코믹',
+    '가',
+    '나',
+    '다',
+    '라',
+    '마',
+    '드라마',
+  ];
 
+  const onKeyPress = (e) => {
+    e.preventDefault();
+    if (e.target.value.length !== 0 && e.key === 'Enter') {
+      const tagValue = e.target.value.trim();
+      if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
+        // whitelist에 지정된 단어들만 입력 가능하도록 검사
+        submitTagItem();
+      } else {
+        e.target.value = '';
+      }
+    }
+  };
+
+  const submitTagItem = () => {
+    let updatedTagList = [...tagList];
+    updatedTagList.push(tagItem);
+    setTagList(updatedTagList);
+    setTagItem('');
+  };
+
+  const deleteTagItem = (e) => {
+    e.preventDefault();
+    const deleteTagItem = e.target.parentElement.firstChild.innerText;
+    const filteredTagList = tagList.filter(
+      (tagItem) => tagItem !== deleteTagItem
+    );
+    setTagList(filteredTagList);
+  };
   useEffect(() => {
     if (
       isValidEmail &&
@@ -74,12 +118,23 @@ function Signin() {
     if (pw === e.target.value) {
       setIsPwCheck(true);
     } else {
-      setIsPwCheck(false);
+      setIsPwCheck('false');
     }
   };
 
   const handleSubmit = async (e) => {
+    axios
+      .post('api/member/insert', {
+        mem_id: email,
+        mem_name: firstName + lastName,
+        mem_hashtag: '',
+      })
+      .catch(function () {
+        console.log('Error for sending user data to Spring - creating member');
+      });
+
     e.preventDefault();
+
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: pw,
@@ -158,6 +213,7 @@ function Signin() {
                 color: 'white',
                 fontSize: '15px',
                 left: '270px',
+                fontWeight: 'normal',
               }}
             >
               비밀번호를 한번 더 정확히 입력해주세요
@@ -172,7 +228,48 @@ function Signin() {
         </div>
 
         <div className={styles.textBox}>
-          <textarea rows="4" cols="50"></textarea>
+          <WholeBox
+            onClick={() => {
+              inputRef.current.focus();
+            }}
+          >
+            <TagBox
+              onClick={() => {
+                inputRef.current.focus();
+              }}
+            >
+              <div
+                onClick={() => {
+                  inputRef.current.focus();
+                }}
+                style={{
+                  color: 'grey',
+                  background: 'white',
+                  fontSize: '14px',
+                  height: '14px',
+                }}
+              >
+                ------좋아하는 장르를 엔터로 추가해주세요
+                [액션,판타지,멜로,코믹,드라마]------
+              </div>
+              {tagList.map((tagItem, index) => {
+                return (
+                  <TagItem key={index}>
+                    <Text>{tagItem}</Text>
+                    <Button onClick={deleteTagItem}>❌</Button>
+                  </TagItem>
+                );
+              })}
+              <TagInput
+                type="text"
+                tabIndex={2}
+                onChange={(e) => setTagItem(e.target.value)}
+                value={tagItem}
+                onKeyPress={onKeyPress}
+                ref={inputRef}
+              />
+            </TagBox>
+          </WholeBox>
         </div>
         <div>
           <button className={styles.submit} disabled={notAllow} type="submit">
@@ -183,5 +280,66 @@ function Signin() {
     </Background>
   );
 }
+
+const WholeBox = styled.div`
+  padding: 0px;
+  width: 490px;
+  height: 180px;
+  transform: translateX(0%);
+  background-color: white;
+  border-radius: 10px;
+`;
+
+const TagBox = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 30px;
+  margin: 10px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: white;
+  border-color: white;
+`;
+
+const TagItem = styled.span`
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(255, 147, 147);
+
+  color: white;
+  font-size: 13px;
+`;
+
+const Text = styled.span``;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  font-size: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background-color: rgb(255, 147, 147);
+  border-radius: 50%;
+  color: red;
+`;
+
+const TagInput = styled.input`
+  display: inline-flex;
+  width: 35px;
+  height: 15px;
+
+  border-radius: 0px;
+  background: white;
+  border: none;
+  outline: none;
+  cursor: text;
+`;
 
 export default Signin;

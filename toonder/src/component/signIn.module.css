@@ -40,7 +40,7 @@
   transform: translateX(4.5%);
   display: flex;
   position: absolute;
-  top: 380px;
+  top: 375px;
 }
 
 .password input {
@@ -60,22 +60,11 @@
   top: 445px;
 }
 
-.textBox textarea {
-  width: 490px;
-  height: 200px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding-top: 10px;
-  font-family: sans-serif;
-  resize: none;
-}
-
 .submit {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 655px;
+  top: 645px;
   border: none;
   background-color: transparent;
   color: #fff;
@@ -85,4 +74,8 @@
   transition: background-color 0.3s ease;
   font-family: 'BMHANNAPro' !important;
   width: 100px;
+}
+
+.WholeBox:focus-within {
+  box-shadow: 0 0 0 2px blue;
 }
