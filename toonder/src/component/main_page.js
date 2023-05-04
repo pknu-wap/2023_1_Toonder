@@ -17,17 +17,22 @@ function Mainpage() {
         <main>
           <h2>실시간 인기 반응 웹툰</h2>
           <table>
-            <td><img src={ex1} alt="image error" /></td>
-            <td><img src={ex2} alt="image error" /></td>
-            <td><img src={ex3} alt="image error" /></td>
-            <td><img src={ex4} alt="image error" /></td>
+            <td><button
+            onClick={() => {
+            navigate('/mainwebtooninfo');
+            }}><img src={ex1} alt="image error" /></button></td>
+            <td><button><img src={ex2} alt="image error" /></button></td>
+            <td><button><img src={ex3} alt="image error" /></button></td>
+            <td><button><img src={ex4} alt="image error" /></button></td>
           </table>
         </main>
         <div className='botPage'>
           <section>
-            <h1>사람의 감정과 이성의 중도를 너무 간결하게 이해시켜주는 작품인 거 같습니다!” - Hanna Lee</h1>
-            <h1>네이버 웹툰 중에서 제일 재밌음! - Stephan Lee</h1>
-            <h1>설레는 포인트도 많고, 정주행 10번은 해야지~ - Howard Wolowitz</h1>
+            <ul>
+              <li>사람의 감정과 이성의 중도를 너무 간결하게 이해시켜주는 작품인 거 같습니다!” - Hanna Lee</li>
+              <li>네이버 웹툰 중에서 제일 재밌음! - Stephan Lee</li>
+              <li>설레는 포인트도 많고, 정주행 10번은 해야지~ - Howard Wolowitz</li>
+            </ul>
           </section>
         </div>
       </div>
