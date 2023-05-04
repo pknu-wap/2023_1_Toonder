@@ -19,10 +19,14 @@ function MainWebtoonList() {
       <div className='mainWebtoonList'>
           <table>
             <tr>
-                <td><img src={ex1} alt="image error" /></td>
-                <td><img src={ex2} alt="image error" /></td>
-                <td><img src={ex3} alt="image error" /></td>
-                <td><img src={ex4} alt="image error" /></td>
+                <td><button
+                onClick={() => {
+                navigate('/mainwebtooninfo');
+                }}
+                ><img src={ex1} alt="image error" /></button></td>
+                <td><button><img src={ex2} alt="image error" /></button></td>
+                <td><button><img src={ex3} alt="image error" /></button></td>
+                <td><button><img src={ex4} alt="image error" /></button></td>
             </tr>
             <tr>
                 <td><img src={ex5} alt="image error" /></td>
