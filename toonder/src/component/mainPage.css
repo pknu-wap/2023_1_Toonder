@@ -21,7 +21,7 @@ button, input{
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 102px;
+    margin-top: 61px;
     width:1224px;
     border-radius: 10px;
 }
@@ -52,7 +52,7 @@ button, input{
 
 .mainInfo{
     position: absolute;
-    top: 256px;
+    margin-top: 51px;
     border-radius: 10px;
     background-color: rgb(255, 147, 147);
     width: 199px;
@@ -82,8 +82,7 @@ button, input{
     position: absolute;
     width: 199px;
     height: 293px;
-    top: 583px;
-    flex-direction: column;
+margin-top: 402px;    flex-direction: column;
     align-items: center;
 }
 
@@ -131,7 +130,6 @@ button, input{
 }
 
 
-
 /*main_page*/
 .mainPage{
     display: flex;
@@ -139,7 +137,7 @@ button, input{
     background-color: rgb(255, 147, 147);
     width: 953px;
     height: 526px;
-    top: 256px;
+    margin-top: 61px;
     flex-direction: column;
     justify-content: center;
     border-radius: 10px;
@@ -205,8 +203,6 @@ main{
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    display: flex;
-    align-items: center;
 }
 
 /*웹툰 목록*/
@@ -216,10 +212,6 @@ main{
     width: 953px;
     height: 715px;
     background-color: rgb(255, 147, 147);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
     color:white;
 }
@@ -227,10 +219,131 @@ main{
 .mainWebtoonList table{
     height: 645px;
     width: 873px;
+    margin-top: 40px;
+    margin-left: 44px;
 }
 
-.mainWebtoonList td,.mainWebtoonList img{
+.mainWebtoonList td,.mainWebtoonList img, .mainWebtoonList button{
     height: 314px;
     width: 207px;
     border-radius: 10px;
+}
+
+
+/*웹툰 정보와 리뷰*/
+
+.mainwtInfo,.mainStory, .mainReview{
+    background-color: rgb(255, 147, 147);
+    border-radius: 10px;
+
+}
+.mainWebtoonInfo{
+    margin-top: 61px;
+    display: flex;
+    align-items: center;
+}
+.mainwtInfo{
+    display: flex;
+    width: 583px;
+    height: 391px;
+}
+.mainStory{
+    width: 339px;
+    height: 391px;
+    margin-left: 31px;
+}
+.mainReview{
+    width: 950px;
+    height: 292px;
+    margin-top: 18px;
+}
+
+.subwtInfo {
+    margin-left: 62px;
+    margin-top: 70px;
+}
+
+
+.mainwtInfo img{
+    height: 314px;
+    width: 207px;
+    border-radius: 10px;
+    margin-top: 41px;
+    margin-left: 45px;
+}
+
+.subwtInfo h1{
+    color: white;
+}
+.subwtInfo ul{
+    height: 85px;
+    width: 195px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 73px;
+    margin-left: 30px;
+}
+
+.subwtInfo li{
+    color:rgb(255, 147, 147);
+    margin-left: 28px;
+}
+
+/*줄거리 내용*/
+.mainStory h1{
+    margin-left: 41px;
+    margin-top: 70px;
+    color: white;
+}
+.mainStory ul{
+    height: 85px;
+    width: 255px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 74px;
+    margin-left: 44px;
+}
+
+.mainStory li{
+    color:rgb(255, 147, 147);
+    margin-left: 28px;
+}
+
+/*mainReview메인 리뷰*/
+.mainReview h1{
+    color: white;
+    padding-top: 12px;
+    margin-left: 24px;
+}
+
+.mainReview section{
+    color:rgb(255, 147, 147);
+    background-color: white;
+    margin-top: 6px;
+    margin-left: 37px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 860px;
+    height: 115px;
+    border-radius: 10px;
+}
+
+.mainReview li{
+    margin-left: 30px;
+    line-height: 25px;
+
+}
+
+.mainReview input{
+    width: 860px;
+    height: 58px;
+    margin-top: 30px;
+    margin-left: 37px;
 }
