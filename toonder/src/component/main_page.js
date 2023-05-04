@@ -7,9 +7,10 @@ import ex2 from "../images/ex2.png"
 import ex3 from "../images/ex3.png"
 import ex4 from "../images/ex4.png"
 
+import {useLocation} from 'react-router';
+
 function Mainpage() {
   const navigate = useNavigate();
-
   return (
     <MainBackgorund>
       <div className='mainPage'>

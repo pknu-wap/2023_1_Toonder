@@ -112,3 +112,14 @@ body {
   background-color: rgb(255, 147, 147);
   color: white;
 }
+
+input::placeholder {
+  color: grey;
+  font-family: 'BMHANNAPro';
+  font-size: 14px;
+  font-weight: normal;
+}
+
+* {
+  outline: none; /* 모든 요소의 outline 제거 */
+}
