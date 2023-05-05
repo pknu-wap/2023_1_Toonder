@@ -10,6 +10,7 @@ import Findpw_after from './component/findpw_after';
 import MainWebtoonList from './component/mainWebtoonList';
 import MainBacksmall from './component/mainBackSmall';
 import  MainWebtoonInfo from './component/mainWebtoonInfo'
+import  Mypage from './component/mypage'
 import Tag from './component/tag';
 import axios from 'axios';
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/mainWebtoonList" element={<MainWebtoonList />} />
           <Route path="/mainbackground" element={<MainBacksmall />} />
           <Route path="/mainwebtooninfo" element={<MainWebtoonInfo />} />
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>

@@ -6,6 +6,7 @@ import ex1 from "../images/ex1.png"
 import ex2 from "../images/ex2.png"
 import ex3 from "../images/ex3.png"
 import ex4 from "../images/ex4.png"
+import MainBackSmall from './mainBackSmall';
 
 import {useLocation} from 'react-router';
 
@@ -13,6 +14,7 @@ function Mainpage() {
   const navigate = useNavigate();
   return (
     <MainBackgorund>
+      <MainBackSmall>
       <div className='mainPage'>
         <main>
           <h2>실시간 인기 반응 웹툰</h2>
@@ -36,7 +38,7 @@ function Mainpage() {
           </section>
         </div>
       </div>
-
+      </MainBackSmall>
     </MainBackgorund>
   );
 }
