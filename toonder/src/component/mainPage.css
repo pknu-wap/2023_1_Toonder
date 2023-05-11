@@ -358,7 +358,53 @@ table td,table img, table button{
 
 /*My page*/
 .mainUserInfo{
+    margin-top: 61px;
     width: 1224px;
     height: 293px;
     background-color: rgb(255, 147, 147);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center
+
+
+}
+.mainUserInfo h1{
+    margin: auto;
+}
+
+.subUserInfo{
+    display: flex;
+}
+
+.myReview , .myPost{
+    margin-top: 58px;
+    background-color: rgb(255, 147, 147);
+    color: white;
+    width: 602px;
+    height: 293px;
+    border-radius: 10px;
+}
+
+.myReview h2, .myPost h2{
+    margin: 25px;
+}
+
+.myReview{
+    margin-right: 43px;
+}
+
+.subUserInfo section{
+    width: 523px;
+    height: 184px;
+    background-color: white;
+    color:rgb(255, 147, 147);
+    border-radius: 10px;
+    margin: auto;
+    padding: 5px;
+}
+
+.subUserInfo h4, .subUserInfo ul{
+    margin: 20px;
 }
