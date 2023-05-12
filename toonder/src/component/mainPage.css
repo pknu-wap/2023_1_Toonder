@@ -408,3 +408,67 @@ table td,table img, table button{
 .subUserInfo h4, .subUserInfo ul{
     margin: 20px;
 }
+
+/*Freeboard*/
+.mainboard {
+    width: 1224px;
+    height: 609px;
+    background-color: rgb(255, 147, 147);
+    border-radius: 10px;
+    margin-top: 50px;
+}
+.mainboard h2 {
+    padding: 17px 58px;
+    color: white;
+}
+.mainboard li{
+    width: 1094px;
+    height:64px;
+    margin: 18px auto;
+    background-color: white;
+    color:rgb(255, 147, 147);
+    border-radius: 10px;
+}
+
+
+.subbuttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 26px;
+}
+
+#freewrite{
+    background-color: rgb(255, 147, 147);
+    color: white;
+    width: 116px;
+    height: 44px;
+    font-size: 30px;
+    float: right;
+}
+
+/* Pagination links */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.pagination a {
+    color: grey;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+  /* Style the active/current link */
+.pagination a.active {
+    background-color: rgb(255, 147, 147);
+    color: white;
+}
+
+  /* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    color:white;
+}
