@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Signin from './component/signIn';
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Findid from './component/findid';
 import Findpw from './component/findpw';
 import Login from './component/login';
@@ -9,12 +9,12 @@ import Findid_after from './component/findid_after';
 import Findpw_after from './component/findpw_after';
 import MainWebtoonList from './component/mainWebtoonList';
 import MainBacksmall from './component/mainBackSmall';
-import  MainWebtoonInfo from './component/mainWebtoonInfo'
+import MainWebtoonInfo from './component/mainWebtoonInfo';
+import InfoC from './component/infoChange';
 import Tag from './component/tag';
 import axios from 'axios';
 
 function App() {
-
   //Test for Spring Data setting
   // useEffect(() => {
   //   axios
@@ -42,6 +42,7 @@ function App() {
           <Route path="/mainWebtoonList" element={<MainWebtoonList />} />
           <Route path="/mainbackground" element={<MainBacksmall />} />
           <Route path="/mainwebtooninfo" element={<MainWebtoonInfo />} />
+          <Route path="/infochange" element={<InfoC />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>
