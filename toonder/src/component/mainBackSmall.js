@@ -34,7 +34,11 @@ function MainBackSmall(props) {
             navigate('/mypage');
           }}
         >마이페이지</button>
-        <button id="freeBoard">자유게시판</button>
+        <button id="freeBoard"
+          onClick={() => {
+            navigate('/freeboard');
+          }}
+        >자유게시판</button>
         <button id="logOut"
         onClick={() => {
           navigate('/');
