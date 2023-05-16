@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./mainPage.css";
 import MainBackgorund from './mainBackground';
 import ex1 from "../images/ex1.png"
+import MainBackSmall from './mainBackSmall';
 
 
 function MainWebtoonInfo() {
@@ -10,6 +11,7 @@ function MainWebtoonInfo() {
 
   return (
     <MainBackgorund>
+      <MainBackSmall>
       <div className='mainWebtoonInfo'>
         <div className='mainwtInfo'>
           <img src={ex1} alt="image error" />
@@ -22,6 +24,7 @@ function MainWebtoonInfo() {
             </ul>
           </div>
         </div>
+
         <div className='mainStory'>
             <h1>줄거리</h1>
             <ul>
@@ -40,6 +43,8 @@ function MainWebtoonInfo() {
         </section>
         <input type="text" placeholder='    리뷰를 달아보세요!'></input>
       </div>
+      </MainBackSmall>
+
     </MainBackgorund>
   );
 }

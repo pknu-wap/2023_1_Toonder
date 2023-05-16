@@ -17,13 +17,11 @@ function MainBackgorund(props) {
   }, []);
 
   return (
-    <div className="mainPageBack">
-      <nav className="sidePart">
-        {' '}
-        {/* 좌우구분용 네브 */}
-        <div className="mainLogo">
-          <button
-            id="main_page"
+
+    <div className='mainPageBack'>
+      <div className='logoSearch'> {/* 좌우구분용 네브 */}
+        <div className='mainLogo'>
+          <button id="main_page"
             onClick={() => {
               navigate('/main_page');
             }}
@@ -32,6 +30,8 @@ function MainBackgorund(props) {
             <h1>Toonder</h1>
           </button>
         </div>
+        <div className='mainSearch'>
+          <input id="mainSearchInput" type="text" placeholder="    찾고싶은 웹툰 검색!" />
         <div className="mainInfo">
           <img></img>
           <h2>{loggedUserName}</h2>
@@ -83,8 +83,8 @@ function MainBackgorund(props) {
           />
           <button id="mainSearchButton">검색</button>
         </div>
+      </div>
         {props.children} {/* props.children 렌더링 */}
-      </section>
     </div>
   );
 }
