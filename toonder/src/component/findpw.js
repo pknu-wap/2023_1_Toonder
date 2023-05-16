@@ -35,7 +35,9 @@ function Findpw() {
     setLoading(true);
     setMessage('');
     try {
-      await supabase.auth.resetPasswordForEmail(email);
+      await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:3000/findid',
+      });
       const [id, domain] = email.split('@');
       const hiddenID = id.slice(0, 3) + id.slice(3).replace(/./g, '*');
       const hiddenEmail = hiddenID + '@' + domain;
