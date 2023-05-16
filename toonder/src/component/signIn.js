@@ -38,6 +38,7 @@ function Signin() {
 
   const onKeyPress = (e) => {
     e.preventDefault();
+
     if (e.target.value.length !== 0 && e.key === 'Enter') {
       const tagValue = e.target.value.trim();
       if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
@@ -115,10 +116,11 @@ function Signin() {
 
   const handleCheckPw = (e) => {
     setPwc(e.target.value);
+
     if (pw === e.target.value) {
       setIsPwCheck(true);
     } else {
-      setIsPwCheck('false');
+      setIsPwCheck(false);
     }
   };
 
@@ -140,7 +142,6 @@ function Signin() {
       password: pw,
     });
 
-    console.log(data.user);
     if (error) {
       alert(error);
     } else alert('인증 메일을 발송했습니다. 이메일 확인 후 로그인해주세요.');
