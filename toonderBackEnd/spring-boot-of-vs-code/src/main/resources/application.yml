@@ -7,11 +7,18 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://database-1.cmblxxo7uwm2.ap-northeast-2.rds.amazonaws.com:3306/toonder?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: admin
-    password: toonder19212121
+    password: 
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        format_sql: trues
+        format_sql: true
+server:
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
