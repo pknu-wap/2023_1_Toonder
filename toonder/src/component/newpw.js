@@ -15,7 +15,36 @@ function Newpw() {
   const [notAllow, setNotAllow] = useState(true);
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
   const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
-  const handleSubmit = async (e) => {};
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      await supabase.auth.updateUser({ password: pw });
+      setMessage(
+        <div>
+          비밀번호 재설정이
+          <br />
+          <br />
+          완료 되었습니다.
+        </div>
+      );
+    } catch (error) {
+      console.error(error);
+      setMessage(
+        <div>
+          비밀번호 재설정이 실패하였습니다
+          <br />
+          <br />
+          다시 시도해 주세요
+        </div>
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (isPwCheck & isPwValid) setNotAllow(false);
     else setNotAllow(true);
@@ -52,49 +81,58 @@ function Newpw() {
   return (
     <Background text="New PW" backgroundSize="318px 265px">
       <form onSubmit={handleSubmit}>
-        <div className={styles.password}>
-          {!isPwValid && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                color: 'white',
-                fontSize: '14px',
-                top: '-5px',
-                width: '234px',
-              }}
-            >
-              영문, 숫자 포함 8~10자 이상 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handlePW}
-            value={pw}
-            placeholder="비밀번호"
-          />
-          {!isPwCheck && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '87px',
-                color: 'white',
-                fontSize: '14px',
-                width: '219px',
-              }}
-            >
-              비밀번호를 한번 더 정확히 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handleCheckPw}
-            value={pwc}
-            placeholder="비밀번호 확인"
-          />
-          <button className={styles.submit} disabled={notAllow} type="submit">
-            <strong>Change PW</strong>
-          </button>
-        </div>
+        {loading ? (
+          <div className={styles.loading}>작업을 처리 중 입니다...</div>
+        ) : message ? (
+          <div className={styles.afterFind}>
+            <h1>{message}</h1>
+            <button onClick={() => navigate('/')}>확인</button>
+          </div>
+        ) : (
+          <div className={styles.password}>
+            {!isPwValid && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  color: 'white',
+                  fontSize: '14px',
+                  top: '-5px',
+                  width: '234px',
+                }}
+              >
+                영문, 숫자 포함 8~10자 이상 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handlePW}
+              value={pw}
+              placeholder="비밀번호"
+            />
+            {!isPwCheck && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '87px',
+                  color: 'white',
+                  fontSize: '14px',
+                  width: '219px',
+                }}
+              >
+                비밀번호를 한번 더 정확히 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handleCheckPw}
+              value={pwc}
+              placeholder="비밀번호 확인"
+            />
+            <button className={styles.submit} disabled={notAllow} type="submit">
+              <strong>Change PW</strong>
+            </button>
+          </div>
+        )}
       </form>
     </Background>
   );
