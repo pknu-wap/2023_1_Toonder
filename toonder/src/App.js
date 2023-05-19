@@ -9,11 +9,12 @@ import Findid_after from './component/findid_after';
 import Findpw_after from './component/findpw_after';
 import MainWebtoonList from './component/mainWebtoonList';
 import MainBacksmall from './component/mainBackSmall';
-import  MainWebtoonInfo from './component/mainWebtoonInfo'
-import  Mypage from './component/mypage'
-import  Freeboard from './component/freeboard'
+import MainWebtoonInfo from './component/mainWebtoonInfo';
+import Mypage from './component/mypage';
+import Freeboard from './component/freeboard';
 import InfoC from './component/infoChange';
 import Tag from './component/tag';
+import Newpw from './component/newpw';
 import axios from 'axios';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/freeboard" element={<Freeboard />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/infochange" element={<InfoC />} />
+          <Route path="/newpw" element={<Newpw />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>

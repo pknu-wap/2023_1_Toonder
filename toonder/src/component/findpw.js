@@ -5,6 +5,9 @@ import supabase from './supabase';
 import styles from './findpw.module.css';
 
 function Findpw() {
+  useEffect(() => {
+    document.title = 'Toonder 비밀번호 찾기';
+  }, []);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(false);
@@ -66,7 +69,7 @@ function Findpw() {
   };
 
   return (
-    <IDBackground text="Find PW">
+    <IDBackground text="Find PW" backgroundSize="600px 500px">
       <div className={styles.findPw}>
         {loading ? (
           <div className={styles.loading}>찾는 중 입니다...</div>
