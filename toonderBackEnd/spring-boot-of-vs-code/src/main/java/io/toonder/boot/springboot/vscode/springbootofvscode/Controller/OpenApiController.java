@@ -21,13 +21,13 @@ public class OpenApiController {
         this.webtoonService = webtoonService;
     }
 
-    @GetMapping("/openapi-load-data")
+    @GetMapping("/openApiLoadData")
     public String callApi() throws IOException {
         StringBuilder result = new StringBuilder();
 
         int totalPages = 350; //350 혹은 toalPages를 모르는 경우 동작하는 코드로 추후 수정 <- 트래픽 초과 문제 발생 가능
 
-        String apiKey = ""; //코드 실행시 apiKey 추가 필요 + rds 비밀번호도 application.yml에 추가해서 코드 실행
+        String apiKey = "ac588af480c81e0c020a57c56bec3efa"; //코드 실행시 apiKey 추가 필요 + rds 비밀번호도 application.yml에 추가해서 코드 실행
         String urlPattern = "https://www.kmas.or.kr/openapi/search/rgDtaMasterList?" +
                 "prvKey=" + apiKey +
                 "&listSeCd=1" +
