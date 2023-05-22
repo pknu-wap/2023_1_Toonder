@@ -30,9 +30,7 @@ public class WebtoonService {
                     String ageGradCdNm = jObj.get("ageGradCdNm").toString();
                     String pltfomCdNm = jObj.get("pltfomCdNm").toString();
 
-                    if (!ageGradCdNm.equals("19세 이상") && (pltfomCdNm.equals("네이버웹툰") 
-                            || pltfomCdNm.equals("다음웹툰") || pltfomCdNm.equals("카카오페이지")
-                                    || pltfomCdNm.equals("카카오웹툰"))) {
+                    if (!ageGradCdNm.equals("19세 이상") ) {
                         String mastrId = jObj.get("mastrId").toString();
 
                         // mastrId로 이미 저장된 웹툰 정보가 있는지 확인
@@ -53,7 +51,7 @@ public class WebtoonService {
                             webtoon.setPltfomCdNm(jObj.get("pltfomCdNm").toString());
                             webtoon.setFnshYn(jObj.get("fnshYn").toString());
                             webtoon.setWebtoonPusryYn(jObj.get("webtoonPusryYn").toString());
-                            webtoon.setImageDownloadUrl(jObj.get("imageDownloadUrl").toString());
+                            webtoon.setImageDownloadUrl(jObj.get("imageDownloadUrl").toString()); // 
 
                             webtoonRepository.save(webtoon);
                         }
