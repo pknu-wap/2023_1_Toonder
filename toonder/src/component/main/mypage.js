@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./mainPage.css";
-import MainBackgorund from './mainBackground';
-import ex1 from "../images/ex1.png"
+import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
 
 

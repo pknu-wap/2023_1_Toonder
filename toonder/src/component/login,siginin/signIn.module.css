@@ -1,0 +1,81 @@
+.name {
+  transform: translateX(4.5%);
+  display: flex;
+  position: relative;
+  top: -120px;
+}
+
+.name input {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+  margin-right: 50px;
+  font-family: sans-serif;
+}
+
+.email {
+  transform: translateX(4.5%);
+  display: flex;
+  position: relative;
+  top: -95px;
+  font-size: 4px;
+}
+
+.email input {
+  right: 0px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  box-sizing: border-box;
+  width: 490px;
+  font-family: sans-serif;
+}
+
+.password {
+  transform: translateX(4.5%);
+  display: flex;
+  position: absolute;
+  top: 375px;
+}
+
+.password input {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+  margin-right: 50px;
+  font-family: sans-serif;
+}
+
+.textBox {
+  transform: translateX(5%);
+  display: flex;
+  position: absolute;
+  top: 445px;
+}
+
+.submit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 645px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 28px;
+  transition: background-color 0.3s ease;
+  font-family: 'BMHANNAPro' !important;
+  width: 100px;
+}
+
+.WholeBox:focus-within {
+  box-shadow: 0 0 0 2px blue;
+}

@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'BMHANNAPro';
+  src: url('../fonts/BMHANNAPro.woff') format('woff');
+}
+
+button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.4;
+} /*회원가입이나 로그인에서 예를들어 이메일 양식이 맞지않는등 입력을 다 안하면 흐리게만드는 기능*/
+
+body {
+  font-family: 'BMHANNAPro', sans-serif;
+}
+
+.id_background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* 추가 */
+  margin: 0;
+  background-image: url('../images/backgroundimg.png');
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  background-size: 318px 265px;
+  height: 500px;
+}
+
+.find_logo {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /*창 화면의 크기가 바뀌면 로고가 한쪽으로 쏠리는 현상을 없애고 가운데정렬을 유지하도록 함 */
+
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  color: rgb(255, 147, 147);
+  margin-top: 40px;
+}
+
+.findid_body {
+  position: relative;
+  top: 100px;
+}
+
+.findid_body form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.findid_body input {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.findid_body button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  background-color: rgb(255, 147, 147);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 20px;
+  font-family: 'BMHANNAPro' !important;
+  transition: background-color 0.3s ease;
+}
+
+#enter_name {
+  height: 30px;
+}
+
+#enter_id {
+  margin-top: 20px;
+  height: 30px;
+}
+
+.joinFindBtn {
+  position: relative;
+  top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: rgb(255, 147, 147);
+}
+
+.joinFindBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: rgb(255, 147, 147);
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5 5px;
+}
+
+.joinFindBtn button:hover {
+  background-color: rgb(255, 147, 147);
+  color: white;
+}
+
+input::placeholder {
+  color: grey;
+  font-family: 'BMHANNAPro';
+  font-size: 14px;
+  font-weight: normal;
+}
+
+* {
+  outline: none; /* 모든 요소의 outline 제거 */
+}
