@@ -16,6 +16,10 @@ function Newpw() {
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
   const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
   const [loading, setLoading] = useState(false);
+  const removeToken = () => {
+    // 토큰 삭제 로직을 구현합니다.
+    supabase.auth.signOut();
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -31,6 +35,7 @@ function Newpw() {
           완료 되었습니다.
         </div>
       );
+      removeToken(); // 재설정이 완료되면 토큰을 삭제합니다.
     } catch (error) {
       console.error(error);
       setMessage(
