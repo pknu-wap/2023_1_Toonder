@@ -1,0 +1,125 @@
+.logo {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /*창 화면의 크기가 바뀌면 로고가 한쪽으로 쏠리는 현상을 없애고 가운데정렬을 유지하도록 함 */
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  color: rgb(255, 147, 147);
+  margin-top: 40px;
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  background-image: url('../../images/backgroundimg.png');
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  background-size: 318px 265px;
+  height: 800px;
+}
+
+
+/*mainBackground*/
+.mainPageBack{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  width:1224px;
+  border-radius: 10px;
+}
+
+.logoSearch{
+  display: flex;
+}
+
+.mainBackSmall{
+  margin-top: 61px;
+}
+
+
+button, input{
+  /*모든 입력창과 버튼에 라운드 처리를 해주고 경계선을 없앴습니다.*/
+  border: none;
+  border-radius: 10px;
+}
+
+/* 검색 하는 부분*/
+.mainSearch input{
+  width: 806px;
+  height: 64px;
+  font-size: 24px;
+}
+
+.mainSearch button{
+  border-radius: 10px;
+  margin-left: 13px;
+  width: 90px;
+  height: 45px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  font-size: 20px;
+}
+
+
+
+/* 우측 section 부분*/
+.mainSearch{
+  border-radius: 10px;
+  display : flex;
+  /* 가로축 가운데 정렬 */
+  justify-content : center;
+  /* 세로축 가운데 정렬 */
+  align-items : center;
+  width: 953px;
+  height: 84px;
+  background-color: rgb(255, 147, 147);
+  background-size: 953px 84px;
+}
+
+/* 검색 하는 부분*/
+.mainSearch input{
+  width: 806px;
+  height: 64px;
+  font-size: 24px;
+}
+
+.mainSearch button{
+  border-radius: 10px;
+  margin-left: 13px;
+  width: 90px;
+  height: 45px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  font-size: 20px;
+}
+
+
+/* 좌측 nav 부분*/
+#main_page {
+  display: flex;
+  align-items: center;
+}
+
+.mainLogo{
+  display: flex;
+  height: auto;
+  margin-right: 20px;
+  width: 257px;
+
+}
+
+.mainLogo button{
+  background-color:white;
+}
+.mainLogo h1{
+  font-size: 40px;
+  margin-left: 20px;
+  color: rgb(255, 147, 147);
+}

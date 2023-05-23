@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/logoimage.png';
-import "./mainPage.css";
+import "./backGround.module.css";
 import axios from 'axios';
 
 function MainBackSmall(props) {
