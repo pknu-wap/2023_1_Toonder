@@ -1,18 +1,24 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Signin from './component/signIn';
+
 import React, { useEffect,useState } from 'react';
-import Findid from './component/findid';
-import Findpw from './component/findpw';
-import Login from './component/login';
-import Mainpage from './component/main_page';
-import Findid_after from './component/findid_after';
-import Findpw_after from './component/findpw_after';
-import MainWebtoonList from './component/mainWebtoonList';
-import MainBacksmall from './component/mainBackSmall';
-import  MainWebtoonInfo from './component/mainWebtoonInfo'
-import  Mypage from './component/mypage'
-import  Freeboard from './component/freeboard'
-import Tag from './component/tag';
+import Findid from            './component/find/findid';
+import Findpw from            './component/find/findpw';
+import Findid_after from      './component/find/findid_after';
+import Findpw_after from      './component/find/findpw_after';
+import CheckPassword from      './component/find/check';
+
+import Login from             './component/loginsiginin/login';
+import Signin from            './component/loginsiginin/signIn';
+
+import Mainpage from          './component/main/main_page';
+import MainWebtoonList from   './component/main/mainWebtoonList';
+import MainWebtoonInfo from   './component/main/mainWebtoonInfo'
+import Mypage from            './component/main/mypage'
+
+import MainBacksmall from     './component/backgrounds/mainBackSmall';
+import Freeboard from         './component/freeboard/freeboard'
+
+import Tag from               './component/tag';
 import axios from 'axios';
 
 function App() {
@@ -39,6 +45,7 @@ function App() {
           <Route path="/findid" element={<Findid />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/findpw" element={<Findpw />} />
+          <Route path="/check_password" element={<CheckPassword />} />
           <Route path="/findid_after" element={<Findid_after />} />
           <Route path="/findpw_after" element={<Findpw_after />} />
           <Route path="/mainWebtoonList" element={<MainWebtoonList />} />
