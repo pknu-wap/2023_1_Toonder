@@ -8,7 +8,7 @@ function Findpw() {
 
   return (
     <IDBackground text="Find PW">
-      <div className="findid_body">
+      <div className="findpw_body">
         <form>
           {/*구현 필요: e-mail을 입력 받고 그 이메일로 임시 비번 전송하는 구현 필요*/}
           <input id="enter_email" type="text" placeholder="Enter your E-mail" />

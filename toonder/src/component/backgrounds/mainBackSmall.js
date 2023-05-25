@@ -20,7 +20,11 @@ function MainBackSmall(props) {
       <div className='mainInfo'>
         <img></img>
         <h2>{loggedUserName}</h2>
-        <button id='changeInfo'><h3>정보수정</h3></button>
+        <button id='changeInfo'
+        onClick={() => {
+          navigate('/check_password');
+        }}
+        ><h3>정보수정</h3></button>
         </div>
         <div className='mainButtonSet'>
         <button id="webtoonList"
