@@ -10,10 +10,12 @@
   padding: 0;
 }
 
-button, input{
+button, input , textarea{
     /*모든 입력창과 버튼에 라운드 처리를 해주고 경계선을 없앴습니다.*/
     border: none;
     border-radius: 10px;
+    resize: none;
+
 }
 
 /*mainBackground*/
@@ -82,6 +84,13 @@ button, input{
     color: white;
     background-color: rgb(255, 147, 147);
 }
+
+#infoimg{
+    margin-top: -100px;
+    width: 124px;
+    height: 124px;
+    border-radius: 62px;
+  }
 
 
 /*버튼 세트 */
@@ -408,3 +417,139 @@ table td,table img, table button{
     margin: 20px;
 }
 
+
+
+/*infoChange*/
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    color: rgb(255, 147, 147);
+  }
+
+  .logo img{
+    margin-top: 60px;
+    margin-left: auto;
+  }
+  .logo h5{
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: auto;
+  }
+  .changeMain {
+    padding: 30px;
+    margin-top: 18px;
+    width: 549px;
+    height: 494px;
+    background-color: rgb(255, 147, 147);
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 140px;
+  }
+
+  .changeMain input{
+    margin-top: 10px;
+    padding: 10px;
+    width: 196px;
+    height: 30px;
+  }
+
+  .changeMain textarea{
+    margin-top: 10px;
+    padding: 10px;
+    width: 456px;
+    height: 215px;
+    margin-right: 48px;
+  }
+
+  .changeMain button{
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgb(255, 147, 147);
+    color: white;
+    width: 125px;
+    height: 100%;
+    font-size: 20px;
+    margin-left: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #infochange {
+    margin-top: 30px;
+    margin-left: 176px;
+  }
+  #givenname{
+    margin-right: 44px;
+  }
+
+  .changeMain h6{
+    margin-top: 15px;
+  }
+  .changeMain form{
+    margin-right: auto;
+    margin-left: auto;
+    width: 476px;
+    font-size: 30px;
+    color: white;
+  }
+
+  #pwchange {
+    display: flex;
+    align-items: center;
+  }
+
+
+
+  /*프롶필 사진 변경*/
+  .profilechangeback {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+  .profilechange{
+    border-radius: 10px;
+    background-color: rgb(255, 147, 147);
+    width: 199px;
+    height: 293px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    }
+
+    #changeinfoimg{
+        margin-top: 29px;
+        width: 124px;
+        height: 124px;
+        border-radius: 62px;
+    }
+
+    .profilechange button{
+        margin-top: 12px;
+        height: 33px;
+        color: white;
+        background-color: rgb(255, 147, 147);
+    }
+
+
+    #changeInfo{
+        margin-bottom: -20px;
+    }
+
+    #cancel{
+        margin-bottom: 30px;
+    }

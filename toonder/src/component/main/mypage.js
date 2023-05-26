@@ -24,7 +24,11 @@ function Mypage() {
         <div className='mainInfo'>
           <img></img>
           <h2>{loggedUserName}</h2>
-          <button id='changeInfo'><h3>정보수정</h3></button>
+          <button id='changeInfo'
+          onClick={() => {
+            navigate('/check_password');
+          }}
+          ><h3>정보수정</h3></button>
         </div>
 
         <h1>#멜로 #코믹 #액션 #유미의 세포들 #연애혁명</h1>
