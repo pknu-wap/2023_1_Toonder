@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link} from 'react-router-dom';
 import "./backGround.module.css";
+import ex1 from '../../images/ex1.png';
 import axios from 'axios';
 
 function MainBackSmall(props) {
@@ -17,15 +18,20 @@ function MainBackSmall(props) {
 
   return (
     <div className='mainBackSmall'>
-      <div className='mainInfo'>
-        <img></img>
-        <h2>{loggedUserName}</h2>
-        <button id='changeInfo'
-        onClick={() => {
-          navigate('/check_password');
-        }}
-        ><h3>정보수정</h3></button>
-        </div>
+        <Link to='/mypage'>
+          <div className='mainInfo'>
+            <Link to='/profilechange'>
+              <img id='infoimg' src={ex1} alt="image error"></img>
+            </Link>
+            <h2>{loggedUserName}</h2>
+            <button id='changeInfo'
+            onClick={() => {
+              navigate('/check_password');
+            }}
+            ><h3>정보수정</h3></button>
+          </div>
+        </Link>
+
         <div className='mainButtonSet'>
         <button id="webtoonList"
         onClick={() => {

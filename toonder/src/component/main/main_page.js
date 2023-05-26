@@ -10,7 +10,7 @@ import MainBackSmall from '../backgrounds/mainBackSmall';
 
 import {useLocation} from 'react-router';
 
-function Mainpage() {
+function Mainpage(props) {
   const navigate = useNavigate();
   return (
     <MainBackgorund>
@@ -38,6 +38,7 @@ function Mainpage() {
           </section>
         </div>
       </div>
+      {props.children}
       </MainBackSmall>
     </MainBackgorund>
   );

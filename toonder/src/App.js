@@ -14,12 +14,15 @@ import Mainpage from          './component/main/main_page';
 import MainWebtoonList from   './component/main/mainWebtoonList';
 import MainWebtoonInfo from   './component/main/mainWebtoonInfo'
 import Mypage from            './component/main/mypage'
+import InfoChange from        './component/main/infoChange'
+import Profilechange from     './component/main/profilechange'
 
 import MainBacksmall from     './component/backgrounds/mainBackSmall';
 import Freeboard from         './component/freeboard/freeboard'
 
 import Tag from               './component/tag';
 import axios from 'axios';
+
 
 function App() {
 
@@ -51,7 +54,9 @@ function App() {
           <Route path="/mainWebtoonList" element={<MainWebtoonList />} />
           <Route path="/mainbackground" element={<MainBacksmall />} />
           <Route path="/mainwebtooninfo" element={<MainWebtoonInfo />} />
+          <Route path="/info_change" element={<InfoChange />} />
           <Route path="/freeboard" element={<Freeboard />} />
+          <Route path="/profilechange" element={<Profilechange />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
