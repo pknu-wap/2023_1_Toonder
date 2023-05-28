@@ -1,7 +1,8 @@
 /*global*/
 @font-face {
     font-family: 'BMHANNAPro';
-    src: url('../fonts/BMHANNAPro.woff') format('woff');
+    src: url('../../fonts/BMHANNAPro.woff') format('woff');
+
   }
 
 *{
@@ -235,7 +236,6 @@ table td,table img, table button{
     width: 207px;
     border-radius: 10px;
 }
-
 
 /*웹툰 정보와 리뷰*/
 

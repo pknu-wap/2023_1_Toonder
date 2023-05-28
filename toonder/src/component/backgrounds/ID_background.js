@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../style.css';
-import logo from '../images/logoimage.png';
+import logo from '../../images/logoimage.png';
 import { Link } from 'react-router-dom';
 
 function IDBackground(props) {
@@ -16,3 +16,4 @@ function IDBackground(props) {
 }
 
 export default IDBackground;
+
