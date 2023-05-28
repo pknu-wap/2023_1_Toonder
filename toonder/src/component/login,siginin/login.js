@@ -44,6 +44,7 @@ function Login() {
   useEffect(() => {
     //이메일 유효성과 비밀번호 유효성이 바꼈을때 둘다 유효한 경우만 login버튼 활성화 해주는 기능
     if (emailValid && pwValid) setNotAllow(false);
+    else setNotAllow(true);
     return;
   }, [emailValid, pwValid]);
 
