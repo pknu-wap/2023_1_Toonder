@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import IDBackground from './ID_background';
 import { useNavigate } from 'react-router-dom';
-import supabase from './supabase';
+import supabase from '../supabase';
 import styles from './findpw.module.css';
 
 function Findpw() {
