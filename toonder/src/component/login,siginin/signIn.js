@@ -115,10 +115,12 @@ function Signin() {
 
   const handleCheckPw = (e) => {
     setPwc(e.target.value);
+
     if (pw === e.target.value) {
       setIsPwCheck(true);
     } else {
-      setIsPwCheck('false');
+      setIsPwCheck(false);
+
     }
   };
 
@@ -140,7 +142,6 @@ function Signin() {
       password: pw,
     });
 
-    console.log(data.user);
     if (error) {
       alert(error);
     } else alert('인증 메일을 발송했습니다. 이메일 확인 후 로그인해주세요.');

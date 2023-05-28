@@ -45,6 +45,7 @@ function App() {
           <Route path="/mainwebtooninfo" element={<MainWebtoonInfo />} />
           <Route path="/freeboard" element={<Freeboard />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/infochange" element={<InfoC />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>
