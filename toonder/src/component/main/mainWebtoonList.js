@@ -1,16 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./mainPage.css";
-import MainBackgorund from './mainBackground';
-import ex1 from "../images/ex1.png"
-import ex2 from "../images/ex2.png"
-import ex3 from "../images/ex3.png"
-import ex4 from "../images/ex4.png"
-import ex5 from "../images/ex5.png"
-import ex6 from "../images/ex6.png"
-import ex7 from "../images/ex7.png"
-import ex8 from "../images/ex8.png"
-import MainBackSmall from './mainBackSmall';
+import MainBackgorund from '../backgrounds/mainBackground';
+import ex1 from "../../images/ex1.png"
+import ex2 from "../../images/ex2.png"
+import ex3 from "../../images/ex3.png"
+import ex4 from "../../images/ex4.png"
+import ex5 from "../../images/ex5.png"
+import ex6 from "../../images/ex6.png"
+import ex7 from "../../images/ex7.png"
+import ex8 from "../../images/ex8.png"
+import MainBackSmall from '../backgrounds/mainBackSmall';
 
 function MainWebtoonList() {
   const navigate = useNavigate();
