@@ -38,6 +38,7 @@ function Signin() {
 
   const onKeyPress = (e) => {
     e.preventDefault();
+    
     if (e.target.value.length !== 0 && e.key === 'Enter') {
       const tagValue = e.target.value.trim();
       if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
@@ -120,7 +121,6 @@ function Signin() {
       setIsPwCheck(true);
     } else {
       setIsPwCheck(false);
-
     }
   };
 

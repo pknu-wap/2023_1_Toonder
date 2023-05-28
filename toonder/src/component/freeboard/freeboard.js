@@ -64,5 +64,4 @@ function Freeboard() {
   );
 }
 
-
 export default Freeboard;

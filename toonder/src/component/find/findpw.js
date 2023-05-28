@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import IDBackground from '../backgrounds/ID_background';
+import IDBackground from '../backgorunds/ID_background';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import styles from './findpw.module.css';
 
 function Findpw() {
+  useEffect(() => {
+    document.title = 'Toonder 비밀번호 찾기';
+  }, []);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(false);
@@ -36,7 +39,7 @@ function Findpw() {
     setMessage('');
     try {
       await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:3000/findid',
+        redirectTo: 'http://localhost:3000/newpw',
       });
       const [id, domain] = email.split('@');
       const hiddenID = id.slice(0, 3) + id.slice(3).replace(/./g, '*');
@@ -66,7 +69,7 @@ function Findpw() {
   };
 
   return (
-    <IDBackground text="Find PW">
+    <IDBackground text="Find PW" backgroundSize="600px 500px">
       <div className={styles.findPw}>
         {loading ? (
           <div className={styles.loading}>찾는 중 입니다...</div>
@@ -99,4 +102,3 @@ function Findpw() {
 }
 
 export default Findpw;
-
