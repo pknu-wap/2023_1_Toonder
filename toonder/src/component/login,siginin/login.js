@@ -14,6 +14,16 @@ function Login() {
   const [pwValid, setPwValid] = useState(false); //비밀번호 유효성
   const [notAllow, setNotAllow] = useState(true); //로그인 (submit)버튼 활성화 여부
   const [error, setError] = useState(null); // 에러 상태 추가
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 이미 로그인된 상태인지 확인
+    const user = supabase.auth.getUser();
+    if (user) {
+      alert('이미 로그인되어 있습니다.');
+      navigate('/main_page'); // 이미 로그인된 상태라면 메인 페이지로 이동
+    }
+  }, []);
 
   const onClickConfirm = async (e) => {
     setError(null); // 에러 메시지 초기화
@@ -71,7 +81,6 @@ function Login() {
     }
   };
 
-  let navigate = useNavigate();
   return (
     //클래스를 설정할땐 styles객체안에 있는 값을 참조하는 방식
     <div>
