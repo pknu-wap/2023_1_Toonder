@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './login.module.css'; //CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있음
-import IDBackground from './ID_background';
+import IDBackground from '../backgrounds/ID_background';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 

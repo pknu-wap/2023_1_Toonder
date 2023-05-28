@@ -1,5 +1,5 @@
 import React from 'react';
-import IDBackground from './ID_background';
+import IDBackground from '../backgrounds/ID_background';
 import { useNavigate } from 'react-router-dom';
 import "../style.css";
 

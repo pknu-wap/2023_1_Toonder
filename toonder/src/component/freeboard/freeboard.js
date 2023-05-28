@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
-import "./mainPage.css";
-import MainBackgorund from './mainBackground';
-import ex1 from "../images/ex1.png"
+import { useNavigate , Link} from 'react-router-dom';
+import "./freeboard.css";
+import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
 
 
@@ -22,12 +21,24 @@ function Freeboard() {
         <div className='mainboard'>
             <h2>자유게시판</h2>
             <ul>
-                <li><a></a></li>
-                <li><a></a></li>
-                <li><a></a></li>
-                <li><a></a></li>
-                <li><a></a></li>
-                <li><a></a></li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
+              <li>
+                <Link to='/postview'>1234</Link>
+              </li>
             </ul>
         </div>
         <div className='subbuttons'>
@@ -43,10 +54,15 @@ function Freeboard() {
                 <a href="#">&gt;</a>
                 <a href="#">&gt;&gt;</a>
             </div>
-            <button id="freewrite">글쓰기</button>
+            <button id="freewrite"
+              onClick={() => {
+                navigate('/write');
+              }}
+              >글쓰기</button>
         </div>
     </MainBackgorund>
   );
 }
+
 
 export default Freeboard;
