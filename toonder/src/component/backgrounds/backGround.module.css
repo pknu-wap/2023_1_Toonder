@@ -1,6 +1,7 @@
+
 .logo {
   position: absolute;
-  top: 70px;
+  top: 60px;
   left: 50%;
   transform: translateX(
     -50%
@@ -11,6 +12,7 @@
   color: rgb(255, 147, 147);
   margin-top: 40px;
 }
+
 
 .background {
   display: flex;
@@ -123,3 +125,4 @@ button, input{
   margin-left: 20px;
   color: rgb(255, 147, 147);
 }
+

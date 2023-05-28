@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Signin from './component/login,siginin/signIn';
 import React, { useEffect, useState } from 'react';
+import Newpw from './component/find/newpw';
 import Findid from './component/find/findid';
 import Findpw from './component/find/findpw';
 import Login from './component/login,siginin/login';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/freeboard" element={<Freeboard />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/infochange" element={<InfoC />} />
+          <Route path="/newpw" element={<Newpw />} />
           <Route path="/123" element={<Tag />} />
         </Routes>
       </BrowserRouter>

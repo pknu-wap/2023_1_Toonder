@@ -1,8 +1,8 @@
 /*global*/
 @font-face {
     font-family: 'BMHANNAPro';
-
     src: url('../../fonts/BMHANNAPro.woff') format('woff');
+
   }
 
 *{
@@ -408,7 +408,6 @@ table td,table img, table button{
 .subUserInfo h4, .subUserInfo ul{
     margin: 20px;
 }
-
 
 /*Freeboard*/
 .mainboard {
