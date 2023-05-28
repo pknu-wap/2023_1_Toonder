@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import IDBackground from './ID_background';
+import IDBackground from '../backgrounds/ID_background';
 import styles from '../style.css';
 
 
@@ -34,3 +34,4 @@ function Findid_after() {
 }
 
 export default Findid_after;
+
