@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Background from './backGround';
+import Background from './backgrounds/backGround';
 import supabase from './supabase';
 import styles from './infoChange.module.css';
 import { useNavigate } from 'react-router-dom';

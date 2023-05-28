@@ -13,6 +13,7 @@ import MainWebtoonInfo from './component/main/mainWebtoonInfo';
 import Mypage from './component/main/mypage';
 import Freeboard from './component/freeboard/freeboard';
 import Tag from './component/tag';
+import InfoC from './component/infoChange';
 import axios from 'axios';
 
 function App() {
