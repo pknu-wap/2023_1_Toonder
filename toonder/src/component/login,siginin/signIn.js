@@ -23,6 +23,7 @@ function Signin() {
   const navigate = useNavigate();
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const whitelist = [
     '액션',
     '멜로',
@@ -38,7 +39,7 @@ function Signin() {
 
   const onKeyPress = (e) => {
     e.preventDefault();
-    
+
     if (e.target.value.length !== 0 && e.key === 'Enter') {
       const tagValue = e.target.value.trim();
       if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
@@ -125,6 +126,7 @@ function Signin() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     axios
       .post('api/member/insert', {
         mem_id: email,
@@ -144,154 +146,159 @@ function Signin() {
 
     if (error) {
       alert(error);
+      setLoading(false);
     } else alert('인증 메일을 발송했습니다. 이메일 확인 후 로그인해주세요.');
     navigate('/');
   };
 
   return (
     <Background text="Join" backgroundSize="600px 500px">
-      <form onSubmit={handleSubmit}>
-        <div className={styles.name}>
-          <input
-            type="text"
-            onChange={handleFirstName}
-            id="firstName"
-            placeholder="이름"
-          />
-          <input
-            type="text"
-            onChange={handleLastName}
-            id="lastName"
-            placeholder="성"
-          />
-        </div>
-        <div className={styles.email}>
-          {!isValidEmail && email.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '-20px',
-                color: 'white',
-                fontSize: '15px',
-              }}
-            >
-              올바른 이메일을 입력해주세요
-            </div>
-          )}
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmail}
-            placeholder="이메일 입력"
-          />
-        </div>
+      {loading ? (
+        <div className={styles.Loading}>잠시만 기다려주세요...</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className={styles.name}>
+            <input
+              type="text"
+              onChange={handleFirstName}
+              id="firstName"
+              placeholder="이름"
+            />
+            <input
+              type="text"
+              onChange={handleLastName}
+              id="lastName"
+              placeholder="성"
+            />
+          </div>
+          <div className={styles.email}>
+            {!isValidEmail && email.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  color: 'white',
+                  fontSize: '15px',
+                }}
+              >
+                올바른 이메일을 입력해주세요
+              </div>
+            )}
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmail}
+              placeholder="이메일 입력"
+            />
+          </div>
 
-        <div className={styles.password}>
-          {!isPwValid && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '-20px',
-                color: 'white',
-                fontSize: '15px',
-              }}
-            >
-              영문, 숫자 포함 8~10자 이상 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handlePW}
-            value={pw}
-            placeholder="비밀번호"
-          />
-          {!isPwCheck && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '-20px',
-                color: 'white',
-                fontSize: '15px',
-                left: '270px',
-                fontWeight: 'normal',
-              }}
-            >
-              비밀번호를 한번 더 정확히 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handleCheckPw}
-            value={pwc}
-            placeholder="비밀번호 확인"
-          />
-        </div>
+          <div className={styles.password}>
+            {!isPwValid && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  color: 'white',
+                  fontSize: '15px',
+                }}
+              >
+                영문, 숫자 포함 8~10자 이상 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handlePW}
+              value={pw}
+              placeholder="비밀번호"
+            />
+            {!isPwCheck && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  color: 'white',
+                  fontSize: '15px',
+                  left: '270px',
+                  fontWeight: 'normal',
+                }}
+              >
+                비밀번호를 한번 더 정확히 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handleCheckPw}
+              value={pwc}
+              placeholder="비밀번호 확인"
+            />
+          </div>
 
-        <div className={styles.textBox}>
-          <WholeBox
-            onClick={() => {
-              inputRef.current.focus();
-            }}
-          >
-            <TagBox
+          <div className={styles.textBox}>
+            <WholeBox
               onClick={() => {
                 inputRef.current.focus();
               }}
             >
-              <div
+              <TagBox
                 onClick={() => {
                   inputRef.current.focus();
                 }}
-                style={{
-                  color: 'grey',
-                  background: 'white',
-                  fontSize: '14px',
-                  height: '14px',
-                }}
               >
-                ------좋아하는 장르를 엔터로 추가해주세요
-                [액션,판타지,멜로,코믹,드라마]------
-              </div>
-              {tagList.map((tagItem, index) => {
-                const backgroundColor =
-                  index % 3 === 0
-                    ? 'rgb(255, 147, 147)'
-                    : index % 3 === 1
-                    ? 'rgb(219, 235, 170)'
-                    : 'rgb(248, 249, 176)';
-                return (
-                  <TagItem
-                    style={{ backgroundColor: backgroundColor }}
-                    key={index}
-                  >
-                    <Text>{tagItem}</Text>
-                    <Button
+                <div
+                  onClick={() => {
+                    inputRef.current.focus();
+                  }}
+                  style={{
+                    color: 'grey',
+                    background: 'white',
+                    fontSize: '14px',
+                    height: '14px',
+                  }}
+                >
+                  ------좋아하는 장르를 엔터로 추가해주세요
+                  [액션,판타지,멜로,코믹,드라마]------
+                </div>
+                {tagList.map((tagItem, index) => {
+                  const backgroundColor =
+                    index % 3 === 0
+                      ? 'rgb(255, 147, 147)'
+                      : index % 3 === 1
+                      ? 'rgb(219, 235, 170)'
+                      : 'rgb(248, 249, 176)';
+                  return (
+                    <TagItem
                       style={{ backgroundColor: backgroundColor }}
-                      onClick={deleteTagItem}
+                      key={index}
                     >
-                      ❌
-                    </Button>
-                  </TagItem>
-                );
-              })}
-              <TagInput
-                type="text"
-                tabIndex={2}
-                onChange={(e) => setTagItem(e.target.value)}
-                value={tagItem}
-                onKeyPress={onKeyPress}
-                ref={inputRef}
-              />
-            </TagBox>
-          </WholeBox>
-        </div>
-        <div>
-          <button className={styles.submit} disabled={notAllow} type="submit">
-            <strong>Join</strong>
-          </button>
-        </div>
-      </form>
+                      <Text>{tagItem}</Text>
+                      <Button
+                        style={{ backgroundColor: backgroundColor }}
+                        onClick={deleteTagItem}
+                      >
+                        ❌
+                      </Button>
+                    </TagItem>
+                  );
+                })}
+                <TagInput
+                  type="text"
+                  tabIndex={2}
+                  onChange={(e) => setTagItem(e.target.value)}
+                  value={tagItem}
+                  onKeyPress={onKeyPress}
+                  ref={inputRef}
+                />
+              </TagBox>
+            </WholeBox>
+          </div>
+          <div>
+            <button className={styles.submit} disabled={notAllow} type="submit">
+              <strong>Join</strong>
+            </button>
+          </div>
+        </form>
+      )}
     </Background>
   );
 }

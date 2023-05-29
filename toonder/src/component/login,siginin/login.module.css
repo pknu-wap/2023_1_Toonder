@@ -1,3 +1,13 @@
+.Loading {
+  position: relative;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+}
+
 .Login {
   position: relative;
   top: 90px;
@@ -63,4 +73,3 @@
   background-color: rgb(255, 147, 147);
   color: white;
 }
-
