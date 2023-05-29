@@ -13,12 +13,28 @@ function Login() {
   const [emailValid, setEmailValid] = useState(false); //이메일 유효성
   const [pwValid, setPwValid] = useState(false); //비밀번호 유효성
   const [notAllow, setNotAllow] = useState(true); //로그인 (submit)버튼 활성화 여부
-  const [error, setError] = useState(null); // 에러 상태 추가
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    // 이미 로그인된 상태인지 확인
+    const checkLoggedIn = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      console.log(data.session);
+      const session = data.session;
+
+      if (session !== null) {
+        // 이미 로그인된 상태라면 로그아웃하고 메인 페이지로 이동
+        alert('이미 로그인되어 있습니다.');
+        navigate('/main_page'); // 메인 페이지로 이동
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
 
   const onClickConfirm = async (e) => {
-    setError(null); // 에러 메시지 초기화
     e.preventDefault();
-
+    setLoading(true);
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
@@ -37,7 +53,8 @@ function Login() {
         navigate('/main_page'); // 로그인 성공 시 대시보드 페이지로 이동
       }
     } catch (error) {
-      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,45 +88,52 @@ function Login() {
     }
   };
 
-  let navigate = useNavigate();
   return (
     //클래스를 설정할땐 styles객체안에 있는 값을 참조하는 방식
     <div>
       <IDBackground text="Login">
-        <form>
-          <div className={styles.Login}>
-            <div>
-              {!emailValid &&
-                email.length > 0 && ( //이메일이 유효하지 않고 이메일을 입력하기 시작하면 에러 메세지가 뜸
-                  <div>올바른 이메일을 입력해주세요</div>
+        {loading ? (
+          <div className={styles.Loading}>로그인 중 입니다...</div>
+        ) : (
+          <form>
+            <div className={styles.Login}>
+              <div>
+                {!emailValid &&
+                  email.length > 0 && ( //이메일이 유효하지 않고 이메일을 입력하기 시작하면 에러 메세지가 뜸
+                    <div>올바른 이메일을 입력해주세요</div>
+                  )}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={handleEmail}
+                  placeholder="Enter your e-mail"
+                />
+              </div>
+              <div>
+                {!pwValid && password.length > 0 && (
+                  <div>영문, 숫자 포함 8~10자 입력해주세요</div> //비밀번호가 유효하지 않고 비밀번호를 입력하기 시작하면 에러 메세지가 뜸
                 )}
+              </div>
+              <div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={handlePW}
+                  placeholder="Enter your password"
+                />
+              </div>
+              <button
+                onClick={onClickConfirm}
+                disabled={notAllow}
+                type="submit"
+              >
+                <strong>Login</strong>
+              </button>
             </div>
-            <div>
-              <input
-                type="text"
-                value={email}
-                onChange={handleEmail}
-                placeholder="Enter your e-mail"
-              />
-            </div>
-            <div>
-              {!pwValid && password.length > 0 && (
-                <div>영문, 숫자 포함 8~10자 입력해주세요</div> //비밀번호가 유효하지 않고 비밀번호를 입력하기 시작하면 에러 메세지가 뜸
-              )}
-            </div>
-            <div>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePW}
-                placeholder="Enter your password"
-              />
-            </div>
-            <button onClick={onClickConfirm} disabled={notAllow} type="submit">
-              <strong>Login</strong>
-            </button>
-          </div>
-        </form>
+          </form>
+        )}
       </IDBackground>
       <div className={styles.FindnSign}>
         <button
