@@ -1,6 +1,6 @@
 import React from "react";
 import IDBackground from '../backgrounds/ID_background';
-import styles from '../style.css';
+import styles from '../../style.css';
 
 function Findpw_after() {
 

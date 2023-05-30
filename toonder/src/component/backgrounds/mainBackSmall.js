@@ -26,7 +26,7 @@ function MainBackSmall(props) {
             <h2>{loggedUserName}</h2>
             <button id='changeInfo'
             onClick={() => {
-              navigate('/check_password');
+              navigate('/infochange');
             }}
             ><h3>정보수정</h3></button>
           </div>
