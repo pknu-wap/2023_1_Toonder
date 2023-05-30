@@ -5,15 +5,17 @@ logging:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/toonder?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: root
+    url: jdbc:mysql://ec2-15-164-55-83.ap-northeast-2.compute.amazonaws.com:3306/toonder?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: toonder
+    password: 
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     hibernate:
       ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         format_sql: true
