@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Background from '../backgrounds/backGround';
 import supabase from '../supabase';
-import styles from './signIn.module.css';
+import styles from './join.module.css';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-function Signin() {
+function Join() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
   }, []);
@@ -364,4 +364,4 @@ const TagInput = styled.input`
   cursor: text;
 `;
 
-export default Signin;
+export default Join;
