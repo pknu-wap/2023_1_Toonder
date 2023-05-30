@@ -1,7 +1,7 @@
 import React from 'react';
 import IDBackground from '../backgrounds/ID_background';
 import { useNavigate } from 'react-router-dom';
-import "../style.css";
+import "../../style.css";
 
 function Findid() {
   const navigate = useNavigate();
