@@ -11,7 +11,7 @@
   padding: 0;
 }
 
-button, input{
+button, input, textarea{
     /*모든 입력창과 버튼에 라운드 처리를 해주고 경계선을 없앴습니다.*/
     border: none;
     border-radius: 10px;
@@ -41,6 +41,13 @@ button, input{
     align-items: center;
   }
 
+#infoimg{
+    margin-top: -100px;
+    width: 124px;
+    height: 124px;
+    border-radius: 62px;
+  }
+  
 .mainLogo{
     display: flex;
     height: auto;
