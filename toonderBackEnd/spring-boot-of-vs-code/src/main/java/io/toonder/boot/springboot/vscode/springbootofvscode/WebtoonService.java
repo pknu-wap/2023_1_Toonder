@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class WebtoonService {
+public class WebtoonService { //웹툰 정보 칼럼 맞춰서 저장
 
     private final WebtoonRepository webtoonRepository;
 
@@ -16,6 +16,7 @@ public class WebtoonService {
     public WebtoonService(WebtoonRepository webtoonRepository) {
         this.webtoonRepository = webtoonRepository;
     }
+    
     @Transactional(rollbackFor = Exception.class)
     public void init(String jsonData) {
         try {
@@ -28,7 +29,6 @@ public class WebtoonService {
                     JSONObject jObj = (JSONObject) jsonArray.get(i);
 
                     String ageGradCdNm = jObj.get("ageGradCdNm").toString();
-                    String pltfomCdNm = jObj.get("pltfomCdNm").toString();
 
                     if (!ageGradCdNm.equals("19세 이상") ) {
                         String mastrId = jObj.get("mastrId").toString();
@@ -40,18 +40,39 @@ public class WebtoonService {
                             Webtoon webtoon = new Webtoon();
                             webtoon.setMastrId(mastrId);
                             webtoon.setTitle(jObj.get("title").toString());
-                            webtoon.setPictrWritrNm(jObj.get("pictrWritrNm").toString());
-                            webtoon.setSntncWritrNm(jObj.get("sntncWritrNm").toString());
+                            //webtoon.setPictrWritrNm(jObj.get("pictrWritrNm").toString());
+                            //webtoon.setSntncWritrNm(jObj.get("sntncWritrNm").toString());
                             
-                            // Handle null or blank mainGenreCdNm
-                            String mainGenreCdNm = jObj.get("mainGenreCdNm") != null ? jObj.get("mainGenreCdNm").toString() : "";
-                            webtoon.setMainGenreCdNm(mainGenreCdNm);
-                            
-                            webtoon.setOutline(jObj.get("outline").toString());
-                            webtoon.setPltfomCdNm(jObj.get("pltfomCdNm").toString());
-                            webtoon.setFnshYn(jObj.get("fnshYn").toString());
-                            webtoon.setWebtoonPusryYn(jObj.get("webtoonPusryYn").toString());
-                            webtoon.setImageDownloadUrl(jObj.get("imageDownloadUrl").toString()); // 
+                            String[] properties = {"pictrWritrNm", "sntncWritrNm", "mainGenreCdNm", "imageDownloadUrl", "outline", "pltfomCdNm", "fnshYn", "webtoonPusryYn"};
+                            for (String property : properties) {
+                                String value = jObj.get(property) != null ? jObj.get(property).toString() : "";
+                                switch (property) {
+                                    case "pictrWritrNm":
+                                        webtoon.setPictrWritrNm(value);
+                                        break;
+                                    case "sntncWritrNm":
+                                        webtoon.setSntncWritrNm(value);
+                                        break;
+                                    case "mainGenreCdNm":
+                                        webtoon.setMainGenreCdNm(value);
+                                        break;
+                                    case "imageDownloadUrl":
+                                        webtoon.setImageDownloadUrl(value);
+                                        break;
+                                    case "outline":
+                                        webtoon.setOutline(value);
+                                        break;
+                                    case "pltfomCdNm":
+                                        webtoon.setPltfomCdNm(value);
+                                        break;
+                                    case "fnshYn":
+                                        webtoon.setFnshYn(value);
+                                        break;
+                                    case "webtoonPusryYn":
+                                        webtoon.setWebtoonPusryYn(value);
+                                        break;
+                                }
+                            }
 
                             webtoonRepository.save(webtoon);
                         }
@@ -66,57 +87,6 @@ public class WebtoonService {
             //예외 처리
         }
     }
-
-
-/* 
-    @Transactional(rollbackFor = Exception.class)
-    public void init(String jsonData) {
-        try {
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
-            JSONArray jsonArray = (JSONArray) jsonObject.get("itemList");
-
-            if (jsonArray != null) {
-                for (int i = 0; i < jsonArray.size(); i++) {
-                    JSONObject jObj = (JSONObject) jsonArray.get(i);
-
-                    String ageGradCdNm = jObj.get("ageGradCdNm").toString();
-                    String pltfomCdNm = jObj.get("pltfomCdNm").toString();
-
-                    if (!ageGradCdNm.equals("19세 이상") && (pltfomCdNm.equals("네이버웹툰") 
-                            || pltfomCdNm.equals("다음웹툰") || pltfomCdNm.equals("카카오페이지")
-                                    || pltfomCdNm.equals("카카오웹툰"))) {
-                        String mastrId = jObj.get("mastrId").toString();
-
-                        // mastrId로 이미 저장된 웹툰 정보가 있는지 확인
-                        Webtoon existingWebtoon = webtoonRepository.findById(mastrId).orElse(null);
-
-                        if (existingWebtoon == null) {
-                            Webtoon webtoon = new Webtoon();
-                            webtoon.setMastrId(mastrId);
-                            webtoon.setTitle(jObj.get("title").toString());
-                            webtoon.setPictrWritrNm(jObj.get("pictrWritrNm").toString());
-                            webtoon.setSntncWritrNm(jObj.get("sntncWritrNm").toString());
-                            webtoon.setMainGenreCdNm(jObj.get("mainGenreCdNm").toString());
-                            webtoon.setOutline(jObj.get("outline").toString());
-                            webtoon.setPltfomCdNm(jObj.get("pltfomCdNm").toString());
-                            webtoon.setFnshYn(jObj.get("fnshYn").toString());
-                            webtoon.setWebtoonPusryYn(jObj.get("webtoonPusryYn").toString());
-                            webtoon.setImageDownloadUrl(jObj.get("imageDownloadUrl").toString());
-
-                            webtoonRepository.save(webtoon);
-                        }
-                    }
-                }
-            }
-
-            webtoonRepository.flush(); // 변경 사항을 즉시 데이터베이스에 반영
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // 예외 처리를 추가로 수행할 수 있습니다.
-        }
-    }*/
 }
 
 

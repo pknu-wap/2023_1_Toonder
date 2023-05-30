@@ -18,33 +18,21 @@ import lombok.Setter;
 public class Webtoon {
     @Id
     @Column(name = "mastrId", nullable = false)
-    private String mastrId;
+    private String mastrId; //자료고유ID
 
     @Column(name = "title", nullable = false)
-    private String title;
+    private String title; //작품명
 
-    @Column(name = "pictrWritrNm")
-    private String pictrWritrNm;
+    private String pictrWritrNm; //그림작가
+    private String sntncWritrNm; //글작가
+    private String mainGenreCdNm; //대표장르코드명
 
-    @Column(name = "sntncWritrNm")
-    private String sntncWritrNm;
+    @Column(length = 3000)
+    private String outline; //줄거리
 
-    @Column(name = "mainGenreCdNm")
-    private String mainGenreCdNm;
-
-    @Column(name = "outline",columnDefinition = "TEXT")
-    private String outline;
-
-    @Column(name = "pltfomCdNm")
-    private String pltfomCdNm;
-
-    @Column(name = "fnshYn")
-    private String fnshYn;
-
-    @Column(name = "webtoonPusryYn")
-    private String webtoonPusryYn;
-
-    @Column(name = "imageDownloadUrl")
-    private String imageDownloadUrl;
+    private String pltfomCdNm; //플랫폼코드명
+    private String fnshYn; //완결여부
+    private String webtoonPusryYn; //웹툰연재여부	
+    private String imageDownloadUrl; //이미지다운로드URL(표지)
 
 }
