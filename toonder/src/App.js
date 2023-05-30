@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Signin from './component/login,siginin/signIn';
+import Join from './component/join/join';
 import React, { useEffect, useState } from 'react';
 import Newpw from './component/find/newpw';
 import Findid from './component/find/findid';
 import Findpw from './component/find/findpw';
-import Login from './component/login,siginin/login';
+import Login from './component/login/login';
 import Mainpage from './component/main/main_page';
 import Findid_after from './component/find/findid_after';
 import Findpw_after from './component/find/findpw_after';
@@ -38,7 +38,6 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/main_page" element={<Mainpage />} />
           <Route path="/findid" element={<Findid />} />
-          <Route path="/signin" element={<Signin />} />
           <Route path="/findpw" element={<Findpw />} />
           <Route path="/findid_after" element={<Findid_after />} />
           <Route path="/findpw_after" element={<Findpw_after />} />
@@ -50,6 +49,7 @@ function App() {
           <Route path="/infochange" element={<InfoC />} />
           <Route path="/newpw" element={<Newpw />} />
           <Route path="/profilechange" element={<Profilechange />} />
+          <Route path='/join' element={<Join/>}/>
         </Routes>
       </BrowserRouter>
     </div>

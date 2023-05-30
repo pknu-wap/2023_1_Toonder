@@ -156,9 +156,9 @@ function Login() {
         &nbsp;&nbsp;
         <button
           onClick={() => {
-            navigate('/signin');
+            navigate('/join');
           }}
-          id="sign_in"
+          id="join"
         >
           회원가입
         </button>
