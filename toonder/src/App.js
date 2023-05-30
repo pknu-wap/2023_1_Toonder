@@ -16,6 +16,7 @@ import Freeboard from './component/freeboard/freeboard';
 import Tag from './component/tag';
 import InfoC from './component/infoChange';
 import axios from 'axios';
+import Profilechange from './component/main/profilechange'
 
 function App() {
   //Test for Spring Data setting
@@ -50,6 +51,7 @@ function App() {
           <Route path="/infochange" element={<InfoC />} />
           <Route path="/newpw" element={<Newpw />} />
           <Route path="/123" element={<Tag />} />
+          <Route path="/profilechange" element={<Profilechange />} />
         </Routes>
       </BrowserRouter>
     </div>
