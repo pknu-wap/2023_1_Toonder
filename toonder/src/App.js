@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+<<<<<<< HEAD
 
 import React, { useEffect,useState } from 'react';
 import Findid from            './component/find/findid';
@@ -21,11 +22,28 @@ import MainBacksmall from     './component/backgrounds/mainBackSmall';
 import Freeboard from         './component/freeboard/freeboard'
 
 import Tag from               './component/tag';
+=======
+import Join from './component/join/join';
+import React, { useEffect, useState } from 'react';
+import Newpw from './component/find/newpw';
+import Findid from './component/find/findid';
+import Findpw from './component/find/findpw';
+import Login from './component/login/login';
+import Mainpage from './component/main/main_page';
+import Findid_after from './component/find/findid_after';
+import Findpw_after from './component/find/findpw_after';
+import MainWebtoonList from './component/main/mainWebtoonList';
+import MainBacksmall from './component/backgrounds/mainBackSmall';
+import MainWebtoonInfo from './component/main/mainWebtoonInfo';
+import Mypage from './component/main/mypage';
+import Freeboard from './component/freeboard/freeboard';
+import InfoC from './component/main/infoChange';
+>>>>>>> main
 import axios from 'axios';
+import Profilechange from './component/main/profilechange'
 
 
 function App() {
-
   //Test for Spring Data setting
   // useEffect(() => {
   //   axios
@@ -46,7 +64,6 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/main_page" element={<Mainpage />} />
           <Route path="/findid" element={<Findid />} />
-          <Route path="/signin" element={<Signin />} />
           <Route path="/findpw" element={<Findpw />} />
           <Route path="/check_password" element={<CheckPassword />} />
           <Route path="/findid_after" element={<Findid_after />} />
@@ -58,7 +75,10 @@ function App() {
           <Route path="/freeboard" element={<Freeboard />} />
           <Route path="/profilechange" element={<Profilechange />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/123" element={<Tag />} />
+          <Route path="/infochange" element={<InfoC />} />
+          <Route path="/newpw" element={<Newpw />} />
+          <Route path="/profilechange" element={<Profilechange />} />
+          <Route path='/join' element={<Join/>}/>
         </Routes>
       </BrowserRouter>
     </div>

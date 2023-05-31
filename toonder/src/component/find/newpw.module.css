@@ -1,16 +1,6 @@
-.Loading {
+.password {
   position: relative;
-  top: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 24px;
-  color: white;
-}
-
-.Login {
-  position: relative;
-  top: 90px;
+  top: -70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +8,7 @@
   color: white;
 }
 
-.Login input {
+.password input {
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -27,49 +17,60 @@
   height: 30px;
   margin-top: 10px;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-family: sans-serif;
 }
 
-.Login button {
+.password button {
   position: relative;
   border: none;
   background-color: transparent;
   color: #fff;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 28px;
+  font-size: 26px;
   transition: background-color 0.3s ease;
   font-family: 'BMHANNAPro' !important;
-  width: 100px;
+  width: 150px;
+  top: 5px;
 }
 
-.FindnSign {
-  position: relative;
-  top: -20px;
+.loading {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 24px;
-  color: rgb(255, 147, 147);
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+  font-size: 28px;
+  position: relative;
+  top: -70px;
 }
-
-.FindnSign button {
+.afterFind {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+}
+.afterFind button {
+  position: relative;
   border: none;
   background-color: transparent;
-  position: relative;
-  top: -0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
+  color: #fff;
   cursor: pointer;
-  color: rgb(255, 147, 147);
   border-radius: 4px;
+  font-size: 26px;
+  transition: background-color 0.3s ease;
   font-family: 'BMHANNAPro' !important;
+  width: 52px;
+  top: -30px;
 }
 
-.FindnSign button:hover {
-  background-color: rgb(255, 147, 147);
-  color: white;
+.afterFind h1 {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: center;
+  top: -70px;
 }
