@@ -1,28 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-<<<<<<< HEAD
-
-import React, { useEffect,useState } from 'react';
-import Findid from            './component/find/findid';
-import Findpw from            './component/find/findpw';
-import Findid_after from      './component/find/findid_after';
-import Findpw_after from      './component/find/findpw_after';
-import CheckPassword from      './component/find/check';
-
-import Login from             './component/loginsiginin/login';
-import Signin from            './component/loginsiginin/signIn';
-
-import Mainpage from          './component/main/main_page';
-import MainWebtoonList from   './component/main/mainWebtoonList';
-import MainWebtoonInfo from   './component/main/mainWebtoonInfo'
-import Mypage from            './component/main/mypage'
-import InfoChange from        './component/main/infoChange'
-import Profilechange from     './component/main/profilechange'
-
-import MainBacksmall from     './component/backgrounds/mainBackSmall';
-import Freeboard from         './component/freeboard/freeboard'
-
-import Tag from               './component/tag';
-=======
 import Join from './component/join/join';
 import React, { useEffect, useState } from 'react';
 import Newpw from './component/find/newpw';
@@ -38,10 +14,10 @@ import MainWebtoonInfo from './component/main/mainWebtoonInfo';
 import Mypage from './component/main/mypage';
 import Freeboard from './component/freeboard/freeboard';
 import InfoC from './component/main/infoChange';
->>>>>>> main
 import axios from 'axios';
 import Profilechange from './component/main/profilechange'
-
+import InfoChange from        './component/main/infoChange'
+import CheckPassword from      './component/find/check';
 
 function App() {
   //Test for Spring Data setting
