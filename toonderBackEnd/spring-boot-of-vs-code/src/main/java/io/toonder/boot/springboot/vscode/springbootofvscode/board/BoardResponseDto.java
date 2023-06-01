@@ -1,9 +1,10 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.CommentResponseDto;
 import lombok.Getter;
 
 /**

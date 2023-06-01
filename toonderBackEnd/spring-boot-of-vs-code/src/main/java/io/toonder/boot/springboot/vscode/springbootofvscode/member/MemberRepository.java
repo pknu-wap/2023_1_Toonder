@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.member;
  
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode.Controller;
+package io.toonder.boot.springboot.vscode.springbootofvscode.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

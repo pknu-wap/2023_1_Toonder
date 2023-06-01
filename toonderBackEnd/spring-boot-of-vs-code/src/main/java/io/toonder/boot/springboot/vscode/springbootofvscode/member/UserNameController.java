@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode.Controller;
+package io.toonder.boot.springboot.vscode.springbootofvscode.member;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import io.toonder.boot.springboot.vscode.springbootofvscode.Member;
-import io.toonder.boot.springboot.vscode.springbootofvscode.MemberRepository;
 
 @RequestMapping("/api/member")
 @RestController

@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.webtoon;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
