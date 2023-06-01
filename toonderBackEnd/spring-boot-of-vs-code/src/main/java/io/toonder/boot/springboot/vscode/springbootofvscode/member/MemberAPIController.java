@@ -1,13 +1,10 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode.Controller;
+package io.toonder.boot.springboot.vscode.springbootofvscode.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.toonder.boot.springboot.vscode.springbootofvscode.Member;
-import io.toonder.boot.springboot.vscode.springbootofvscode.MemberRepository;
 
 import java.util.List;
 import java.util.Map;

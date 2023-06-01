@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,6 +21,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,8 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode.Controller;
+package io.toonder.boot.springboot.vscode.springbootofvscode.webtoon;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-
-import io.toonder.boot.springboot.vscode.springbootofvscode.WebtoonService;
 
 import java.io.BufferedReader;
 import java.io.IOException;

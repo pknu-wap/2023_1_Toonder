@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.member;
  
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
+
 import javax.persistence.OrderBy;
  
 @Getter

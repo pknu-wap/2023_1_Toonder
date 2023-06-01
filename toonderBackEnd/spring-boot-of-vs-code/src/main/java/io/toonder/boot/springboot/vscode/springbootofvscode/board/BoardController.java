@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode.Controller;
+package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
 import java.util.Map;
 
@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.toonder.boot.springboot.vscode.springbootofvscode.Board;
-import io.toonder.boot.springboot.vscode.springbootofvscode.BoardService;
 
 @CrossOrigin(origins = "http://localhost:8080") //@CrossOrigin : CORS 문제를 해결하기 위해 추가 - 수정필요
 @RestController

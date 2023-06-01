@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import io.toonder.boot.springboot.vscode.springbootofvscode.ResourceNotFoundException;
 
 @Service
 public class BoardService {

@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.webtoon;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

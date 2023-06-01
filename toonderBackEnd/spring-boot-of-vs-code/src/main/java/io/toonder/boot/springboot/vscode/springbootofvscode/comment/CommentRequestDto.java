@@ -1,8 +1,10 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.comment;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

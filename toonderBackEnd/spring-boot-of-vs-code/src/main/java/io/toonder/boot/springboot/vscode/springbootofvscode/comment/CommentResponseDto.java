@@ -1,4 +1,4 @@
-package io.toonder.boot.springboot.vscode.springbootofvscode;
+package io.toonder.boot.springboot.vscode.springbootofvscode.comment;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
