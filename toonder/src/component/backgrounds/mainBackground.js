@@ -7,14 +7,6 @@ import axios from 'axios';
 function MainBackgorund(props) {
   const navigate = useNavigate();
   const [loggedUserName, setLoggedUserName] = useState('지금 로그인하세요!');
-  useEffect(() => {
-    axios
-      .get('api/member/select/'+sessionStorage.getItem('loggedUserEmail'))
-      .then(loggedUserData => {
-        setLoggedUserName(loggedUserData.data.mem_name);
-      })
-      .catch(error => console.log(error))
-  },[])
 
   return (
     <div className='mainPageBack'>
