@@ -17,18 +17,6 @@ import axios from 'axios';
 import Profilechange from './component/main/profilechange';
 
 function App() {
-  //Test for Spring Data setting
-  // useEffect(() => {
-  //   axios
-  //     .get('/api/hello')
-  //     .then((response) => console.log(response.data))
-  //     .catch((error) => console.log(error));
-
-  //   axios
-  //     .get('/api/username')
-  //     .then((response) => console.log(response.data))
-  //     .catch((error) => console.log(error));
-  // }, []);
 
   return (
     <div className="App">
