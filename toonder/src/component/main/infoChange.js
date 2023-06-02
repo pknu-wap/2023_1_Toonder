@@ -20,28 +20,15 @@ function InfoC() {
   const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
   const navigate = useNavigate();
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
-  const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState(defaultTags);
-  const inputRef = useRef(null);
-  const whitelist = [
-    '액션',
-    '멜로',
-    '판타지',
-    '코믹',
-    '가',
-    '나',
-    '다',
-    '라',
-    '마',
-    '드라마',
-  ];
+  const [selectedHashtags, setSelectedHashtags] = useState(defaultTags);
 
   const handleSubmit = async (e) => {
+    const hashtag = selectedHashtags.join(' '); //공백으로 구분되는 문자열로 저장
     axios
       .post('api/member/insert', {
         mem_name: firstName + lastName,
-        mem_hashtag:
-          '' /*****************************백엔드로 넘겨주어야할 것들*********************************************/,
+        mem_hashtag: hashtag,
+        /*****************************백엔드로 넘겨주어야할 것들*********************************************/
       })
       .catch(function () {
         console.log('Error for sending user data to Spring - creating member');
@@ -62,40 +49,19 @@ function InfoC() {
     }
   };
 
-  const onKeyPress = (e) => {
-    e.preventDefault();
-    if (e.target.value.length !== 0 && e.key === 'Enter') {
-      const tagValue = e.target.value.trim();
-      if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
-        // whitelist에 지정된 단어들만 입력 가능하도록 검사
-        submitTagItem();
-      } else {
-        e.target.value = '';
-      }
-    }
-  };
-
-  const submitTagItem = () => {
-    let updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
-    setTagList(updatedTagList);
-    setTagItem('');
-  };
-
-  const deleteTagItem = (e) => {
-    e.preventDefault();
-    const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter(
-      (tagItem) => tagItem !== deleteTagItem
-    );
-    setTagList(filteredTagList);
-  };
   useEffect(() => {
-    if (isPwCheck && isPwValid && firstName.length > 0 && lastName.length > 0)
+    if (
+      isPwCheck &&
+      isPwValid &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      selectedHashtags.length > 0
+    )
       setNotAllow(false);
     else setNotAllow(true);
+
     return;
-  }, [isPwValid, isPwCheck, firstName, lastName]);
+  }, [isPwValid, isPwCheck, firstName, lastName, selectedHashtags]);
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -109,7 +75,7 @@ function InfoC() {
     setPw(e.target.value);
 
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(pw)) {
+    if (regex.test(e.target.value)) {
       setIsPwValid(true);
     } else {
       setIsPwValid(false);
@@ -130,6 +96,55 @@ function InfoC() {
       setIsPwCheck(false);
     }
   };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedHashtags((prevSelectedHashtags) => [
+        ...prevSelectedHashtags,
+        value,
+      ]);
+    } else {
+      setSelectedHashtags((prevSelectedHashtags) =>
+        prevSelectedHashtags.filter((hashtag) => hashtag !== value)
+      );
+    }
+  };
+
+  const hashtagOptions = [
+    '공포',
+    '드라마',
+    '코믹',
+    '일상',
+    '판타지',
+    '액션',
+    '역사',
+    '학원',
+    'SF',
+    '학습만화',
+    '캠페인',
+    '스포츠',
+    '동성애',
+    '추리',
+    '모험',
+    '무협',
+    '시사',
+    '교양',
+    '요리',
+    '성인',
+    '순정',
+    'BL',
+    '소년',
+    '미스터리',
+    'GL',
+    '로맨스판타지',
+    '카툰',
+    '기관발행물',
+    '만화이론',
+    '로맨스',
+    '그래픽노블',
+    '개그',
+  ];
 
   return (
     <Background text="Info Change" backgroundSize="600px 500px">
@@ -190,64 +205,33 @@ function InfoC() {
           />
         </div>
 
-        <div className={styles.textBox}>
-          <WholeBox
-            onClick={() => {
-              inputRef.current.focus();
+        {!selectedHashtags.length > 0 && (
+          <div
+            style={{
+              position: 'absolute',
+              color: 'white',
+              fontSize: '15px',
+              left: '594px',
+              top: '372px',
             }}
           >
-            <TagBox
-              onClick={() => {
-                inputRef.current.focus();
-              }}
-            >
-              <div
-                onClick={() => {
-                  inputRef.current.focus();
-                }}
-                style={{
-                  color: 'grey',
-                  background: 'white',
-                  fontSize: '14px',
-                  height: '14px',
-                }}
-              >
-                ------좋아하는 장르를 엔터로 추가해주세요
-                [액션,판타지,멜로,코믹,드라마]------
-              </div>
-              {tagList.map((tagItem, index) => {
-                const backgroundColor =
-                  index % 3 === 0
-                    ? 'rgb(255, 147, 147)'
-                    : index % 3 === 1
-                    ? 'rgb(219, 235, 170)'
-                    : 'rgb(248, 249, 176)';
-                return (
-                  <TagItem
-                    style={{ backgroundColor: backgroundColor }}
-                    key={index}
-                  >
-                    <Text>{tagItem}</Text>
-                    <Button
-                      style={{ backgroundColor: backgroundColor }}
-                      onClick={deleteTagItem}
-                    >
-                      ❌
-                    </Button>
-                  </TagItem>
-                );
-              })}
-              <TagInput
-                type="text"
-                tabIndex={2}
-                onChange={(e) => setTagItem(e.target.value)}
-                value={tagItem}
-                onKeyPress={onKeyPress}
-                ref={inputRef}
+            좋아하는 만화 장르를 1개 이상 선택
+          </div>
+        )}
+
+        <CheckboxContainer>
+          {hashtagOptions.map((hashtag) => (
+            <CheckboxLabel key={hashtag}>
+              <CheckboxInput
+                type="checkbox"
+                value={hashtag}
+                onChange={handleCheckboxChange}
+                checked={selectedHashtags.includes(hashtag)}
               />
-            </TagBox>
-          </WholeBox>
-        </div>
+              {hashtag}
+            </CheckboxLabel>
+          ))}
+        </CheckboxContainer>
         <div>
           <button className={styles.submit} disabled={notAllow} type="submit">
             <strong>Info Change</strong>
@@ -258,65 +242,34 @@ function InfoC() {
   );
 }
 
-const WholeBox = styled.div`
-  padding: 0px;
-  width: 490px;
-  height: 220px;
-  transform: translateX(0%);
-  background-color: white;
-  border-radius: 10px;
-`;
-
-const TagBox = styled.div`
+const CheckboxContainer = styled.div`
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  height: 30px;
-  margin: 10px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: white;
-  border-color: white;
-`;
-
-const TagItem = styled.span`
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 5px;
-  color: black;
-  font-size: 15px;
-  height: 45px;
-`;
-
-const Text = styled.span``;
-
-const Button = styled.button`
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 470px;
+  transform: translateX(5%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 15px;
-  font-size: 15px;
-  height: 15px;
-  margin-left: 5px;
-
-  border-radius: 50%;
-  color: red;
+  position: absolute;
+  top: 391px;
+  border-radius: 10px;
+  background-color: white;
+  color: grey;
 `;
 
-const TagInput = styled.input`
-  display: inline-flex;
-  width: 45px;
-  height: 15px;
-  font-family: 'Sans-serif';
-  font-weight: 500;
-  border-radius: 0px;
-  background: white;
-  border: none;
-  outline: none;
-  cursor: text;
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 5px;
+`;
+
+const CheckboxInput = styled.input`
+  margin-right: 15px;
+  margin-left: 65px;
 `;
 
 export default InfoC;
