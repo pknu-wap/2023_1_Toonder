@@ -19,7 +19,6 @@ function Login() {
     // 이미 로그인된 상태인지 확인
     const checkLoggedIn = async () => {
       const { data, error } = await supabase.auth.getSession();
-      console.log(data.session);
       const session = data.session;
 
       if (session !== null) {
@@ -45,8 +44,6 @@ function Login() {
         alert('로그인에 실패했습니다.');
         console.log(error);
       } else if (data) {
-        // 사용자 정보가 할당되어 있는 경우
-        console.log(data.user);
         alert('로그인 되었습니다.');
 
         sessionStorage.setItem('loggedUserEmail', email); // 로그인 하면 sessionStorage에 email이 저장됨
@@ -70,7 +67,7 @@ function Login() {
     setEmail(e.target.value);
     const regex = //이메일 유효성검사 하기위한 객체
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (regex.test(email)) {
+    if (regex.test(e.target.value)) {
       setEmailValid(true);
     } else {
       setEmailValid(false);
@@ -81,7 +78,7 @@ function Login() {
     //위와 마찬가지 비밀번호인 경우
     setPw(e.target.value);
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(password)) {
+    if (regex.test(e.target.value)) {
       setPwValid(true);
     } else {
       setPwValid(false);
