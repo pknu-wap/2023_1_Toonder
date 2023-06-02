@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Background from '../backgrounds/backGround';
 import supabase from '../supabase';
 import styles from './join.module.css';
@@ -6,11 +6,40 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
+const CheckboxContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  height: 160px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 470px;
+  transform: translateX(5%);
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  position: absolute;
+  top: 455px;
+  border-radius: 10px;
+  background-color: white;
+  color: grey;
+`;
+
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 5px;
+`;
+
+const CheckboxInput = styled.input`
+  margin-right: 15px;
+  margin-left: 65px;
+`;
+
 function Join() {
   useEffect(() => {
     document.title = 'Toonder 회원가입';
   }, []);
-  const inputRef = useRef(null);
   const [pw, setPw] = useState(''); //비밀번호 값
   const [pwc, setPwc] = useState(''); //비밀번호 확인 값
   const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
@@ -21,51 +50,58 @@ function Join() {
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
   const [isValidEmail, setEmailValid] = useState(false); //이메일 유효성 여부
   const navigate = useNavigate();
-  const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const whitelist = [
-    '액션',
-    '멜로',
-    '판타지',
-    '코믹',
-    '가',
-    '나',
-    '다',
-    '라',
-    '마',
-    '드라마',
-  ];
+  const [selectedHashtags, setSelectedHashtags] = useState([]);
 
-  const onKeyPress = (e) => {
-    e.preventDefault();
-
-    if (e.target.value.length !== 0 && e.key === 'Enter') {
-      const tagValue = e.target.value.trim();
-      if (whitelist.includes(tagValue) && !tagList.includes(tagValue)) {
-        // whitelist에 지정된 단어들만 입력 가능하도록 검사
-        submitTagItem();
-      } else {
-        e.target.value = '';
-      }
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedHashtags((prevSelectedHashtags) => [
+        ...prevSelectedHashtags,
+        value,
+      ]);
+    } else {
+      setSelectedHashtags((prevSelectedHashtags) =>
+        prevSelectedHashtags.filter((hashtag) => hashtag !== value)
+      );
     }
   };
 
-  const submitTagItem = () => {
-    let updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
-    setTagList(updatedTagList);
-    setTagItem('');
-  };
+  const hashtagOptions = [
+    '공포',
+    '드라마',
+    '코믹',
+    '일상',
+    '판타지',
+    '액션',
+    '역사',
+    '학원',
+    'SF',
+    '학습만화',
+    '캠페인',
+    '스포츠',
+    '동성애',
+    '추리',
+    '모험',
+    '무협',
+    '시사',
+    '교양',
+    '요리',
+    '성인',
+    '순정',
+    'BL',
+    '소년',
+    '미스터리',
+    'GL',
+    '로맨스판타지',
+    '카툰',
+    '기관발행물',
+    '만화이론',
+    '로맨스',
+    '그래픽노블',
+    '개그',
+  ];
 
-  const deleteTagItem = (e) => {
-    e.preventDefault();
-    const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter(
-      (tagItem) => tagItem !== deleteTagItem
-    );
-    setTagList(filteredTagList);
-  };
   useEffect(() => {
     if (
       isValidEmail &&
@@ -127,11 +163,12 @@ function Join() {
 
   const handleSubmit = async (e) => {
     setLoading(true);
+    const hashtag = selectedHashtags.join(' ');
     axios
       .post('api/member/insert', {
         mem_id: email,
         mem_name: firstName + lastName,
-        mem_hashtag: '',
+        mem_hashtag: hashtag,
       })
       .catch(function () {
         console.log('Error for sending user data to Spring - creating member');
@@ -192,7 +229,6 @@ function Join() {
               placeholder="이메일 입력"
             />
           </div>
-
           <div className={styles.password}>
             {!isPwValid && pw.length > 0 && (
               <div
@@ -233,65 +269,29 @@ function Join() {
               placeholder="비밀번호 확인"
             />
           </div>
-
-          <div className={styles.textBox}>
-            <WholeBox
-              onClick={() => {
-                inputRef.current.focus();
-              }}
-            >
-              <TagBox
-                onClick={() => {
-                  inputRef.current.focus();
-                }}
-              >
-                <div
-                  onClick={() => {
-                    inputRef.current.focus();
-                  }}
-                  style={{
-                    color: 'grey',
-                    background: 'white',
-                    fontSize: '14px',
-                    height: '14px',
-                  }}
-                >
-                  ------좋아하는 장르를 엔터로 추가해주세요
-                  [액션,판타지,멜로,코믹,드라마]------
-                </div>
-                {tagList.map((tagItem, index) => {
-                  const backgroundColor =
-                    index % 3 === 0
-                      ? 'rgb(255, 147, 147)'
-                      : index % 3 === 1
-                      ? 'rgb(219, 235, 170)'
-                      : 'rgb(248, 249, 176)';
-                  return (
-                    <TagItem
-                      style={{ backgroundColor: backgroundColor }}
-                      key={index}
-                    >
-                      <Text>{tagItem}</Text>
-                      <Button
-                        style={{ backgroundColor: backgroundColor }}
-                        onClick={deleteTagItem}
-                      >
-                        ❌
-                      </Button>
-                    </TagItem>
-                  );
-                })}
-                <TagInput
-                  type="text"
-                  tabIndex={2}
-                  onChange={(e) => setTagItem(e.target.value)}
-                  value={tagItem}
-                  onKeyPress={onKeyPress}
-                  ref={inputRef}
-                />
-              </TagBox>
-            </WholeBox>
+          <div
+            style={{
+              position: 'absolute',
+              color: 'white',
+              fontSize: '15px',
+              left: '594px',
+              top: '436px',
+            }}
+          >
+            좋아하는 만화 장르를 1개 이상 선택
           </div>
+          <CheckboxContainer>
+            {hashtagOptions.map((hashtag) => (
+              <CheckboxLabel key={hashtag}>
+                <CheckboxInput
+                  type="checkbox"
+                  value={hashtag}
+                  onChange={handleCheckboxChange}
+                />
+                {hashtag}
+              </CheckboxLabel>
+            ))}
+          </CheckboxContainer>
           <div>
             <button className={styles.submit} disabled={notAllow} type="submit">
               <strong>Join</strong>
@@ -302,66 +302,4 @@ function Join() {
     </Background>
   );
 }
-
-const WholeBox = styled.div`
-  padding: 0px;
-  width: 490px;
-  height: 180px;
-  transform: translateX(0%);
-  background-color: white;
-  border-radius: 10px;
-`;
-
-const TagBox = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 30px;
-  margin: 10px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: white;
-  border-color: white;
-`;
-
-const TagItem = styled.span`
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 5px;
-  color: black;
-  font-size: 15px;
-  height: 45px;
-`;
-
-const Text = styled.span``;
-
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15px;
-  font-size: 15px;
-  height: 15px;
-  margin-left: 5px;
-
-  border-radius: 50%;
-  color: red;
-`;
-
-const TagInput = styled.input`
-  display: inline-flex;
-  width: 45px;
-  height: 15px;
-  font-family: 'Sans-serif';
-  font-weight: 500;
-  border-radius: 0px;
-  background: white;
-  border: none;
-  outline: none;
-  cursor: text;
-`;
-
 export default Join;
