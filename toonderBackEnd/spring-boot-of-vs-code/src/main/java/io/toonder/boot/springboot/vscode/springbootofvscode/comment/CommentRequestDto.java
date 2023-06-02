@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class CommentRequestDto {
     private Timestamp cmtUpdateDate = Timestamp.valueOf(LocalDateTime.now()); //댓글 수정일
     private Integer cmtLike; //댓글 좋아요 수 
 	private Board board;
-	private Member member;
+	private MemberDto member;
 
     /* Dto -> Entity */
     public Comment toEntity() {

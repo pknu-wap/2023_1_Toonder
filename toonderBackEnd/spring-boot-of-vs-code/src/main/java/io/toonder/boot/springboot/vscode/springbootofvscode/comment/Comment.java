@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,7 +47,7 @@ public class Comment {
 
 	@ManyToOne
 	@JoinColumn(name="mem_email") 
-	private Member member;
+	private MemberDto member;
 
 	/* 댓글 수정을 위한 setter */
     public void update(String cmtContent) {
