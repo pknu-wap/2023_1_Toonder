@@ -7,15 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface BoardRepository extends JpaRepository<Board, Integer>{
 
-    public final static String SELECT_BOARD_LIST_PAGED = ""
+	public final static String SELECT_BOARD_LIST_PAGED = ""
 			+ "SELECT "
 			+ "brdNo,"
 			+ "brdTitle,"
 			+ "brdContent,"
             + "brdRegDate,"
             + "brdUpdateDate,"
-			//+ "mem_name,"
-			+ "brdViewCount"
+			+ "brdViewCount,"
+			+ "brdLike,"
+			+ "mem_email"
 			+ " FROM board WHERE 0 < brdNo "
 			+ "ORDER BY brdNo DESC LIMIT ?1, ?2";
 	

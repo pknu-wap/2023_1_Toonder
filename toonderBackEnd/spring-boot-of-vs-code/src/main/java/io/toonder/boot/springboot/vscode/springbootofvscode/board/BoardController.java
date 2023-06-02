@@ -1,5 +1,8 @@
 package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,51 +25,57 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
     
     @Autowired
-	private BoardService boardService;
+    private BoardService boardService;
 
-    //Service 호출 -> 글목록 리턴
-    // 페이징 처리
-	@GetMapping("/board") 
-	public ResponseEntity<Map> getAllBoards(@RequestParam(value = "p_num", required=false) Integer p_num) {
-		if (p_num == null || p_num <= 0) p_num = 1;
-		
-		return boardService.getPagingBoard(p_num);
+    // 글목록 리턴 (페이징 처리)
+    @GetMapping("/board")
+    public ResponseEntity<List<Board>> getAllBoards(@RequestParam(value = "p_num", required = false) Integer p_num) {
+        if (p_num == null || p_num <= 0) p_num = 1;
+
+        ResponseEntity<Map<String, Object>> response = boardService.getPagingBoard(p_num);
+        if (response == null || response.getBody() == null) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+
+        List<Board> boardList = (List<Board>) response.getBody().get("list");
+        return ResponseEntity.ok(boardList);
     }
 
     // 게시글 생성 (create)
-	@PostMapping("/board")
-	public Board createBoard(@RequestBody Board board) {
-		return boardService.createBoard(board);
-	}
+    @PostMapping("/board")
+    public ResponseEntity<BoardResponseDto> createBoard(@RequestBody BoardRequestDto boardRequestDto) {
+        BoardResponseDto createdBoard = boardService.createBoard(boardRequestDto);
+        return ResponseEntity.ok(createdBoard);
+    }
 
     // 게시글 상세보기
-	@GetMapping("/board/{brdNo}")
-	public ResponseEntity<Board> getBoardByBrdNo(
-			@PathVariable Integer brdNo) {
-		return boardService.getBoard(brdNo);
-	}
+    @GetMapping("/board/{brdNo}")
+    public ResponseEntity<BoardResponseDto> getBoardByBrdNo(@PathVariable Integer brdNo) {
+        boardService.increaseViewCount(brdNo); 
+        BoardResponseDto boardResponseDto = boardService.getBoard(brdNo);
+        return ResponseEntity.ok(boardResponseDto);
+    }
+        
+    // 게시글 수정 (update)
+    @PutMapping("/board/{brdNo}")
+    public ResponseEntity<BoardResponseDto> updateBoardByNo(@PathVariable Integer brdNo, @RequestBody BoardRequestDto boardRequestDto) {
+        BoardResponseDto updatedBoard = boardService.updateBoard(brdNo, boardRequestDto);
+        return ResponseEntity.ok(updatedBoard);
+    }
 
-    //게시글 수정 (update)
-	@PutMapping("/board/{brdNo}")
-	public ResponseEntity<Board> updateBoardByNo(
-			@PathVariable Integer brdNo, @RequestBody Board board){
-		
-		return boardService.updateBoard(brdNo, board);
-	}
+    // 게시글 삭제
+    @DeleteMapping("/board/{brdNo}")
+    public ResponseEntity<Map<String, Boolean>> deleteBoardByNo(@PathVariable Integer brdNo, @RequestBody BoardRequestDto boardRequestDto) {
+        boardService.deleteBoard(brdNo, boardRequestDto);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("Deleted Board Data by brdNo: " + brdNo, Boolean.TRUE);
+        return ResponseEntity.ok(response);
+    }
 
-    //게시글 삭제 
-	@DeleteMapping("/board/{brdNo}")
-	public ResponseEntity<Map<String, Boolean>> deleteBoardByNo(
-			@PathVariable Integer brdNo) {
-		
-		return boardService.deleteBoard(brdNo);
-	}
-
-
-
-
-
-
-
-
+    // 게시글 좋아요 기능
+    @PostMapping("/board/{brdNo}/like")
+    public ResponseEntity<BoardResponseDto> likeBoard(@PathVariable Integer brdNo, @RequestHeader("mem_email") String memEmail) {
+        BoardResponseDto likedBoard = boardService.likeBoard(brdNo, memEmail);
+        return ResponseEntity.ok(likedBoard);
+    }  
 }
