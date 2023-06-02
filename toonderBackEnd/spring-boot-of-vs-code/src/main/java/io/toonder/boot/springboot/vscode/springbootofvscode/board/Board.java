@@ -22,7 +22,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -58,7 +58,7 @@ public class Board {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="mem_email") 
-	private Member member;
+	private MemberDto member;
 	
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@OrderBy("cmtNo asc") // 댓글 정렬
