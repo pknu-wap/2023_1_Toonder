@@ -16,7 +16,7 @@ const CheckboxContainer = styled.div`
   width: 470px;
   transform: translateX(5%);
   display: flex;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: center;
   position: absolute;
   top: 455px;
   border-radius: 10px;
@@ -108,12 +108,20 @@ function Join() {
       isPwCheck &&
       isPwValid &&
       firstName.length > 0 &&
-      lastName.length > 0
+      lastName.length > 0 &&
+      selectedHashtags.length > 0
     )
       setNotAllow(false);
     else setNotAllow(true);
     return;
-  }, [isValidEmail, isPwValid, isPwCheck, firstName, lastName]);
+  }, [
+    isValidEmail,
+    isPwValid,
+    isPwCheck,
+    firstName,
+    lastName,
+    selectedHashtags,
+  ]);
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -127,7 +135,7 @@ function Join() {
     setPw(e.target.value);
 
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(pw)) {
+    if (regex.test(e.target.value)) {
       setIsPwValid(true);
     } else {
       setIsPwValid(false);
@@ -144,7 +152,7 @@ function Join() {
     setEmail(e.target.value);
     const regex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (regex.test(email)) {
+    if (regex.test(e.target.value)) {
       setEmailValid(true);
     } else {
       setEmailValid(false);
@@ -162,6 +170,7 @@ function Join() {
   };
 
   const handleSubmit = async (e) => {
+    //////////////체크박스로 입력받은 해시태그는 공백으로 단어가 분리된 문자열로 저장을 해서 데이터로 보냄
     setLoading(true);
     const hashtag = selectedHashtags.join(' ');
     axios
@@ -269,17 +278,20 @@ function Join() {
               placeholder="비밀번호 확인"
             />
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              color: 'white',
-              fontSize: '15px',
-              left: '594px',
-              top: '436px',
-            }}
-          >
-            좋아하는 만화 장르를 1개 이상 선택
-          </div>
+          {!selectedHashtags.length > 0 && (
+            <div
+              style={{
+                position: 'absolute',
+                color: 'white',
+                fontSize: '15px',
+                left: '594px',
+                top: '436px',
+              }}
+            >
+              좋아하는 만화 장르를 1개 이상 선택
+            </div>
+          )}
+
           <CheckboxContainer>
             {hashtagOptions.map((hashtag) => (
               <CheckboxLabel key={hashtag}>

@@ -47,27 +47,31 @@ body {
   margin-top: 40px;
 }
 
-.findid_body ,.findpw_body , .checkPw {
+.findid_body,
+.findpw_body,
+.checkPw {
   position: relative;
   top: 100px;
 }
 
-.findid_body form ,.findpw_body form ,.checkPw form {
+.findid_body form,
+.findpw_body form,
+.checkPw form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.findid_body input{
+.findid_body input {
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   font-family: sans-serif;
-
 }
 
-.findpw_body input ,.checkPw input{
+.findpw_body input,
+.checkPw input {
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -77,7 +81,9 @@ body {
   height: 50px;
 }
 
-.findid_body button ,.checkPw button ,.findpw_body button{
+.findid_body button,
+.checkPw button,
+.findpw_body button {
   margin-top: 15px;
   padding: 12px 24px;
   border: none;
@@ -134,3 +140,7 @@ input::placeholder {
 * {
   outline: none; /* 모든 요소의 outline 제거 */
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+} /*인풋창 색깔이 달라지는거 금지*/
