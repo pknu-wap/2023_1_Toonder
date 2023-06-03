@@ -25,39 +25,38 @@
   height: 800px;
 }
 
-
 /*mainBackground*/
-.mainPageBack{
+.mainPageBack {
   margin-left: auto;
   margin-right: auto;
   margin-top: 60px;
-  width:1224px;
+  width: 1224px;
   border-radius: 10px;
 }
 
-.logoSearch{
+.logoSearch {
   display: flex;
 }
 
-.mainBackSmall{
+.mainBackSmall {
   margin-top: 61px;
 }
 
-
-button, input{
+button,
+input {
   /*모든 입력창과 버튼에 라운드 처리를 해주고 경계선을 없앴습니다.*/
   border: none;
   border-radius: 10px;
 }
 
 /* 검색 하는 부분*/
-.mainSearch input{
+.mainSearch input {
   width: 806px;
   height: 64px;
   font-size: 24px;
 }
 
-.mainSearch button{
+.mainSearch button {
   border-radius: 10px;
   margin-left: 13px;
   width: 90px;
@@ -67,16 +66,14 @@ button, input{
   font-size: 20px;
 }
 
-
-
 /* 우측 section 부분*/
-.mainSearch{
+.mainSearch {
   border-radius: 10px;
-  display : flex;
+  display: flex;
   /* 가로축 가운데 정렬 */
-  justify-content : center;
+  justify-content: center;
   /* 세로축 가운데 정렬 */
-  align-items : center;
+  align-items: center;
   width: 953px;
   height: 84px;
   background-color: rgb(255, 147, 147);
@@ -84,13 +81,13 @@ button, input{
 }
 
 /* 검색 하는 부분*/
-.mainSearch input{
+.mainSearch input {
   width: 806px;
   height: 64px;
   font-size: 24px;
 }
 
-.mainSearch button{
+.mainSearch button {
   border-radius: 10px;
   margin-left: 13px;
   width: 90px;
@@ -100,27 +97,24 @@ button, input{
   font-size: 20px;
 }
 
-
 /* 좌측 nav 부분*/
 #main_page {
   display: flex;
   align-items: center;
 }
 
-.mainLogo{
+.mainLogo {
   display: flex;
   height: auto;
   margin-right: 20px;
   width: 257px;
-
 }
 
-.mainLogo button{
-  background-color:white;
+.mainLogo button {
+  background-color: white;
 }
-.mainLogo h1{
+.mainLogo h1 {
   font-size: 40px;
   margin-left: 20px;
   color: rgb(255, 147, 147);
 }
-
