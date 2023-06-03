@@ -14,10 +14,7 @@ import Mypage from './component/main/mypage';
 import Freeboard from './component/freeboard/freeboard';
 import InfoC from './component/main/infoChange';
 import axios from 'axios';
-import Profilechange from './component/main/profilechange';
-import Practice from './component/practice';
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -34,9 +31,7 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/infochange" element={<InfoC />} />
           <Route path="/newpw" element={<Newpw />} />
-          <Route path="/profilechange" element={<Profilechange />} />
           <Route path="/join" element={<Join />} />
-          <Route path="/practice" element={<Practice />} />
         </Routes>
       </BrowserRouter>
     </div>
