@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
 import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
+import io.toonder.boot.springboot.vscode.springbootofvscode.review.Review;
 
 import javax.persistence.OrderBy;
  
@@ -44,6 +45,11 @@ public class Member {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     @JsonBackReference
     private List<Board> board;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OrderBy("revNo asc") // 댓글 정렬
+    @JsonBackReference
+	private List<Review> review;
 
     public Member(String mem_email, String mem_name, String mem_hashtag, String mem_photo) {
         this.mem_email = mem_email;

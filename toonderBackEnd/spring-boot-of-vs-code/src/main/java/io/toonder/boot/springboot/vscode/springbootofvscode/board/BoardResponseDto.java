@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.comment.CommentResponseDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class BoardResponseDto {
     
 	private Integer brdNo;  
