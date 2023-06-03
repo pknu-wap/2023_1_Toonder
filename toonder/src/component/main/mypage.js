@@ -3,11 +3,51 @@ import { useNavigate } from 'react-router-dom';
 import './mainPage.css';
 import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
+import supabase from '../supabase';
 
 function Mypage() {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState('지금 로그인하세요!');
-  
+  const [loggedUserName, setLoggedUserName] = useState(
+    localStorage.getItem('loggedUserName')
+  );
+  const [loggedUserHashTag, setLoggedUserHashTag] = useState(
+    localStorage.getItem('loggedUserHashTag')
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await supabase.auth.getSession();
+      const email = data.session.user.email;
+      const requestData = {
+        email: email,
+      };
+
+      axios
+        .post('toonder/mypage', requestData)
+        .then((hashData) => {
+          console.log(hashData.data.mem_hashtag);
+          setLoggedUserHashTag(hashData.data.mem_hashtag);
+          localStorage.setItem('loggedUserHashTag', hashData.data.mem_hashtag);
+        })
+        .catch((error) => console.log(error));
+
+      if (!localStorage.getItem('loggedUserName')) {
+        axios
+          .post('toonder/name', requestData)
+          .then((loggedUserData) => {
+            console.log(loggedUserData.data.mem_name);
+            setLoggedUserName(loggedUserData.data.mem_name);
+            localStorage.setItem(
+              'loggedUserName',
+              loggedUserData.data.mem_name
+            );
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <MainBackgorund>
@@ -25,7 +65,7 @@ function Mypage() {
           </button>
         </div>
 
-        <h1>#멜로 #코믹 #액션 #유미의 세포들 #연애혁명</h1>
+        <h1>{loggedUserHashTag}</h1>
       </div>
 
       <div className="subUserInfo">

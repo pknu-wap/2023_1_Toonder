@@ -211,7 +211,7 @@ function InfoC() {
               position: 'absolute',
               color: 'white',
               fontSize: '15px',
-              left: '594px',
+              left: '40%',
               top: '372px',
             }}
           >
@@ -246,7 +246,7 @@ const CheckboxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
   width: 470px;
@@ -258,6 +258,22 @@ const CheckboxContainer = styled.div`
   border-radius: 10px;
   background-color: white;
   color: grey;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const CheckboxLabel = styled.label`
