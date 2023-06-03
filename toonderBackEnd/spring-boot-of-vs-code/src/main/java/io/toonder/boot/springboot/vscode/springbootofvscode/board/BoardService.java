@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,36 +35,34 @@ public class BoardService {
     public int findAllCount() {
         return (int) boardRepository.count();
     }
-
-    // Repository를 호출해서 글목록 데이터를 리턴하는 메소드
+	// 게시글 목록 데이터를 리턴
     public List<Board> getAllBoard() {
         return boardRepository.findAll();
     }
 
-	/* 
-    public Board createBoard(Board board) {
-        return boardRepository.save(board);
-    }*/
+	// 페이징 처리된 글목록 데이터를 리턴
+	public ResponseEntity<Map<String, Object>> getPagingBoard(Integer p_num) {
+		Map<String, Object> result = new HashMap<>();
 
-    // 페이징 처리된 글목록 데이터를 리턴하는 메소드
-    public ResponseEntity<Map<String, Object>> getPagingBoard(Integer p_num) {
-        Map<String, Object> result = new HashMap<>();
+		int totalObjectCount = findAllCount(); // 전체 글 수 조회
 
-        int totalObjectCount = findAllCount(); // 전체 글 수 조회
+		PagingUtil pu = new PagingUtil(p_num, 5, 5);
+		List<Board> boardList = boardRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
+		pu.setObjectCountTotal(totalObjectCount);
+		pu.setCalcForPaging();
 
-        PagingUtil pu = new PagingUtil(p_num, 5, 5);
-        List<Board> boardList = boardRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
-        pu.setObjectCountTotal(totalObjectCount);
-        pu.setCalcForPaging();
+		if (boardList == null || boardList.size() == 0) {
+			return ResponseEntity.ok(Collections.emptyMap());
+		}
 
-        if (boardList == null || boardList.size() == 0) {
-            return ResponseEntity.ok(Collections.emptyMap());
-        }
+		List<BoardResponseDto> boardResponseDtoList = boardList.stream()
+				.map(BoardResponseDto::new)
+				.collect(Collectors.toList());
 
-        result.put("pagingData", pu);
-        result.put("list", boardList);
-        return ResponseEntity.ok(result);
-    }
+		result.put("pagingData", pu);
+		result.put("list", boardResponseDtoList);
+		return ResponseEntity.ok(result);
+	}
 
     // 게시글 생성 (create)
     public BoardResponseDto createBoard(BoardRequestDto boardRequestDto) {
