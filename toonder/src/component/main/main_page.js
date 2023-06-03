@@ -17,6 +17,29 @@ function Mainpage(props) {
   const [resdata, setResData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleRecommendation = () => {
+    setIsLoading(true); // 새로운 추천 웹툰 이미지를 가져오기 전에 로딩 상태를 true로 설정
+
+    const fetchData = async () => {
+      const { data } = await supabase.auth.getSession();
+      const email = data.session.user.email;
+      const requestData = {
+        email: email,
+      };
+
+      axios
+        .post('toonder/recommand', requestData)
+        .then((res) => {
+          console.log(res.data);
+          setResData(res.data);
+          setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
+        })
+        .catch((error) => console.log(error));
+    };
+
+    fetchData();
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase.auth.getSession();
@@ -54,6 +77,11 @@ function Mainpage(props) {
 
   return (
     <MainBackgorund>
+      {' '}
+      <div className="refresh">
+        <h2>사용자 추천 웹툰</h2>
+        <button onClick={handleRecommendation}>추천 새로 받기</button>
+      </div>
       <MainBackSmall loggedUserName={loggedUserName}>
         <div className="mainPage">
           {isLoading ? ( // 로딩 중일 때의 화면
@@ -63,13 +91,13 @@ function Mainpage(props) {
             </div>
           ) : (
             <main>
-              <h2>사용자 추천 웹툰</h2>
               <table>
                 <tbody>
                   <tr>
                     {resdata.map((item, index) => (
                       <td key={index}>
                         <button
+                          className="refresh"
                           onClick={() => {
                             navigate('/mainwebtooninfo');
                           }}
