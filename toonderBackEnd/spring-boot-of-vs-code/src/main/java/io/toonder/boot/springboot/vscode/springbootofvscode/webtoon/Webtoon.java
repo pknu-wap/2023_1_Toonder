@@ -1,17 +1,27 @@
 package io.toonder.boot.springboot.vscode.springbootofvscode.webtoon;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.JoinColumn;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "webtoon")
@@ -35,4 +45,8 @@ public class Webtoon {
     private String webtoonPusryYn; //웹툰연재여부	
     private String imageDownloadUrl; //이미지다운로드URL(표지)
 
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@JoinColumn(name="mem_email") 
+	private Member member;
 }

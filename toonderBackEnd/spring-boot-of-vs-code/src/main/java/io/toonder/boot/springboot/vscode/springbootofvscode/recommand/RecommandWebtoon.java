@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberRepository;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.Webtoon;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.WebtoonRepository;
@@ -33,7 +33,7 @@ public class RecommandWebtoon {
     public List<List<Map<String, String>>> selectById(@RequestBody Map<String,String> memberEmail){
         
         
-        MemberDto member = memberRepository.findById(memberEmail.get("email")).orElse(null);
+        Member member = memberRepository.findById(memberEmail.get("email")).orElse(null);
         if (member == null) {
             return null;
         }        

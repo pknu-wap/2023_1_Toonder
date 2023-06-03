@@ -44,4 +44,11 @@ public class Member {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     @JsonBackReference
     private List<Board> board;
+
+    public Member(String mem_email, String mem_name, String mem_hashtag, String mem_photo) {
+        this.mem_email = mem_email;
+        this.mem_name = mem_name;
+        this.mem_hashtag = mem_hashtag;
+        this.mem_photo = mem_photo;
+    }
 }

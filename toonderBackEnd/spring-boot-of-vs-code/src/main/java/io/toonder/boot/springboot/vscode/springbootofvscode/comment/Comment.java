@@ -19,7 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -55,7 +55,7 @@ public class Comment {
 
 	@ManyToOne
 	@JoinColumn(name="mem_email") 
-	private MemberDto member;
+	private Member member;
 
 	@ElementCollection
 	@CollectionTable(name = "comment_likes", joinColumns = @JoinColumn(name = "cmtNo"))
