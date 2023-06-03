@@ -7,32 +7,6 @@ import supabase from '../supabase';
 
 function MainBackSmall(props) {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState('지금 로그인 하세요');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await supabase.auth.getSession();
-      const email = data.session.user.email;
-      const requestData = {
-        email: email,
-      };
-
-      axios
-        .post('toonder/recommand', requestData)
-        .then((res) => console.log(res.data))
-        .catch((error) => console.log(error));
-
-      axios
-        .post('toonder/name', requestData)
-        .then((loggedUserData) => {
-          console.log(loggedUserData.data.mem_name);
-          setLoggedUserName(loggedUserData.data.mem_name);
-        })
-        .catch((error) => console.log(error));
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div className="mainBackSmall">
@@ -41,8 +15,11 @@ function MainBackSmall(props) {
           <Link to="/profilechange">
             <img id="infoimg" src={ex1} alt="image error"></img>
           </Link>
-          <h2>{loggedUserName}</h2>
-          <button id="changeInfo">
+          <h2>{props.loggedUserName}</h2>
+          <button
+            id="changeInfo"
+            onClick={() => localStorage.removeItem('loggedUserName')}
+          >
             <h3>정보수정</h3>
           </button>
         </div>
