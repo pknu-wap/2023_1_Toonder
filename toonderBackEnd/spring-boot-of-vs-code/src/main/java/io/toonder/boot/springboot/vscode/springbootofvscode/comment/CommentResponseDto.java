@@ -3,9 +3,11 @@ package io.toonder.boot.springboot.vscode.springbootofvscode.comment;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class CommentResponseDto {
 
     private Integer cmtNo; 
