@@ -176,7 +176,7 @@ function Join() {
     axios
       .post('toonder/join', {
         mem_email: email,
-        mem_name: firstName + ' ' + lastName,
+        mem_name: lastName + firstName,
         mem_hashtag: hashtag,
       })
       .catch(function () {
