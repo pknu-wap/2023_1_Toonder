@@ -127,3 +127,7 @@ input::placeholder {
 * {
   outline: none; /* 모든 요소의 outline 제거 */
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+} /*인풋창 색깔이 달라지는거 금지*/

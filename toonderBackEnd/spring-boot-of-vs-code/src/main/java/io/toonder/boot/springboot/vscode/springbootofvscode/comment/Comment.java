@@ -19,7 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.board.Board;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,17 +50,15 @@ public class Comment {
     private Integer cmtLike; //댓글 좋아요 수 
     
     @ManyToOne 
-	//@JsonManagedReference
 	@JoinColumn(name="brdNo") 
 	private Board board;
 
 	@ManyToOne
-	//@JsonManagedReference
 	@JoinColumn(name="mem_email") 
-	private Member member;
+	private MemberDto member;
 
 	@ElementCollection
-	@CollectionTable(name = "comment_likes", joinColumns = @JoinColumn(name = "cmt_no"))
+	@CollectionTable(name = "comment_likes", joinColumns = @JoinColumn(name = "cmtNo"))
 	@Column(name = "mem_email")
 	private Set<String> likedByMembers = new HashSet<>(); // 좋아요를 누른 사용자 이메일 저장
 
