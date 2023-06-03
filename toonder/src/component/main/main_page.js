@@ -6,7 +6,7 @@ import MainBackSmall from '../backgrounds/mainBackSmall';
 import supabase from '../supabase';
 import { useLocation } from 'react-router';
 import axios from 'axios';
-import logo from '../../images/logoimage.png';
+import logo from '../../images/logo2.png';
 import { FaSpinner } from 'react-icons/fa'; // 로딩 아이콘 추가
 
 function Mainpage(props) {
@@ -48,20 +48,6 @@ function Mainpage(props) {
         email: email,
       };
 
-      if (!localStorage.getItem('loggedUserName')) {
-        axios
-          .post('toonder/name', requestData)
-          .then((loggedUserData) => {
-            console.log(loggedUserData.data.mem_name);
-            setLoggedUserName(loggedUserData.data.mem_name);
-            localStorage.setItem(
-              'loggedUserName',
-              loggedUserData.data.mem_name
-            );
-          })
-          .catch((error) => console.log(error));
-      }
-
       axios
         .post('toonder/recommand', requestData)
         .then((res) => {
@@ -77,20 +63,60 @@ function Mainpage(props) {
 
   return (
     <MainBackgorund>
-      {' '}
-      <div className="refresh">
-        <h2>사용자 추천 웹툰</h2>
-        <button onClick={handleRecommendation}>추천 새로 받기</button>
-      </div>
-      <MainBackSmall loggedUserName={loggedUserName}>
+      <div style={{ position: 'relative' }}>
+        <h2
+          style={{
+            position: 'absolute',
+            color: 'white',
+            display: 'flex',
+            zIndex: 1,
+            top: '90px',
+            left: '300px',
+          }}
+        >
+          추천 웹툰 목록
+        </h2>
+      </div>{' '}
+      <MainBackSmall>
         <div className="mainPage">
+          <div style={{ position: 'absolute' }}>
+            <button
+              onClick={handleRecommendation}
+              style={{
+                position: 'absolute',
+                color: 'rgb(255, 147, 147)',
+                display: 'flex',
+                zIndex: 1,
+                backgroundColor: 'white',
+                width: '150px',
+                height: '25px',
+                justifyContent: 'center', // 가로 가운데 정렬
+                alignItems: 'center',
+                fontSize: '22px',
+                top: '-235px',
+                left: '765px',
+                borderRadius: '10px',
+              }}
+            >
+              추천 새로 받기
+            </button>
+          </div>
           {isLoading ? ( // 로딩 중일 때의 화면
-            <div style={{ fontSize: '50px', color: 'white' }}>
-              &nbsp;&nbsp; 웹툰 추천 받는 중...{' '}
+            <div
+              style={{
+                fontSize: '100px',
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+              }}
+            >
               <FaSpinner className="loadingIcon" />
             </div>
           ) : (
             <main>
+              <div className="recommendationButtonWrapper"></div>
               <table>
                 <tbody>
                   <tr>
@@ -104,6 +130,7 @@ function Mainpage(props) {
                         >
                           <div className="imageContainer">
                             <img
+                              className="webtoonImage"
                               src={item.imageDownloadUrl}
                               alt="image error"
                               onError={(e) => {
@@ -113,7 +140,7 @@ function Mainpage(props) {
                             />
                           </div>
                           <br />
-                          <br />
+
                           <p
                             className="webtoonTitle"
                             style={{ fontSize: '22px', color: 'white' }}

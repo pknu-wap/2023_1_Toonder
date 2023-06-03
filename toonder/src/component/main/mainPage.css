@@ -177,13 +177,23 @@ main {
   padding-left: 17px;
 }
 
-.mainPage img,
-.mainPage button {
+.mainPage img {
   width: 207px;
   height: 314px;
   border-radius: 10px;
 }
 
+.mainPage button {
+  border: none;
+  background-color: transparent;
+  top: -0px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(255, 147, 147);
+  border-radius: 4px;
+  float: right;
+}
 /*밑의 부분이 나타날 부분*/
 .botPage {
   position: absolute;
@@ -513,6 +523,7 @@ table button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1; /* 다른 요소 위로 올리기 */
 }
 
 .profilechange {
@@ -574,31 +585,13 @@ table button {
   border: none;
   background-color: white;
   position: absolute;
-  top: 29.1%;
-  left: 76%;
+  top: 29.6%;
+  left: 76.9%;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   color: rgb(255, 147, 147);
-  border-radius: 10px;
-  z-index: 1; /* 다른 요소 위로 올리기 */
-  width: 140px; /* 버튼의 너비를 고정 */
-  height: 30px; /* 버튼의 높이를 고정 */
-}
-
-.refresh h2 {
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  top: 29.6%;
-  left: 31.3%;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  cursor: pointer;
-  color: white;
   border-radius: 4px;
-  font-family: 'BMHANNAPro' !important;
   z-index: 1; /* 다른 요소 위로 올리기 */
 }
