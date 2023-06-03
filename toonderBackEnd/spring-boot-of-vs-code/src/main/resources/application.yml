@@ -19,6 +19,9 @@ spring:
     properties:
       hibernate:
         format-sql: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 server:
   servlet:
     encoding:
