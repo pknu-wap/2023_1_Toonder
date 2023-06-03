@@ -1,99 +1,245 @@
 package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
+import java.nio.file.AccessDeniedException;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.ResourceNotFoundException;
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.CommentRepository;
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.CommentRequestDto;
+import io.toonder.boot.springboot.vscode.springbootofvscode.comment.CommentResponseDto;
 
 @Service
 public class BoardService {
 
+    @Autowired
+    private BoardRepository boardRepository;
+
 	@Autowired
-	private BoardRepository boardRepository;
-	
+    private CommentRepository commentRepository;
+
+
     public int findAllCount() {
-		return (int) boardRepository.count();
-	}
-	
-	// 페이징
-	public ResponseEntity<Map> getPagingBoard(Integer p_num) {
-		Map result = null;
-		
-		PagingUtil pu = new PagingUtil(p_num, 5, 5); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
-		List<Board> list = boardRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
-		pu.setObjectCountTotal(findAllCount());
-		pu.setCalcForPaging();
-		
-		System.out.println("p_num : "+p_num);
-		System.out.println(pu.toString());
-		
-		if (list == null || list.size() == 0) {
-			return null;
-		}
-		
-		result = new HashMap<>();
-		result.put("pagingData", pu);
-		result.put("list", list);
-		
-		return ResponseEntity.ok(result);
-	}
-
-    //Repository를 호출해서 글목록 데이터를 리턴하는 메소드
-	public List<Board> getAllBoard() { 
-		return boardRepository.findAll();
-	}
-
-    // 게시글 생성 (create)
-	public Board createBoard(Board board) {
-		return boardRepository.save(board);
-	}
-
-    // id값에 해당하는 게시글 불러오기
-	public ResponseEntity<Board> getBoard(Integer brdNo) {
-		Board board = boardRepository.findById(brdNo)
-				.orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by brdNo : ["+brdNo+"]"));
-		return ResponseEntity.ok(board);
-	}
-
-    // id에 해당하는 게시글 수정 (제목, 내용)
-	public ResponseEntity<Board> updateBoard(
-        Integer brdNo, Board updatedBoard) {
-        Board board = boardRepository.findById(brdNo)
-                .orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by brdNo : ["+brdNo+"]"));
-        board.setBrdTitle(updatedBoard.getBrdTitle());
-        board.setBrdContent(updatedBoard.getBrdContent());
-        board.setBrdUpdateDate(new Timestamp(System.currentTimeMillis()));
-        
-        Board endUpdatedBoard = boardRepository.save(board);
-        return ResponseEntity.ok(endUpdatedBoard);
+        return (int) boardRepository.count();
     }
 
-    //게시글 삭제
-    public ResponseEntity<Map<String, Boolean>> deleteBoard(
-			Integer brdNo) {
-		Board board = boardRepository.findById(brdNo)
-				.orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by brdNo : ["+brdNo+"]"));
-		
-		boardRepository.delete(board);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("Deleted Board Data by brdNo : ["+brdNo+"]", Boolean.TRUE);
-		return ResponseEntity.ok(response);
+    // Repository를 호출해서 글목록 데이터를 리턴하는 메소드
+    public List<Board> getAllBoard() {
+        return boardRepository.findAll();
+    }
+
+	/* 
+    public Board createBoard(Board board) {
+        return boardRepository.save(board);
+    }*/
+
+    // 페이징 처리된 글목록 데이터를 리턴하는 메소드
+    public ResponseEntity<Map<String, Object>> getPagingBoard(Integer p_num) {
+        Map<String, Object> result = new HashMap<>();
+
+        int totalObjectCount = findAllCount(); // 전체 글 수 조회
+
+        PagingUtil pu = new PagingUtil(p_num, 5, 5);
+        List<Board> boardList = boardRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
+        pu.setObjectCountTotal(totalObjectCount);
+        pu.setCalcForPaging();
+
+        if (boardList == null || boardList.size() == 0) {
+            return ResponseEntity.ok(Collections.emptyMap());
+        }
+
+        result.put("pagingData", pu);
+        result.put("list", boardList);
+        return ResponseEntity.ok(result);
+    }
+
+    // 게시글 생성 (create)
+    public BoardResponseDto createBoard(BoardRequestDto boardRequestDto) {
+        Board board = boardRequestDto.toEntity();
+        Board savedBoard = boardRepository.save(board);
+        return new BoardResponseDto(savedBoard);
+    }
+
+    // id값에 해당하는 게시글 불러오기
+    public BoardResponseDto getBoard(Integer brdNo) {
+        Board board = boardRepository.findById(brdNo)
+                .orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+        return new BoardResponseDto(board);
+    }
+
+	// id에 해당하는 게시글 수정 (제목, 내용)
+	public BoardResponseDto updateBoard(Integer brdNo, BoardRequestDto boardRequestDto) {
+		try {
+			Board board = boardRepository.findById(brdNo)
+					.orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+
+			if (!board.getMember().getMem_email().equals(boardRequestDto.getMem_email())) {
+				throw new AccessDeniedException("게시글 수정 권한이 없습니다");
+			}
+
+			board.setBrdTitle(boardRequestDto.getBrdTitle());
+			board.setBrdContent(boardRequestDto.getBrdContent());
+			board.setBrdUpdateDate(Timestamp.valueOf(LocalDateTime.now()));
+			Board updatedBoard = boardRepository.save(board);
+			return new BoardResponseDto(updatedBoard);
+		} catch (AccessDeniedException e) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "게시글 수정 권한이 없습니다");
+		}
 	}
 
+	// 게시글 삭제
+	public void deleteBoard(Integer brdNo, BoardRequestDto boardRequestDto) {
+		try {
+			Board board = boardRepository.findById(brdNo)
+					.orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by brdNo: " + brdNo));
+
+			if (!board.getMember().getMem_email().equals(boardRequestDto.getMem_email())) {
+				throw new AccessDeniedException("게시글 삭제 권한이 없습니다");
+			}
+
+			boardRepository.delete(board);
+		} catch (AccessDeniedException e) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "게시글 삭제 권한이 없습니다");
+		}
+	}
+
+	// 게시글 좋아요 기능
+    public BoardResponseDto likeBoard(Integer brdNo, String mem_email) {
+		Board board = boardRepository.findById(brdNo)
+				.orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+	
+		if (board.isLikedByMember(mem_email)) {
+			board.decreaseLike(mem_email); // 좋아요 취소
+		} else {
+			board.increaseLike(mem_email); // 좋아요 추가
+		}
+	
+		Board likedBoard = boardRepository.save(board);
+		return new BoardResponseDto(likedBoard);
+	}
+
+	// 게시글 조회 시 조회수 증가 
+    public ResponseEntity<Board> increaseViewCount(Integer brdNo) {
+        Board board = boardRepository.findById(brdNo)
+                .orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+
+        board.setBrdViewCount(board.getBrdViewCount() + 1);
+        boardRepository.save(board);
+
+        return ResponseEntity.ok(board);
+    }
 
 
 
+	// --- 댓글 ---
 
 
 
+	// 게시글에 댓글 작성 (create)
+    public CommentResponseDto createComment(Integer brdNo, CommentRequestDto commentDto) {
+        Board board = boardRepository.findById(brdNo)
+                .orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
 
+        Comment comment = commentDto.toEntity();
+        comment.setBoard(board);
 
+        Comment savedComment = commentRepository.save(comment);
+        CommentResponseDto responseDto = new CommentResponseDto(savedComment);
+        return responseDto;
+    }
+
+    // 댓글 조회
+    public List<CommentResponseDto> getAllCommentsForBoard(Integer brdNo) {
+        Board board = boardRepository.findById(brdNo)
+                .orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+
+        List<CommentResponseDto> responseDtoList = new ArrayList<>();
+        for (Comment comment : board.getComment()) {
+            CommentResponseDto responseDto = new CommentResponseDto(comment);
+            responseDtoList.add(responseDto);
+        }
+
+        return responseDtoList;
+    }
+
+    // 댓글 수정
+	public CommentResponseDto updateComment(Integer brdNo, Integer cmtNo, CommentRequestDto commentDto) {
+		try {
+			Board board = boardRepository.findById(brdNo)
+					.orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+
+			Comment comment = board.getComment().stream()
+					.filter(c -> c.getCmtNo().equals(cmtNo))
+					.findFirst()
+					.orElseThrow(() -> new ResourceNotFoundException(cmtNo + "번 댓글이 존재하지 않습니다"));
+
+			if (!comment.getMember().getMem_email().equals(commentDto.getMem_email())) {
+				throw new AccessDeniedException("댓글 수정 권한이 없습니다");
+			}
+
+			comment.update(commentDto.getCmtContent());
+			comment.setCmtUpdateDate(new Timestamp(System.currentTimeMillis()));
+
+			Comment updatedComment = commentRepository.save(comment);
+			CommentResponseDto responseDto = new CommentResponseDto(updatedComment);
+			return responseDto;
+		} catch (AccessDeniedException e) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "댓글 수정 권한이 없습니다");
+		}
+	}
+
+	//댓글 삭제
+    public ResponseEntity<Map<String, Boolean>> deleteComment(Integer brdNo, Integer cmtNo, CommentRequestDto commentDto) {
+		try {
+			Board board = boardRepository.findById(brdNo)
+					.orElseThrow(() -> new ResourceNotFoundException(brdNo + "번 게시글이 존재하지 않습니다"));
+	
+			Comment comment = board.getComment().stream()
+					.filter(c -> c.getCmtNo().equals(cmtNo))
+					.findFirst()
+					.orElseThrow(() -> new ResourceNotFoundException(cmtNo + "번 댓글이 존재하지 않습니다"));
+	
+			if (!comment.getMember().getMem_email().equals(commentDto.getMem_email())) {
+				throw new AccessDeniedException("댓글 삭제 권한이 없습니다");
+			}
+	
+			commentRepository.delete(comment);
+	
+			Map<String, Boolean> response = new HashMap<>();
+			response.put(cmtNo + "번 댓글이 삭제되었습니다", Boolean.TRUE);
+			return ResponseEntity.ok(response);
+		} catch (AccessDeniedException e) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "댓글 삭제 권한이 없습니다");
+		}
+	}
+
+	// 댓글 좋아요 기능
+    public CommentResponseDto likeComment(Integer brdNo, Integer cmtNo, String mem_email) {
+        Board board = boardRepository.findById(brdNo)
+                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        Comment comment = commentRepository.findById(cmtNo)
+                .orElseThrow(() -> new RuntimeException("댓글을 찾을 수 없습니다."));
+
+		if (comment.isLikedByMember(mem_email)) {
+			comment.decreaseLike(mem_email); // 좋아요 취소
+		} else {
+			comment.increaseLike(mem_email); // 좋아요 추가
+		}
+	
+		Comment likedComment = commentRepository.save(comment);
+		return new CommentResponseDto(likedComment);
+	}
 }
 
