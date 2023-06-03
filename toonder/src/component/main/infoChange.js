@@ -206,17 +206,20 @@ function InfoC() {
         </div>
 
         {!selectedHashtags.length > 0 && (
+          <div  style={{
+            position: 'absolute'
+          }}>
           <div
             style={{
-              position: 'absolute',
+              position: 'relative',
               color: 'white',
               fontSize: '15px',
-              left: '40%',
-              top: '372px',
+              left: '70%',
+                top: '-50px',
             }}
           >
             좋아하는 만화 장르를 1개 이상 선택
-          </div>
+          </div></div>
         )}
 
         <CheckboxContainer>
@@ -258,6 +261,7 @@ const CheckboxContainer = styled.div`
   border-radius: 10px;
   background-color: white;
   color: grey;
+
   ::-webkit-scrollbar {
     width: 6px;
   }
