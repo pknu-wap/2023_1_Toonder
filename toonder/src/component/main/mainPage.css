@@ -177,13 +177,23 @@ main {
   padding-left: 17px;
 }
 
-.mainPage img,
-.mainPage button {
+.mainPage img {
   width: 207px;
   height: 314px;
   border-radius: 10px;
 }
 
+.mainPage button {
+  border: none;
+  background-color: transparent;
+  top: -0px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(255, 147, 147);
+  border-radius: 4px;
+  float: right;
+}
 /*밑의 부분이 나타날 부분*/
 .botPage {
   position: absolute;
@@ -513,6 +523,7 @@ table button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1; /* 다른 요소 위로 올리기 */
 }
 
 .profilechange {
@@ -568,4 +579,19 @@ table button {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.refresh button {
+  border: none;
+  background-color: white;
+  position: absolute;
+  top: 29.6%;
+  left: 76.9%;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  cursor: pointer;
+  color: rgb(255, 147, 147);
+  border-radius: 4px;
+  z-index: 1; /* 다른 요소 위로 올리기 */
 }
