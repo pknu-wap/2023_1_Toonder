@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './backGround.module.css';
 import ex1 from '../../images/ex1.png';
 import axios from 'axios';
@@ -7,7 +7,19 @@ import supabase from '../supabase';
 
 function MainBackSmall(props) {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState('지금 로그인 하세요');
+  const [loggedUserName, setLoggedUserName] = useState(
+    localStorage.getItem('loggedUserName') || '지금 로그인 하세요'
+  );
+  const [loggedUserImage, setLoggedUserImage] = useState(ex1);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,18 +29,19 @@ function MainBackSmall(props) {
         email: email,
       };
 
-      axios
-        .post('toonder/recommand', requestData)
-        .then((res) => console.log(res.data))
-        .catch((error) => console.log(error));
-
-      axios
-        .post('toonder/name', requestData)
-        .then((loggedUserData) => {
-          console.log(loggedUserData.data.mem_name);
-          setLoggedUserName(loggedUserData.data.mem_name);
-        })
-        .catch((error) => console.log(error));
+      if (!localStorage.getItem('loggedUserName')) {
+        axios
+          .post('toonder/name', requestData)
+          .then((loggedUserData) => {
+            console.log(loggedUserData.data.mem_name);
+            setLoggedUserName(loggedUserData.data.mem_name);
+            localStorage.setItem(
+              'loggedUserName',
+              loggedUserData.data.mem_name
+            );
+          })
+          .catch((error) => console.log(error));
+      }
     };
 
     fetchData();
@@ -36,17 +49,21 @@ function MainBackSmall(props) {
 
   return (
     <div className="mainBackSmall">
-      <Link to="/infochange">
-        <div className="mainInfo">
-          <Link to="/profilechange">
-            <img id="infoimg" src={ex1} alt="image error"></img>
-          </Link>
-          <h2>{loggedUserName}</h2>
-          <button id="changeInfo">
-            <h3>정보수정</h3>
-          </button>
+      <div className="mainInfo">
+        <div onClick={openModal}>
+          <img id="infoimg" src={loggedUserImage} alt="image error" />
         </div>
-      </Link>
+        <h2>{loggedUserName}</h2>
+        <button
+          id="changeInfo"
+          onClick={() => {
+            localStorage.removeItem('loggedUserName');
+            navigate('/infochange');
+          }}
+        >
+          <h3>정보수정</h3>
+        </button>
+      </div>
       <div className="mainButtonSet">
         <button
           id="webtoonList"
@@ -80,10 +97,102 @@ function MainBackSmall(props) {
         >
           로그아웃
         </button>
-        {/*로그아웃 시 세션 만료했음을 나타내는 기능 필요함 */}
       </div>
-      {props.children} {/* props.children 렌더링 */}
+      {modalOpen && (
+        <ModalBasic
+          setModalOpen={setModalOpen}
+          setLoggedUserImage={setLoggedUserImage}
+          openModal={openModal}
+        />
+      )}
+      {props.children}
     </div>
   );
 }
+
+function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
+  const [selectedImage, setSelectedImage] = useState(ex1);
+  const [newImage, setNewImage] = useState(null);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+      setNewImage(file);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSave = () => {
+    if (newImage) {
+      console.log('새 이미지 저장:', newImage);
+      setLoggedUserImage(selectedImage);
+    }
+
+    closeModal();
+  };
+
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handler);
+
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, []);
+
+  return (
+    <div className="profilechangeback">
+      <div className="profilechange" ref={modalRef}>
+        <img id="changeinfoimg" src={selectedImage} alt="image error" />
+        <div id="changeFile">
+          <label htmlFor="chooseFile">
+            <h3>프로필 사진 변경</h3>
+          </label>
+        </div>
+        <div style={{ position: 'relative' }}>
+          <input
+            type="file"
+            id="chooseFile"
+            name="chooseFile"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{
+              position: 'absolute',
+              right: '-200px',
+              top: '0px',
+              marginTop: '10px',
+            }}
+          />
+        </div>
+        <div id="changeButtonSet" style={{ marginTop: '25px' }}>
+          <button id="submitButton" type="submit" onClick={handleSave}>
+            <h3>저장</h3>
+          </button>
+          <br />
+          <button id="cancel" onClick={closeModal}>
+            <h3>취소</h3>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default MainBackSmall;

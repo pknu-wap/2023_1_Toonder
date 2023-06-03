@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberRepository;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.Webtoon;
+import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.WebtoonRecommendationDto;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.WebtoonRepository;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,7 @@ public class RecommandWebtoon {
     private WebtoonRepository webtoonRepository;
 
     @RequestMapping(value = "/recommand", method = {RequestMethod.GET, RequestMethod.POST})
-    public List<List<Map<String, String>>> selectById(@RequestBody Map<String,String> memberEmail){
-        
+    public List<WebtoonRecommendationDto> recommandByEmail(@RequestBody Map<String,String> memberEmail){
         
         Member member = memberRepository.findById(memberEmail.get("email")).orElse(null);
         if (member == null) {
@@ -39,7 +39,7 @@ public class RecommandWebtoon {
         }        
         List<String> hashTagArray = splitHashTagString(member.getMem_hashtag());
 
-        List<List<Map<String, String>>> result = null;
+        List<WebtoonRecommendationDto> result = null;
         
         result = randomSelectWebtoonInMemGenre(hashTagArray);
 
@@ -47,33 +47,37 @@ public class RecommandWebtoon {
     }
 
 
-    private List<List<Map<String, String>>> randomSelectWebtoonInMemGenre(List<String> hashTagArray) {
-
-        List<List<Map<String, String>>> chosenWebtoonsIdAndImageLink = new ArrayList<>();
+    private List<WebtoonRecommendationDto> randomSelectWebtoonInMemGenre(List<String> hashTagArray) {
+;
         
         Random random = new Random();
         
-        
-        for (int i=0; i<4; i++){
+        List<WebtoonRecommendationDto> chosenWebtoonsInfo = new ArrayList<>();
+        while (chosenWebtoonsInfo.size()!=4){
             String randomGenre = hashTagArray.get(random.nextInt(hashTagArray.size()));
-            List<Webtoon> webtoons = webtoonRepository.findByMainGenreCdNm(randomGenre);
+            List<Webtoon> chosenGenreWebtoons = webtoonRepository.findByMainGenreCdNm(randomGenre);
+            Webtoon chosenWebtoon = chosenGenreWebtoons.get(random.nextInt(chosenGenreWebtoons.size()));
             
-            Map<String,String> randomWebtoonIdFromGenre = new HashMap<>() ;
-            Map<String,String> randomWebtoonImageLinkFromGenre = new HashMap<>() ;
-            List<Map<String, String>> chosenWebtoonIdAndImageLink = new ArrayList<>();
-
-            randomWebtoonIdFromGenre.put("mastrId" ,webtoons.get(random.nextInt(webtoons.size())).getMastrId());
-            randomWebtoonImageLinkFromGenre.put("imageDownloadUrl" ,webtoons.get(random.nextInt(webtoons.size())).getImageDownloadUrl());
-            chosenWebtoonIdAndImageLink.add(randomWebtoonIdFromGenre);
-            chosenWebtoonIdAndImageLink.add(randomWebtoonImageLinkFromGenre);
-
-            chosenWebtoonsIdAndImageLink.add(chosenWebtoonIdAndImageLink);
-            System.out.println(chosenWebtoonsIdAndImageLink);
+            
+            
+            if (checkForUnique(chosenWebtoon, chosenWebtoonsInfo)) {
+                chosenWebtoonsInfo.add(new WebtoonRecommendationDto(chosenWebtoon.getMastrId(), chosenWebtoon.getTitle(), chosenWebtoon.getImageDownloadUrl()));
+            }
         }
         
-        return chosenWebtoonsIdAndImageLink;
+        return chosenWebtoonsInfo;
     }
     
+
+    private boolean checkForUnique(Webtoon chosenWebtoon, List<WebtoonRecommendationDto> chosenWebtoonsInfo) {
+        for (int i=0; i<chosenWebtoonsInfo.size(); i++){
+            if (chosenWebtoon.getMastrId() == chosenWebtoonsInfo.get(i).getMastrId()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     private ArrayList<String> splitHashTagString(String hashTagString){
         ArrayList<String> hastTagArrayList = new ArrayList<>();
