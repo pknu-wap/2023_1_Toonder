@@ -27,18 +27,18 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    // 글목록 리턴 (페이징 처리)
     @GetMapping("/board")
-    public ResponseEntity<List<Board>> getAllBoards(@RequestParam(value = "p_num", required = false) Integer p_num) {
+    public ResponseEntity<List<BoardResponseDto>> getAllBoards(@RequestParam(value = "p_num", required = false) Integer p_num) {
         if (p_num == null || p_num <= 0) p_num = 1;
-
+    
         ResponseEntity<Map<String, Object>> response = boardService.getPagingBoard(p_num);
         if (response == null || response.getBody() == null) {
             return ResponseEntity.ok(Collections.emptyList());
         }
-
-        List<Board> boardList = (List<Board>) response.getBody().get("list");
-        return ResponseEntity.ok(boardList);
+    
+        List<BoardResponseDto> boardResponseDtoList = (List<BoardResponseDto>) response.getBody().get("list");
+    
+        return ResponseEntity.ok(boardResponseDtoList);
     }
 
     // 게시글 생성 (create)

@@ -23,7 +23,7 @@ public class OpenApiController {
     public String callApi() throws IOException {
         StringBuilder result = new StringBuilder();
 
-        int totalPages = 350; 
+        int totalPages = 400; 
 
         String apiKey = "ac588af480c81e0c020a57c56bec3efa"; //코드 실행시 apiKey 추가 필요 + rds 비밀번호도 application.yml에 추가해서 코드 실행
         String urlPattern = "https://www.kmas.or.kr/openapi/search/rgDtaMasterList?" +
