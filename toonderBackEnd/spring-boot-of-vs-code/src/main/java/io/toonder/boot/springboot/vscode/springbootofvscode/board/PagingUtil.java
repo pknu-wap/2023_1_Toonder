@@ -1,5 +1,10 @@
 package io.toonder.boot.springboot.vscode.springbootofvscode.board;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PagingUtil {
 
 	Integer currentPageNum;         // 현재 페이지 번호
@@ -66,6 +71,26 @@ public class PagingUtil {
 	}
 
 	/**
+     * 생성자 4;
+     * 1) '현재 페이지 번호','한 화면에 출력할 오브젝트 수','한 화면에 출력할 페이지 번호 수', '전체 글 수'를 변수로 받는다.
+     * 2) setObjectStartAndEnd()를 호출하여 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정
+     * 3) setCalcForPaging()를 호출하여 페이지 계산을 수행
+     *
+     * @param currentPageNum
+     * @param objectCountPerPage
+     * @param pageNumCountPerPage
+     * @param objectCountTotal
+     */
+    public PagingUtil(int currentPageNum, int objectCountPerPage, int pageNumCountPerPage, int objectCountTotal) {
+        this.currentPageNum = (0 < currentPageNum) ? currentPageNum : 1;
+        this.objectCountPerPage = (0 < objectCountPerPage) ? objectCountPerPage : 10;
+        this.pageNumCountPerPage = (0 < pageNumCountPerPage) ? pageNumCountPerPage : 10;
+
+        setObjectStartAndEnd();
+        setCalcForPaging(objectCountTotal);
+    }
+
+	/**
 	 * 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정\
 	 * 
 	 */
@@ -75,6 +100,10 @@ public class PagingUtil {
 
 	}
 
+	public int getCurrentPage() {
+        return currentPageNum;
+    }
+	
 	public boolean setCalcForPaging(Integer objectCountTotal) {
 		if (objectCountTotal == null) {
 			return false;
@@ -116,55 +145,6 @@ public class PagingUtil {
 	
 	public boolean setCalcForPaging() {
 		return setCalcForPaging(this.objectCountTotal);
-	}
-
-	
-	// -- Getter & Setter --
-	
-	public void setObjectCountTotal(Integer objectCountTotal) {
-		this.objectCountTotal = objectCountTotal;
-		
-	}
-	
-	public void setCurrentPageNum(Integer currentPageNum) {
-		this.currentPageNum = (0 < currentPageNum) ? currentPageNum : 1 ;
-		setObjectStartAndEnd();
-	}
-
-	public Integer getCurrentPageNum() {
-		return currentPageNum;
-	}
-
-	public Integer getObjectCountTotal() {
-		return objectCountTotal;
-	}
-
-	public Integer getObjectCountPerPage() {
-		return objectCountPerPage;
-	}
-
-	public Integer getObjectStartNum() {
-		return objectStartNum;
-	}
-
-	public Integer getObjectEndNum() {
-		return objectEndNum;
-	}
-
-	public Integer getPageNumCountTotal() {
-		return pageNumCountTotal;
-	}
-
-	public Integer getPageNumCountPerPage() {
-		return pageNumCountPerPage;
-	}
-
-	public Integer getPageNumStart() {
-		return pageNumStart;
-	}
-
-	public Integer getPageNumEnd() {
-		return pageNumEnd;
 	}
 
 	public boolean isPrev() {

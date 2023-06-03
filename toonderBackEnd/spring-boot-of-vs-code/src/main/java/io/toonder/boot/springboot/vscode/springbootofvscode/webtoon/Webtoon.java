@@ -8,21 +8,16 @@ import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.JoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.review.Review;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "webtoon")
 public class Webtoon {
@@ -45,8 +40,8 @@ public class Webtoon {
     private String webtoonPusryYn; //웹툰연재여부	
     private String imageDownloadUrl; //이미지다운로드URL(표지)
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "webtoon", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonManagedReference
-	@JoinColumn(name="mem_email") 
-	private Member member;
+	@OrderBy("revNo asc") // 리뷰 정렬
+	private List<Review> review;
 }
