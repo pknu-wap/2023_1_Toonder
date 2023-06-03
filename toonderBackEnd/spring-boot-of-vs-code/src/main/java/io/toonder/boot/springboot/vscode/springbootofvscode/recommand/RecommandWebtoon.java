@@ -53,16 +53,31 @@ public class RecommandWebtoon {
         Random random = new Random();
         
         List<WebtoonRecommendationDto> chosenWebtoonsInfo = new ArrayList<>();
-        for (int i=0; i<4; i++){
+        while (chosenWebtoonsInfo.size()!=4){
             String randomGenre = hashTagArray.get(random.nextInt(hashTagArray.size()));
             List<Webtoon> chosenGenreWebtoons = webtoonRepository.findByMainGenreCdNm(randomGenre);
             Webtoon chosenWebtoon = chosenGenreWebtoons.get(random.nextInt(chosenGenreWebtoons.size()));
-            chosenWebtoonsInfo.add(new WebtoonRecommendationDto(chosenWebtoon.getMastrId(), chosenWebtoon.getTitle(), chosenWebtoon.getImageDownloadUrl()));
+            
+            
+            
+            if (checkForUnique(chosenWebtoon, chosenWebtoonsInfo)) {
+                chosenWebtoonsInfo.add(new WebtoonRecommendationDto(chosenWebtoon.getMastrId(), chosenWebtoon.getTitle(), chosenWebtoon.getImageDownloadUrl()));
+            }
         }
         
         return chosenWebtoonsInfo;
     }
     
+
+    private boolean checkForUnique(Webtoon chosenWebtoon, List<WebtoonRecommendationDto> chosenWebtoonsInfo) {
+        for (int i=0; i<chosenWebtoonsInfo.size(); i++){
+            if (chosenWebtoon.getMastrId() == chosenWebtoonsInfo.get(i).getMastrId()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     private ArrayList<String> splitHashTagString(String hashTagString){
         ArrayList<String> hastTagArrayList = new ArrayList<>();
