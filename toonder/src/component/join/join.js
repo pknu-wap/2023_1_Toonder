@@ -22,6 +22,7 @@ const CheckboxContainer = styled.div`
   border-radius: 10px;
   background-color: white;
   color: grey;
+
   /* 스크롤 스타일 적용 */
   ::-webkit-scrollbar {
     width: 6px;
@@ -296,16 +297,20 @@ function Join() {
             />
           </div>
           {!selectedHashtags.length > 0 && (
+            <div  style={{
+              position: 'absolute'
+            }}>
             <div
               style={{
-                position: 'absolute',
+                position: 'relative',
                 color: 'white',
                 fontSize: '15px',
-                left: '40%',
-                top: '435px',
+                left: '70%',
+                top: '-10px',
               }}
             >
               좋아하는 만화 장르를 1개 이상 선택
+            </div>
             </div>
           )}
 
