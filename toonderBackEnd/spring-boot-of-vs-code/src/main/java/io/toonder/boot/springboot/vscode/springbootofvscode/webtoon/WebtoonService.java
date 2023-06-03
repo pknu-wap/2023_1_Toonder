@@ -8,15 +8,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class WebtoonService { //웹툰 정보 칼럼 맞춰서 저장
+public class WebtoonService { 
 
+    @Autowired
+    private WebtoonRepository webtoonRepository;
+
+
+    /* 
     private final WebtoonRepository webtoonRepository;
 
     @Autowired
     public WebtoonService(WebtoonRepository webtoonRepository) {
         this.webtoonRepository = webtoonRepository;
-    }
+    }*/
     
+    //웹툰 정보 저장
     @Transactional(rollbackFor = Exception.class)
     public void init(String jsonData) {
         try {

@@ -24,7 +24,7 @@ public class MemberNameController {
     @RequestMapping(value = "/name", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, String> selectById(@RequestBody Map<String,String> memberEmail){
 
-        MemberDto member = memberRepository.findById(memberEmail.get("email")).orElse(null);
+        Member member = memberRepository.findById(memberEmail.get("email")).orElse(null);
         if (member == null) {
             return null;
         }

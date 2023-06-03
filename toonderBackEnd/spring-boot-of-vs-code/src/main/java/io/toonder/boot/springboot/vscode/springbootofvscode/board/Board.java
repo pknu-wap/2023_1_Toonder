@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -68,7 +68,7 @@ public class Board {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonManagedReference
 	@JoinColumn(name="mem_email") 
-	private MemberDto member;
+	private Member member;
 	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonBackReference

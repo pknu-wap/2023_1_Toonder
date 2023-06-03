@@ -15,8 +15,8 @@ public class MemberJoinController {
     private MemberRepository memberRepository;
  
     @RequestMapping(value = "/join", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
-    public MemberDto insert(@RequestBody Map<String, String> map) {
-        return memberRepository.save(new MemberDto(map.get("mem_email"), map.get("mem_name"), map.get("mem_hashtag"),null));
+    public Member insert(@RequestBody Map<String, String> map) {
+        return memberRepository.save(new Member(map.get("mem_email"),map.get("mem_name"), map.get("mem_hashtag"),null));
     }
     
 }
