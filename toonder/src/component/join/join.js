@@ -10,7 +10,7 @@ const CheckboxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 160px;
-  overflow-y: scroll;
+  overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
   width: 470px;
@@ -22,6 +22,23 @@ const CheckboxContainer = styled.div`
   border-radius: 10px;
   background-color: white;
   color: grey;
+  /* 스크롤 스타일 적용 */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const CheckboxLabel = styled.label`
@@ -284,8 +301,8 @@ function Join() {
                 position: 'absolute',
                 color: 'white',
                 fontSize: '15px',
-                left: '594px',
-                top: '436px',
+                left: '40%',
+                top: '435px',
               }}
             >
               좋아하는 만화 장르를 1개 이상 선택
