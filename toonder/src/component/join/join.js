@@ -172,11 +172,11 @@ function Join() {
   const handleSubmit = async (e) => {
     //////////////체크박스로 입력받은 해시태그는 공백으로 단어가 분리된 문자열로 저장을 해서 데이터로 보냄
     setLoading(true);
-    const hashtag = selectedHashtags.join(' ');
+    const hashtag = '#' + selectedHashtags.join(' #');
     axios
-      .post('api/member/insert', {
-        mem_id: email,
-        mem_name: firstName + lastName,
+      .post('toonder/join', {
+        mem_email: email,
+        mem_name: firstName + ' ' + lastName,
         mem_hashtag: hashtag,
       })
       .catch(function () {
