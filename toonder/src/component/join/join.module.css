@@ -63,13 +63,6 @@
   font-family: sans-serif;
 }
 
-.textBox {
-  transform: translateX(5%);
-  display: flex;
-  position: absolute;
-  top: 445px;
-}
-
 .submit {
   position: absolute;
   left: 50%;

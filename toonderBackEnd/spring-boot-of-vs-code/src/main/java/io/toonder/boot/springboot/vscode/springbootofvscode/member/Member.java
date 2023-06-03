@@ -3,7 +3,6 @@ package io.toonder.boot.springboot.vscode.springbootofvscode.member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -35,6 +34,7 @@ public class Member {
     private String mem_email;
     private String mem_name;
     private String mem_hashtag;
+    private String mem_photo;
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@OrderBy("cmtNo asc") // 댓글 정렬

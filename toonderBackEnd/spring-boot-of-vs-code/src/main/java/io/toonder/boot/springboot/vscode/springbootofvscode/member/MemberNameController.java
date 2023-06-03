@@ -22,9 +22,9 @@ public class MemberNameController {
     private MemberRepository memberRepository;
     
     @RequestMapping(value = "/name", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, String> selectById(@RequestBody Map<String,String> memberEmailJsonString){
+    public Map<String, String> selectById(@RequestBody Map<String,String> memberEmail){
 
-        Member member = memberRepository.findById(memberEmailJsonString.get("email")).orElse(null);
+        MemberDto member = memberRepository.findById(memberEmail.get("email")).orElse(null);
         if (member == null) {
             return null;
         }

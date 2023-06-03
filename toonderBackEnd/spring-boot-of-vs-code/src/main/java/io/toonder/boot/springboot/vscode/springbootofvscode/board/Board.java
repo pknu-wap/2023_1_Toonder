@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.comment.Comment;
-import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
+import io.toonder.boot.springboot.vscode.springbootofvscode.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -68,7 +68,7 @@ public class Board {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonManagedReference
 	@JoinColumn(name="mem_email") 
-	private Member member;
+	private MemberDto member;
 	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonBackReference
@@ -76,7 +76,7 @@ public class Board {
 	private List<Comment> comment;
 
 	@ElementCollection
-    @CollectionTable(name = "board_likes", joinColumns = @JoinColumn(name = "brd_no"))
+    @CollectionTable(name = "board_likes", joinColumns = @JoinColumn(name = "brdNo"))
     @Column(name = "mem_email")
     private Set<String> likedByMembers = new HashSet<>(); // 좋아요를 누른 사용자 이메일 저장
 	

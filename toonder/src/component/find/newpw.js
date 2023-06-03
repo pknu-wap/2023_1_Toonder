@@ -60,7 +60,7 @@ function Newpw() {
     setPw(e.target.value);
 
     const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(pw)) {
+    if (regex.test(e.target.value)) {
       setIsPwValid(true);
     } else {
       setIsPwValid(false);
