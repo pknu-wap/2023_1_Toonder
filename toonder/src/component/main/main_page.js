@@ -140,7 +140,7 @@ function Mainpage(props) {
 
                           <p
                             className="webtoonTitle"
-                            style={{ fontSize: '22px', color: 'white' }}
+                            style={{ fontSize: '18px', color: 'white' }}
                           >
                             {item.title}
                           </p>
