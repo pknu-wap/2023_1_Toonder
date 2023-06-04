@@ -13,6 +13,7 @@ import MainWebtoonInfo from './component/main/mainWebtoonInfo';
 import Mypage from './component/main/mypage';
 import Freeboard from './component/freeboard/freeboard';
 import InfoC from './component/main/infoChange';
+import Write from './component/freeboard/write';
 import axios from 'axios';
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/infochange" element={<InfoC />} />
           <Route path="/newpw" element={<Newpw />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/write" element={<Write />} />
         </Routes>
       </BrowserRouter>
     </div>
