@@ -18,12 +18,6 @@ public class MemberPhotoUpdateController {
     @RequestMapping(value = "/photo/update", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
     public Member updatePhoto(@RequestBody Map<String, String> memberEmailAndImageFile){
 
-        System.out.println("------------------------");
-        System.out.println("HI");
-        System.out.println(memberEmailAndImageFile.get("email"));
-        System.out.println(memberEmailAndImageFile.get("image").replace("data:",""));
-        System.out.println("------------------------");
-
         Member member = memberRepository.findById(memberEmailAndImageFile.get("email")).orElse(null);
         member.setMem_photo(memberEmailAndImageFile.get("image").replace("data:",""));
 
