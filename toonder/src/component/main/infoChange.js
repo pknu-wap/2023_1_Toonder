@@ -11,7 +11,6 @@ function InfoC() {
     document.title = 'Toonder 정보변경';
   }, []); //페이지 타이틀
 
-  const defaultTags = ['액션', '코믹', '드라마']; // **************************백엔드에서 가져올 태그 배열예시****************************
   const [firstName, setFirstName] = useState(''); //이름 값
   const [lastName, setLastName] = useState(''); //성씨 값
   const [pw, setPw] = useState(''); //비밀번호 값
@@ -20,32 +19,46 @@ function InfoC() {
   const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
   const navigate = useNavigate();
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
-  const [selectedHashtags, setSelectedHashtags] = useState(defaultTags);
+  const [selectedHashtags, setSelectedHashtags] = useState('');
+
+  useEffect(() => {
+    const storedHashtags = localStorage.getItem('loggedUserHashTag');
+    if (storedHashtags) {
+      const tags = storedHashtags.split(' ').map((tag) => tag.replace('#', ''));
+      setSelectedHashtags(tags);
+    }
+  }, []); //사용자 해시태그 정보 가져옴
 
   const handleSubmit = async (e) => {
-    const hashtag = selectedHashtags.join(' '); //공백으로 구분되는 문자열로 저장
-    axios
-      .post('api/member/insert', {
-        mem_name: firstName + lastName,
-        mem_hashtag: hashtag,
-        /*****************************백엔드로 넘겨주어야할 것들*********************************************/
-      })
-      .catch(function () {
-        console.log('Error for sending user data to Spring - creating member');
-      });
-
     e.preventDefault();
 
-    const { data, error } = await supabase.auth.updateUser({
-      password: pw,
-    });
+    const hashtag = '#' + selectedHashtags.join(' #');
+    const email = sessionStorage.getItem('loggedUserEmail');
 
-    console.log(data.user);
-    if (error) {
-      alert(error);
-    } else {
-      alert('회원정보가 변경되었습니다.');
-      navigate(-1);
+    try {
+      await supabase.auth.updateUser({ password: pw });
+
+      axios
+        .post('toonder/update', {
+          mem_email: email,
+          mem_name: lastName + firstName,
+          mem_hashtag: hashtag,
+        })
+        .then(() => {
+          localStorage.removeItem('loggedUserName');
+          localStorage.removeItem('loggedUserHashTag');
+          alert('회원정보가 변경되었습니다.');
+          navigate(-1);
+        })
+        .catch(() => {
+          console.log(
+            'Error for sending user data to Spring - creating member'
+          );
+          alert('회원정보 변경 중에 오류가 발생했습니다.');
+        });
+    } catch (error) {
+      console.error(error);
+      alert('회원정보 변경 중에 오류가 발생했습니다.');
     }
   };
 
@@ -155,12 +168,14 @@ function InfoC() {
             onChange={handleFirstName}
             id="firstName"
             placeholder="이름"
+            autoComplete="off"
           />
           <input
             type="text"
             onChange={handleLastName}
             id="lastName"
             placeholder="성"
+            autoComplete="off"
           />
         </div>
 
@@ -182,6 +197,7 @@ function InfoC() {
             onChange={handlePW}
             value={pw}
             placeholder="비밀번호"
+            autoComplete="off"
           />
           {!isPwCheck && pw.length > 0 && (
             <div
@@ -202,24 +218,28 @@ function InfoC() {
             onChange={handleCheckPw}
             value={pwc}
             placeholder="비밀번호 확인"
+            autoComplete="off"
           />
         </div>
 
         {!selectedHashtags.length > 0 && (
-          <div  style={{
-            position: 'absolute'
-          }}>
           <div
             style={{
-              position: 'relative',
-              color: 'white',
-              fontSize: '15px',
-              left: '70%',
-                top: '-50px',
+              position: 'absolute',
             }}
           >
-            좋아하는 만화 장르를 1개 이상 선택
-          </div></div>
+            <div
+              style={{
+                position: 'relative',
+                color: 'white',
+                fontSize: '15px',
+                left: '70%',
+                top: '-50px',
+              }}
+            >
+              좋아하는 만화 장르를 1개 이상 선택
+            </div>
+          </div>
         )}
 
         <CheckboxContainer>
