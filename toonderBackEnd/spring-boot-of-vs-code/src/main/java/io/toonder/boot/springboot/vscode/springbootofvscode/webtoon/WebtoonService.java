@@ -52,7 +52,7 @@ public class WebtoonService {
 
 		int totalObjectCount = findAllCount(); // 전체 글 수 조회
 
-		PagingUtil pu = new PagingUtil(p_num, 8, 10);
+		PagingUtil pu = new PagingUtil(p_num, 64, 10);
 		List<Webtoon> webtoonList = webtoonRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
 		pu.setObjectCountTotal(totalObjectCount);
 		pu.setCalcForPaging();
@@ -86,7 +86,7 @@ public class WebtoonService {
     public ResponseEntity<Map<String, Object>> searchWebtoonsByTitle(String keyword, int currentPageNum) {
         int totalCount = webtoonRepository.countByTitleContaining(keyword);
 
-        PagingUtil pagingUtil = new PagingUtil(currentPageNum, 8, 10, totalCount);
+        PagingUtil pagingUtil = new PagingUtil(currentPageNum, 64, 10, totalCount);
         pagingUtil.setCalcForPaging();
 
         PageRequest pageable = PageRequest.of(pagingUtil.getCurrentPage() - 1, pagingUtil.getObjectCountPerPage());
