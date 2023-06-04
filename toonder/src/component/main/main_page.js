@@ -11,9 +11,6 @@ import { FaSpinner } from 'react-icons/fa'; // 로딩 아이콘 추가
 
 function Mainpage(props) {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState(
-    localStorage.getItem('loggedUserName') || '지금 로그인 하세요'
-  );
   const [resdata, setResData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

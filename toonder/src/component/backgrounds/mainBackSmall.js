@@ -8,9 +8,11 @@ import supabase from '../supabase';
 function MainBackSmall(props) {
   const navigate = useNavigate();
   const [loggedUserName, setLoggedUserName] = useState(
-    localStorage.getItem('loggedUserName') || '지금 로그인 하세요'
+    localStorage.getItem('loggedUserName')
   );
-  const [loggedUserImage, setLoggedUserImage] = useState(localStorage.getItem('loggedUserPhoto') || ex1);
+  const [loggedUserImage, setLoggedUserImage] = useState(
+    localStorage.getItem('loggedUserPhoto') || ex1
+  );
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -43,7 +45,7 @@ function MainBackSmall(props) {
           .catch((error) => console.log(error));
       }
 
-      if (!localStorage.getItem('loggedUserPhoto')){
+      if (!localStorage.getItem('loggedUserPhoto')) {
         axios
           .post('toonder/photo', requestData)
           .then((loggedUserData) => {
@@ -56,7 +58,6 @@ function MainBackSmall(props) {
           })
           .catch((error) => console.log(error));
       }
-
     };
 
     fetchData();
@@ -106,7 +107,11 @@ function MainBackSmall(props) {
         </button>
         <button
           id="logOut"
-          onClick={() => {
+          onClick={async () => {
+            localStorage.removeItem('loggedUserPhoto');
+            localStorage.removeItem('loggedUserName');
+            localStorage.removeItem('loggedUserHashTag');
+            await supabase.auth.signOut();
             navigate('/');
           }}
         >
@@ -126,7 +131,9 @@ function MainBackSmall(props) {
 }
 
 function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
-  const [selectedImage, setSelectedImage] = useState(localStorage.getItem('loggedUserPhoto') || ex1);
+  const [selectedImage, setSelectedImage] = useState(
+    localStorage.getItem('loggedUserPhoto') || ex1
+  );
   const [newImage, setNewImage] = useState(null);
 
   const closeModal = () => {
@@ -147,20 +154,20 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
     }
   };
 
-  const handleSave = async() => {
+  const handleSave = async () => {
     if (newImage) {
       console.log('새 이미지 저장:', newImage);
 
       const { data } = await supabase.auth.getSession();
       axios
         .post('toonder/photo/update', {
-          email : data.session.user.email,
-          image : selectedImage
+          email: data.session.user.email,
+          image: selectedImage,
         })
-        .then(res => console.log(res))
-        .catch(error => console.log(error))
-      
-      localStorage.setItem('loggedUserPhoto', selectedImage)
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
+
+      localStorage.setItem('loggedUserPhoto', selectedImage);
       setLoggedUserImage(selectedImage);
     }
 
