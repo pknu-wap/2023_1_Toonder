@@ -122,7 +122,7 @@ function Mainpage(props) {
                         <button
                           className="refresh"
                           onClick={() => {
-                            navigate('/mainwebtooninfo');
+                            navigate('/mainwebtooninfo', {state : {mastrId : item.mastrId}});
                           }}
                         >
                           <div className="imageContainer">
