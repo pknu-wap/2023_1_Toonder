@@ -233,7 +233,7 @@ main {
 .mainWebtoonList {
   position: absolute;
   width: 953px;
-  height: 715px;
+  height: '100%';
   background-color: rgb(255, 147, 147);
   border-radius: 10px;
   color: white;
