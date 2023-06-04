@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./mainPage.css";
 import MainBackgorund from '../backgrounds/mainBackground';
 import ex1 from "../../images/ex1.png"
@@ -7,7 +7,12 @@ import MainBackSmall from '../backgrounds/mainBackSmall';
 
 
 function MainWebtoonInfo() {
-  const navigate = useNavigate();
+  
+  const {state} = useLocation();
+  const {mastrId} = state;
+  useEffect( () => {
+    console.log(mastrId)
+  },[])
 
   return (
     <MainBackgorund>
