@@ -126,7 +126,7 @@ function MainBackSmall(props) {
 }
 
 function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
-  const [selectedImage, setSelectedImage] = useState(ex1);
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem('loggedUserPhoto') || ex1);
   const [newImage, setNewImage] = useState(null);
 
   const closeModal = () => {
