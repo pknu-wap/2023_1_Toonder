@@ -10,7 +10,7 @@ function MainBackSmall(props) {
   const [loggedUserName, setLoggedUserName] = useState(
     localStorage.getItem('loggedUserName') || '지금 로그인 하세요'
   );
-  const [loggedUserImage, setLoggedUserImage] = useState(ex1);
+  const [loggedUserImage, setLoggedUserImage] = useState(localStorage.getItem('loggedUserPhoto') || ex1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -42,6 +42,21 @@ function MainBackSmall(props) {
           })
           .catch((error) => console.log(error));
       }
+
+      if (!localStorage.getItem('loggedUserPhoto')){
+        axios
+          .post('toonder/photo', requestData)
+          .then((loggedUserData) => {
+            console.log(loggedUserData.data.mem_photo);
+            setLoggedUserImage(loggedUserData.data.mem_photo);
+            localStorage.setItem(
+              'loggedUserPhoto',
+              loggedUserData.data.mem_photo
+            );
+          })
+          .catch((error) => console.log(error));
+      }
+
     };
 
     fetchData();
