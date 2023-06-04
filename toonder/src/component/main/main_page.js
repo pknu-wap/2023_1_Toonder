@@ -14,12 +14,39 @@ function Mainpage(props) {
   const [resdata, setResData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      const session = data.session;
+
+      if (session === null) {
+        alert('로그인을 먼저 해주세요.');
+        navigate('/');
+      } else {
+        const email = session.user.email;
+        const requestData = {
+          email: email,
+        };
+
+        axios
+          .post('toonder/recommand', requestData)
+          .then((res) => {
+            console.log(res.data);
+            setResData(res.data);
+            setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleRecommendation = () => {
     setIsLoading(true); // 새로운 추천 웹툰 이미지를 가져오기 전에 로딩 상태를 true로 설정
 
     const fetchData = async () => {
-      const { data } = await supabase.auth.getSession();
-      const email = data.session.user.email;
+      const email = sessionStorage.getItem('loggedUserEmail');
       const requestData = {
         email: email,
       };
@@ -36,27 +63,6 @@ function Mainpage(props) {
 
     fetchData();
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await supabase.auth.getSession();
-      const email = data.session.user.email;
-      const requestData = {
-        email: email,
-      };
-
-      axios
-        .post('toonder/recommand', requestData)
-        .then((res) => {
-          console.log(res.data);
-          setResData(res.data);
-          setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
-        })
-        .catch((error) => console.log(error));
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <MainBackgorund>
