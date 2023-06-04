@@ -147,9 +147,20 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async() => {
     if (newImage) {
       console.log('새 이미지 저장:', newImage);
+
+      const { data } = await supabase.auth.getSession();
+      axios
+        .post('toonder/photo/update', {
+          email : data.session.user.email,
+          image : selectedImage
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+      
+      localStorage.setItem('loggedUserPhoto', selectedImage)
       setLoggedUserImage(selectedImage);
     }
 
