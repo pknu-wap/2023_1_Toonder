@@ -73,7 +73,6 @@ function MainBackSmall(props) {
         <button
           id="changeInfo"
           onClick={() => {
-            localStorage.removeItem('loggedUserName');
             navigate('/infochange');
           }}
         >
@@ -111,6 +110,8 @@ function MainBackSmall(props) {
             localStorage.removeItem('loggedUserPhoto');
             localStorage.removeItem('loggedUserName');
             localStorage.removeItem('loggedUserHashTag');
+            sessionStorage.removeItem('loggedUserEmail'); // 세션 스토리지에서 loggedUserEmail 제거
+
             await supabase.auth.signOut();
             navigate('/');
           }}

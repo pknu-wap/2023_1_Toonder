@@ -297,20 +297,22 @@ function Join() {
             />
           </div>
           {!selectedHashtags.length > 0 && (
-            <div  style={{
-              position: 'absolute'
-            }}>
             <div
               style={{
-                position: 'relative',
-                color: 'white',
-                fontSize: '15px',
-                left: '70%',
-                top: '-10px',
+                position: 'absolute',
               }}
             >
-              좋아하는 만화 장르를 1개 이상 선택
-            </div>
+              <div
+                style={{
+                  position: 'relative',
+                  color: 'white',
+                  fontSize: '15px',
+                  left: '70%',
+                  top: '-10px',
+                }}
+              >
+                좋아하는 만화 장르를 1개 이상 선택
+              </div>
             </div>
           )}
 
