@@ -1,112 +1,142 @@
 /*Freeboard*/
-.mainboard , .writeboard {
-    width: 1224px;
-    height: 609px;
-    background-color: rgb(255, 147, 147);
-    border-radius: 10px;
-    margin-top: 50px;
+.mainboard,
+.writeboard {
+  width: 1224px;
+  height: 609px;
+  background-color: rgb(255, 147, 147);
+  border-radius: 10px;
+  margin-top: 50px;
 }
-.mainboard h2 , .writeboard h2 {
-    padding: 17px 58px;
-    color: white;
-    margin-left: 8px;
-
+.mainboard h2,
+.writeboard h2 {
+  padding: 8px 58px;
+  color: white;
+  margin-left: 8px;
 }
-.mainboard li{
-    width: 1094px;
-    height:64px;
-    margin: 18px auto;
-    background-color: white;
-    color:rgb(255, 147, 147);
-    border-radius: 10px;
+.mainboard li {
+  width: 1094px;
+  height: 64px;
+  margin: 28px auto;
+  margin-top: 25px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
 }
 
 .mainboard a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-.subbuttons{
-    display: flex;
-    justify-content: space-between;
+.subbuttons {
+  display: flex;
+  justify-content: space-between;
 }
 
-#freewrite , #save{
-    background-color: rgb(255, 147, 147);
-    color: white;
-    width: 116px;
-    height: 44px;
-    font-size: 30px;
-    float: right;
-    margin-top: 19px;
+#freewrite,
+#save {
+  background-color: rgb(255, 147, 147);
+  color: white;
+  width: 116px;
+  height: 44px;
+  font-size: 30px;
+  float: right;
+  margin-top: 19px;
 }
 
 /* Pagination links */
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin: auto;
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 .pagination a {
-    color: grey;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
+  color: grey;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
-  /* Style the active/current link */
+/* Style the active/current link */
 .pagination a.active {
-    background-color: rgb(255, 147, 147);
-    color: white;
+  background-color: rgb(255, 147, 147);
+  color: white;
 }
 
-  /* Add a grey background color on mouse-over */
+/* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {
-    background-color: #ddd;
-    color:white;
+  background-color: #ddd;
+  color: white;
 }
 
 /*Freeboard writing*/
 
 .title {
-    width: 1062px;
-    height: 25px;
-    padding: 16px;
-    margin-left: 66px;
+  width: 1062px;
+  height: 25px;
+  padding: 16px;
+  margin-left: 66px;
 }
 
-.writeboard textarea{
-    width: 1062px;
-    height: 452px;
-    padding: 16px;
-    margin-left: 66px;
-    margin-top: 19px;
-    resize: none;
-    border: none;
-    border-radius: 10px;
+.writeboard textarea {
+  width: 1062px;
+  height: 452px;
+  padding: 16px;
+  margin-left: 66px;
+  margin-top: 19px;
+  resize: none;
+  border: none;
+  border-radius: 10px;
 }
 .writeboard {
-    height: 689px;
+  height: 689px;
 }
 
 /*Freeboard writing*/
-#postinfo,#postcontent,#repl{
-    width:1062px;
-    background-color: white;
-    color: rgb(255, 147, 147);
-    border-radius: 10px;
-    padding:16px;
-    margin-bottom: 18px;
-    margin-left: 66px;
+#postinfo,
+#postcontent,
+#repl {
+  width: 1062px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  margin-left: 66px;
 }
-#postinfo{
-    height:74px;
+#postinfo {
+  height: 74px;
 }
-#postcontent{
-    height:249px;
+#postcontent {
+  height: 249px;
 }
-#repl{
-    height:120px;
+#repl {
+  height: 120px;
+}
 
+/* freeboard.css */
+
+.link-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.link-wrapper a {
+  color: rgb(255, 147, 147);
+  text-decoration: none;
+  margin-top: 2%;
+  margin-left: 2%;
+  font-size: 20px;
+}
+.meta {
+  margin-top: 23px;
+}
+.link-wrapper span {
+  color: rgb(255, 147, 147);
+  font-size: 15px;
+  margin-right: 10px;
 }

@@ -33,7 +33,7 @@ function Write() {
     };
 
     try {
-      const response = await axios.post('/toonder/board', requestData);
+      await axios.post('/toonder/board', requestData);
       alert('글이 저장되었습니다.');
       navigate(-1);
     } catch (error) {
