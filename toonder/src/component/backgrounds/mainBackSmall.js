@@ -111,7 +111,7 @@ function MainBackSmall(props) {
             localStorage.removeItem('loggedUserName');
             localStorage.removeItem('loggedUserHashTag');
             sessionStorage.removeItem('loggedUserEmail'); // 세션 스토리지에서 loggedUserEmail 제거
-
+            alert('로그아웃 되었습니다.');
             await supabase.auth.signOut();
             navigate('/');
           }}

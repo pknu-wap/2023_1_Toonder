@@ -171,7 +171,7 @@ function InfoC() {
             display: 'flex',
             alignItems: 'center',
             position: 'absolute',
-            top: '30px',
+            top: '390px',
           }}
         >
           <FaSpinner className={styles.loadingIcon} />
