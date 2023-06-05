@@ -3,21 +3,20 @@ import { useNavigate, Link } from 'react-router-dom';
 import './freeboard.css';
 import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
+import { FaSpinner } from 'react-icons/fa';
 
 function Freeboard() {
   const navigate = useNavigate();
-  const email = sessionStorage.getItem('loggedUserEmail');
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/toonder/board?p_num=${pageNum}`);
         setPosts(response.data);
-        console.log(response.data);
-
         let total = pageNum;
         let hasMorePages = true;
 
@@ -31,6 +30,7 @@ function Freeboard() {
         }
 
         setTotalPages(total);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -87,49 +87,73 @@ function Freeboard() {
     <MainBackgorund>
       <div className="mainboard">
         <br />
-        <h2>자유게시판</h2>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.brdNo}>
-              <div className="link-wrapper">
-                <Link to={`/postview/${post.brdNo}`}> {post.brdTitle} </Link>
-                <div className="meta">
-                  <span>{post.mem_name}</span>
-                  <span>|</span>
-                  <span>{post.brdViewCount}</span>
-                  <span>|</span>
-                  <span>{post.brdRegDate.split('T')[0]}</span>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {loading ? (
+          <div
+            style={{
+              fontSize: '120px',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              top: '30%',
+            }}
+          >
+            <FaSpinner className="loadingIcon" />
+          </div>
+        ) : (
+          <>
+            <h2>자유게시판</h2>
+            <ul>
+              {posts.map((post) => (
+                <li key={post.brdNo}>
+                  <div className="link-wrapper">
+                    <a
+                      onClick={() => {
+                        navigate('/postview', {
+                          state: { brdNo: post.brdNo },
+                        });
+                      }}
+                    >
+                      {post.brdTitle}
+                    </a>
+                    <div className="meta">
+                      <span>{post.mem_name}</span>
+                      <span>|</span>
+                      <span>{post.brdViewCount}</span>
+                      <span>|</span>
+                      <span>{post.brdRegDate.split('T')[0]}</span>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button
+              id="freewrite"
+              onClick={() => {
+                navigate('/write');
+              }}
+            >
+              글쓰기
+            </button>
+          </>
+        )}
       </div>
-      <div className="subbuttons">
-        <div className="pagination">
-          <a href="#" onClick={goToFirstPage}>
-            &lt;&lt;
-          </a>
-          <a href="#" onClick={goToPrevPage}>
-            &lt;
-          </a>
-          {paginationButtons}
-          <a href="#" onClick={goToNextPage}>
-            &gt;
-          </a>
-          <a href="#" onClick={goToLastPage}>
-            &gt;&gt;
-          </a>
-        </div>
+      <div className="pagination">
+        <a href="#" onClick={goToFirstPage}>
+          &lt;&lt;
+        </a>
+        <a href="#" onClick={goToPrevPage}>
+          &lt;
+        </a>
+        {paginationButtons}
+        <a href="#" onClick={goToNextPage}>
+          &gt;
+        </a>
+        <a href="#" onClick={goToLastPage}>
+          &gt;&gt;
+        </a>
       </div>
-      <button
-        id="freewrite"
-        onClick={() => {
-          navigate('/write');
-        }}
-      >
-        글쓰기
-      </button>
     </MainBackgorund>
   );
 }
