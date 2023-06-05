@@ -3,6 +3,7 @@ import IDBackground from '../backgrounds/ID_background';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import styles from './findpw.module.css';
+import { FaSpinner } from 'react-icons/fa';
 
 function Findpw() {
   useEffect(() => {
@@ -72,7 +73,17 @@ function Findpw() {
     <IDBackground text="Find PW" backgroundSize="600px 500px">
       <div className={styles.findPw}>
         {loading ? (
-          <div className={styles.loading}>찾는 중 입니다...</div>
+          <div
+            style={{
+              fontSize: '80px',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              position: 'absolute',
+            }}
+          >
+            <FaSpinner className={styles.loadingIcon} />
+          </div>
         ) : message ? (
           <div className={styles.afterFind}>
             <h1>{message}</h1>
