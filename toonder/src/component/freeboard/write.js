@@ -45,7 +45,9 @@ function Write() {
   return (
     <MainBackgorund>
       <div className="writeboard">
+        <br />
         <h2>글쓰기</h2>
+        <br />
         <input
           className="title"
           type="text"
@@ -59,7 +61,15 @@ function Write() {
           onChange={handleContentChange}
         ></textarea>
       </div>
-      <button id="save" type="submit" onClick={handleSubmit}>
+      <button
+        id="save"
+        style={{
+          fontSize: '20px',
+          height: '40px',
+        }}
+        type="submit"
+        onClick={handleSubmit}
+      >
         저장
       </button>
     </MainBackgorund>
