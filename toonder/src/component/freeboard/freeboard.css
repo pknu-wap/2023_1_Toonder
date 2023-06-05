@@ -27,12 +27,6 @@
   text-decoration: none;
 }
 
-.subbuttons {
-  display: flex;
-  margin-top: 15px;
-  justify-content: space-between;
-}
-
 #freewrite,
 #save {
   background-color: rgb(255, 147, 147);
@@ -48,7 +42,7 @@
 .pagination {
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 5px;
 }
 
 .pagination a {
@@ -146,6 +140,29 @@
   font-size: 20px;
   position: relative;
   height: 40px;
-  margin-top: -40px;
+  left: -65px;
+  width: 80px;
+  height: 35px;
+  margin-top: -535px;
   margin-bottom: 20px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+}
+button:hover {
+  cursor: pointer;
+}
+a:hover {
+  cursor: pointer;
+}
+loadingIcon {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

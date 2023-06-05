@@ -69,7 +69,7 @@ function MainBackSmall(props) {
         <div onClick={openModal}>
           <img id="infoimg" src={loggedUserImage} alt="image error" />
         </div>
-        <h2>{loggedUserName}</h2>
+        <h2 style={{ color: 'white' }}>{loggedUserName}</h2>
         <button
           id="changeInfo"
           onClick={() => {

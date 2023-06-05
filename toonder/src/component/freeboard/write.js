@@ -61,17 +61,30 @@ function Write() {
           onChange={handleContentChange}
         ></textarea>
       </div>
-      <button
-        id="save"
-        style={{
-          fontSize: '20px',
-          height: '40px',
-        }}
-        type="submit"
-        onClick={handleSubmit}
-      >
-        저장
-      </button>
+      <div style={{ position: 'relative' }}>
+        <button
+          id="save"
+          style={{
+            position: 'absolute',
+            fontSize: '20px',
+            height: '36px',
+            color: 'rgb(255, 147, 147)',
+            display: 'flex',
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '22px',
+            width: '80px',
+            borderRadius: '10px',
+            top: '-690px',
+            right: '65px',
+          }}
+          type="submit"
+          onClick={handleSubmit}
+        >
+          저장
+        </button>
+      </div>
     </MainBackgorund>
   );
 }
