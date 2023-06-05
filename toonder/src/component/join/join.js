@@ -5,6 +5,7 @@ import styles from './join.module.css';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FaSpinner } from 'react-icons/fa';
 
 const CheckboxContainer = styled.div`
   display: flex;
@@ -218,7 +219,18 @@ function Join() {
   return (
     <Background text="Join" backgroundSize="600px 500px">
       {loading ? (
-        <div className={styles.Loading}>잠시만 기다려주세요...</div>
+        <div
+          style={{
+            fontSize: '120px',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            top: '385px',
+            position: 'absolute',
+          }}
+        >
+          <FaSpinner className={styles.loadingIcon} />
+        </div>
       ) : (
         <form onSubmit={handleSubmit}>
           <div className={styles.name}>
