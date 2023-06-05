@@ -29,6 +29,7 @@
 
 .subbuttons {
   display: flex;
+  margin-top: 15px;
   justify-content: space-between;
 }
 
@@ -139,4 +140,12 @@
   color: rgb(255, 147, 147);
   font-size: 15px;
   margin-right: 10px;
+}
+
+#freewrite {
+  font-size: 20px;
+  position: relative;
+  height: 40px;
+  margin-top: -40px;
+  margin-bottom: 20px;
 }

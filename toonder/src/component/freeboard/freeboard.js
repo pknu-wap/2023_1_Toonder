@@ -6,23 +6,82 @@ import axios from 'axios';
 
 function Freeboard() {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState('지금 로그인하세요!');
   const email = sessionStorage.getItem('loggedUserEmail');
   const [posts, setPosts] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/toonder/board');
+        const response = await axios.get(`/toonder/board?p_num=${pageNum}`);
         setPosts(response.data);
         console.log(response.data);
+
+        let total = pageNum;
+        let hasMorePages = true;
+
+        while (hasMorePages) {
+          const response = await axios.get(`/toonder/board?p_num=${total + 1}`);
+          if (response.data.length === 0) {
+            hasMorePages = false;
+          } else {
+            total++;
+          }
+        }
+
+        setTotalPages(total);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [pageNum]);
+
+  const goToPage = (page) => {
+    setPageNum(page);
+  };
+
+  const goToPrevPage = () => {
+    if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (pageNum < totalPages) {
+      setPageNum(pageNum + 1);
+    }
+  };
+
+  const goToFirstPage = () => {
+    setPageNum(1);
+  };
+
+  const goToLastPage = () => {
+    setPageNum(totalPages);
+  };
+
+  const paginationButtons = [];
+  const maxPageButtons = Math.min(totalPages, 5);
+
+  let startPage = Math.max(1, pageNum - 2);
+  if (startPage + maxPageButtons > totalPages) {
+    startPage = totalPages - maxPageButtons + 1;
+  }
+
+  for (let i = startPage; i < startPage + maxPageButtons; i++) {
+    paginationButtons.push(
+      <a
+        href="#"
+        className={pageNum === i ? 'active' : ''}
+        onClick={() => goToPage(i)}
+      >
+        {i}
+      </a>
+    );
+  }
 
   return (
     <MainBackgorund>
@@ -48,28 +107,29 @@ function Freeboard() {
       </div>
       <div className="subbuttons">
         <div className="pagination">
-          <a href="#">&lt;&lt;</a>
-          <a href="#">&lt;</a>
-          <a className="active" href="#">
-            1
+          <a href="#" onClick={goToFirstPage}>
+            &lt;&lt;
           </a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">&gt;</a>
-          <a href="#">&gt;&gt;</a>
+          <a href="#" onClick={goToPrevPage}>
+            &lt;
+          </a>
+          {paginationButtons}
+          <a href="#" onClick={goToNextPage}>
+            &gt;
+          </a>
+          <a href="#" onClick={goToLastPage}>
+            &gt;&gt;
+          </a>
         </div>
-        <button
-          id="freewrite"
-          onClick={() => {
-            navigate('/write');
-          }}
-        >
-          글쓰기
-        </button>
       </div>
+      <button
+        id="freewrite"
+        onClick={() => {
+          navigate('/write');
+        }}
+      >
+        글쓰기
+      </button>
     </MainBackgorund>
   );
 }
