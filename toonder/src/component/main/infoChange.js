@@ -5,6 +5,7 @@ import styles from './infoChange.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FaSpinner } from 'react-icons/fa'; // 로딩 아이콘 추가
 
 function InfoC() {
   useEffect(() => {
@@ -20,7 +21,7 @@ function InfoC() {
   const navigate = useNavigate();
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
   const [selectedHashtags, setSelectedHashtags] = useState('');
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const storedHashtags = localStorage.getItem('loggedUserHashTag');
     if (storedHashtags) {
@@ -31,7 +32,7 @@ function InfoC() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const hashtag = '#' + selectedHashtags.join(' #');
     const email = sessionStorage.getItem('loggedUserEmail');
 
@@ -47,6 +48,7 @@ function InfoC() {
         .then(() => {
           localStorage.removeItem('loggedUserName');
           localStorage.removeItem('loggedUserHashTag');
+          setLoading(false);
           alert('회원정보가 변경되었습니다.');
           navigate(-1);
         })
@@ -161,106 +163,121 @@ function InfoC() {
 
   return (
     <Background text="Info Change" backgroundSize="600px 500px">
-      <form onSubmit={handleSubmit}>
-        <div className={styles.name}>
-          <input
-            type="text"
-            onChange={handleFirstName}
-            id="firstName"
-            placeholder="이름"
-            autoComplete="off"
-          />
-          <input
-            type="text"
-            onChange={handleLastName}
-            id="lastName"
-            placeholder="성"
-            autoComplete="off"
-          />
+      {loading ? ( // 로딩 중일 때의 화면
+        <div
+          style={{
+            fontSize: '100px',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '30px',
+          }}
+        >
+          <FaSpinner className={styles.loadingIcon} />
         </div>
-
-        <div className={styles.password}>
-          {!isPwValid && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '-20px',
-                color: 'white',
-                fontSize: '15px',
-              }}
-            >
-              영문, 숫자 포함 8~10자 이상 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handlePW}
-            value={pw}
-            placeholder="비밀번호"
-            autoComplete="off"
-          />
-          {!isPwCheck && pw.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '-20px',
-                color: 'white',
-                fontSize: '15px',
-                left: '270px',
-                fontWeight: 'normal',
-              }}
-            >
-              비밀번호를 한번 더 정확히 입력해주세요
-            </div>
-          )}
-          <input
-            type="password"
-            onChange={handleCheckPw}
-            value={pwc}
-            placeholder="비밀번호 확인"
-            autoComplete="off"
-          />
-        </div>
-
-        {!selectedHashtags.length > 0 && (
-          <div
-            style={{
-              position: 'absolute',
-            }}
-          >
-            <div
-              style={{
-                position: 'relative',
-                color: 'white',
-                fontSize: '15px',
-                left: '70%',
-                top: '-50px',
-              }}
-            >
-              좋아하는 만화 장르를 1개 이상 선택
-            </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className={styles.name}>
+            <input
+              type="text"
+              onChange={handleFirstName}
+              id="firstName"
+              placeholder="이름"
+              autoComplete="off"
+            />
+            <input
+              type="text"
+              onChange={handleLastName}
+              id="lastName"
+              placeholder="성"
+              autoComplete="off"
+            />
           </div>
-        )}
 
-        <CheckboxContainer>
-          {hashtagOptions.map((hashtag) => (
-            <CheckboxLabel key={hashtag}>
-              <CheckboxInput
-                type="checkbox"
-                value={hashtag}
-                onChange={handleCheckboxChange}
-                checked={selectedHashtags.includes(hashtag)}
-              />
-              {hashtag}
-            </CheckboxLabel>
-          ))}
-        </CheckboxContainer>
-        <div>
-          <button className={styles.submit} disabled={notAllow} type="submit">
-            <strong>Info Change</strong>
-          </button>
-        </div>
-      </form>
+          <div className={styles.password}>
+            {!isPwValid && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  color: 'white',
+                  fontSize: '15px',
+                }}
+              >
+                영문, 숫자 포함 8~10자 이상 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handlePW}
+              value={pw}
+              placeholder="비밀번호"
+              autoComplete="off"
+            />
+            {!isPwCheck && pw.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  color: 'white',
+                  fontSize: '15px',
+                  left: '270px',
+                  fontWeight: 'normal',
+                }}
+              >
+                비밀번호를 한번 더 정확히 입력해주세요
+              </div>
+            )}
+            <input
+              type="password"
+              onChange={handleCheckPw}
+              value={pwc}
+              placeholder="비밀번호 확인"
+              autoComplete="off"
+            />
+          </div>
+
+          {!selectedHashtags.length > 0 && (
+            <div
+              style={{
+                position: 'absolute',
+              }}
+            >
+              <div
+                style={{
+                  position: 'relative',
+                  color: 'white',
+                  fontSize: '15px',
+                  left: '70%',
+                  top: '-50px',
+                }}
+              >
+                좋아하는 만화 장르를 1개 이상 선택
+              </div>
+            </div>
+          )}
+
+          <CheckboxContainer>
+            {hashtagOptions.map((hashtag) => (
+              <CheckboxLabel key={hashtag}>
+                <CheckboxInput
+                  type="checkbox"
+                  value={hashtag}
+                  onChange={handleCheckboxChange}
+                  checked={selectedHashtags.includes(hashtag)}
+                />
+                {hashtag}
+              </CheckboxLabel>
+            ))}
+          </CheckboxContainer>
+          <div>
+            <button className={styles.submit} disabled={notAllow} type="submit">
+              <strong>Info Change</strong>
+            </button>
+          </div>
+        </form>
+      )}
     </Background>
   );
 }
