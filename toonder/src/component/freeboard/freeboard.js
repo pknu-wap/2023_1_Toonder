@@ -15,6 +15,7 @@ function Freeboard() {
       try {
         const response = await axios.get('/toonder/board');
         setPosts(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
