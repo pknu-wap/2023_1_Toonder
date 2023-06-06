@@ -6,7 +6,6 @@ import axios from 'axios';
 
 function MainBackgorund(props) {
   const navigate = useNavigate();
-  const [loggedUserName, setLoggedUserName] = useState('지금 로그인하세요!');
 
   return (
     <div className="mainPageBack">

@@ -49,6 +49,7 @@ function Write() {
         <h2>글쓰기</h2>
         <br />
         <input
+          style={{ fontSize: '20px' }}
           className="title"
           type="text"
           placeholder="제목을 작성해주세요"
@@ -56,6 +57,7 @@ function Write() {
           onChange={handleTitleChange}
         />
         <textarea
+          style={{ fontSize: '17px' }}
           placeholder="내용을 작성해주세요."
           value={content}
           onChange={handleContentChange}

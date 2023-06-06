@@ -1,4 +1,28 @@
 /*Freeboard*/
+.postboard {
+  width: 1224px;
+  height: 750px;
+  background-color: rgb(255, 147, 147);
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.postboard h2 {
+  padding: 8px 58px;
+  color: white;
+  margin-left: 8px;
+}
+#commentwrite {
+  width: 1062px;
+  height: 25px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  margin-left: 66px;
+}
+
 .mainboard,
 .writeboard {
   width: 1224px;
@@ -151,9 +175,7 @@
 button:hover {
   cursor: pointer;
 }
-a:hover {
-  cursor: pointer;
-}
+
 loadingIcon {
   animation: spin 1s infinite linear;
 }
@@ -165,4 +187,37 @@ loadingIcon {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* freeboard.css */
+#postcontent {
+  height: 249px;
+  overflow: auto;
+}
+
+#repl {
+  height: 120px;
+  overflow: auto;
+}
+
+/* Scrollbar Styles */
+#postcontent::-webkit-scrollbar,
+#repl::-webkit-scrollbar {
+  width: 6px;
+}
+
+#postcontent::-webkit-scrollbar-track,
+#repl::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#postcontent::-webkit-scrollbar-thumb,
+#repl::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+#postcontent::-webkit-scrollbar-thumb:hover,
+#repl::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
