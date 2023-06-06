@@ -28,6 +28,8 @@ function MainWebtoonInfo() {
   const {state} = useLocation();
   const {mastrId} = state;
 
+  const [userEmail, setUserEmail] = useState('')
+
   const [webtoonImage, setWebtoonImage] = useState(ex1);
   const [webtoonTitle, setWebtoonTitle] = useState("");
   const [webtoonOutline, setWebtoonOutline] = useState("");
@@ -48,7 +50,11 @@ function MainWebtoonInfo() {
 
   const [openModalForConfirm, setOpenModalForConfirm] = useState(false)
 
-  useEffect( () => {
+  useEffect( async() => {
+    const { data, error } = await supabase.auth.getSession();
+    const session = data.session;
+    setUserEmail(session.user.email)
+
     axios
       .get('toonder/webtoon/'+mastrId)
       .then(res => {
@@ -86,7 +92,6 @@ function MainWebtoonInfo() {
 
     }
 
-
     
     const handleReviewReg = () => {
       setOpenModalForRefRating(false) 
@@ -99,7 +104,7 @@ function MainWebtoonInfo() {
             revContent : inputReviewText,
             revRating : regRateValue,
             memName : localStorage.getItem('loggedUserName'),
-            mem_email : 'wkdghdwns19969@gmail.com',
+            mem_email : userEmail
           }
 
           console.log(sendingReviewData)
