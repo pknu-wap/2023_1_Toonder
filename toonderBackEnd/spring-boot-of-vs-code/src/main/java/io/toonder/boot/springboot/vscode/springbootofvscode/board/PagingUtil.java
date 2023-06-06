@@ -25,7 +25,7 @@ public class PagingUtil {
 	
 	/**
 	 * 생성자 1; 
-	 * 1) 현재 페이지 번호 : 1, 한 화면에 출력할 오브젝트 수: 10, 한 화면에 출력할 페이지 번호 수 : 10으로 기본설정한다.
+	 * 1) 현재 페이지 번호 : 1, 한 화면에 출력할 오브젝트 수: 10, 한 화면에 출력할 페이지 번호 수 : 10으로 기본설정
 	 * 2) setObjectStartAndEnd()를 호출하여 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정
 	 * 
 	 */
@@ -40,7 +40,7 @@ public class PagingUtil {
 	
 	/**
 	 * 생성자 2;
-	 * 1) '현재 페이지 번호'를 변수로 받는다. 한 화면에 출력할 오브젝트 수: 10, 한 화면에 출력할 페이지 번호 수 : 10으로 기본설정한다.
+	 * 1) '현재 페이지 번호'를 변수로 받는다. 한 화면에 출력할 오브젝트 수: 10, 한 화면에 출력할 페이지 번호 수 : 10으로 기본설정
 	 * 2) setObjectStartAndEnd()를 호출하여 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정
 	 * 
 	 * @param currentPageNum
@@ -70,28 +70,9 @@ public class PagingUtil {
 		setObjectStartAndEnd();
 	}
 
-	/**
-     * 생성자 4;
-     * 1) '현재 페이지 번호','한 화면에 출력할 오브젝트 수','한 화면에 출력할 페이지 번호 수', '전체 글 수'를 변수로 받는다.
-     * 2) setObjectStartAndEnd()를 호출하여 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정
-     * 3) setCalcForPaging()를 호출하여 페이지 계산을 수행
-     *
-     * @param currentPageNum
-     * @param objectCountPerPage
-     * @param pageNumCountPerPage
-     * @param objectCountTotal
-     */
-    public PagingUtil(int currentPageNum, int objectCountPerPage, int pageNumCountPerPage, int objectCountTotal) {
-        this.currentPageNum = (0 < currentPageNum) ? currentPageNum : 1;
-        this.objectCountPerPage = (0 < objectCountPerPage) ? objectCountPerPage : 10;
-        this.pageNumCountPerPage = (0 < pageNumCountPerPage) ? pageNumCountPerPage : 10;
-
-        setObjectStartAndEnd();
-        setCalcForPaging(objectCountTotal);
-    }
 
 	/**
-	 * 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정\
+	 * 한 화면에 표시되는 오브젝트의 시작과 마지막을 설정
 	 * 
 	 */
 	public void setObjectStartAndEnd() {

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.review.Review;
@@ -41,7 +42,7 @@ public class Webtoon {
     private String imageDownloadUrl; //이미지다운로드URL(표지)
 
     @OneToMany(mappedBy = "webtoon", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JsonManagedReference
-	@OrderBy("revNo asc") // 리뷰 정렬
+	@JsonBackReference
+    @OrderBy("revNo asc") // 리뷰 정렬
 	private List<Review> review;
 }
