@@ -1,0 +1,38 @@
+a:hover {
+  background-color: rgb(255, 147, 147);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.commentInput {
+  border-radius: 0px;
+  font-size: 18px;
+  width: 1000px;
+  height: 30px;
+  margin-top: -5px;
+}
+.editedCommentInput {
+  border-radius: 0px;
+  font-size: 16px;
+  color: rgb(255, 147, 147);
+  width: 300px;
+  height: 15px;
+  margin-top: -200px;
+}
+.commentSubmit {
+  position: relative;
+  top: -25px;
+  left: 1010px;
+  color: rgb(255, 147, 147);
+}
+
+.metaDataWrap {
+  position: relative;
+}
+
+.metaData {
+  position: absolute;
+  left: 500px;
+  top: -16px;
+}
