@@ -30,7 +30,7 @@ function MainWebtoonList() {
       const documentHeight = document.documentElement.scrollHeight;
       const scrolledToBottom =
         Math.ceil(window.scrollY + windowHeight) >= documentHeight;
-      
+
         //console.log(window.scrollY)
       if (window.scrollY === 0) {
         setShowNavigationToScrollTop(false)
@@ -44,7 +44,7 @@ function MainWebtoonList() {
         setCountPage(countPage+1)
       }
   }
-  
+
   useEffect(()=> {
     //console.log(showNavigationToScrollTop)
     if (!isLoading){
@@ -53,8 +53,8 @@ function MainWebtoonList() {
       window.removeEventListener("scroll", onScroll)
     };
     }
-    
-    
+
+
   })
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function MainWebtoonList() {
           setIsLoading(false)
           setWebToonList(webtoonList.concat(res.data))
         }
-        
+
       })
   },[countPage])
 
@@ -80,16 +80,7 @@ function MainWebtoonList() {
     return(
       <>
       {firstLoading ? (
-         <div
-         style={{
-           fontSize: '30px',
-           color: 'white',
-           display: 'flex',
-           justifyContent: 'center',
-           alignItems: 'center',
-           height: '60px',
-         }}
-       >
+         <div id='firstLoading'>
          <FaSpinner className="loadingIcon" />
        </div>
       ) : (
@@ -101,13 +92,13 @@ function MainWebtoonList() {
                 if (countForTrSplit === 1) {
                   trWebtoonList = []
                 }
-                
+
                 trWebtoonList.push(webtoonInfo)
                 if (countForTrSplit === 4){
                   countForTrSplit = 1;
                   return (
                     <tr>
-                      
+
                       <tr>
                       {
                         trWebtoonList.map(trWebtoonInfo => (
@@ -116,23 +107,22 @@ function MainWebtoonList() {
                               <td>
                                 <button onClick={() => {navigate('/mainwebtooninfo', {state : {mastrId : trWebtoonInfo.mastrId}});}}>
                                   <img src={trWebtoonInfo.imageDownloadUrl} alt="image error" />
-                                </button>  
+                                </button>
                               </td>
                             </tr>
                             <tr style={{height:'65px'}}>
                               <td style={{height:'75px'}}>
-                              <p className="webtoonTitle" 
-                                style={{ fontSize: '18px', color: 'white', textAlign: 'center'}}>
+                              <p className="webtoonTitle">
                                 {trWebtoonInfo.title}
                               </p>
                               </td>
                             </tr>
-                          </td>   
+                          </td>
                         ))
                       }
                       </tr>
                     </tr>
-                    
+
                   )
                 }
                 else {
@@ -141,35 +131,20 @@ function MainWebtoonList() {
               }
               )
           }
-          
+
       </table>
       {isLoading ? ( // 로딩 중일 때의 화면
-            <div
-              style={{
-                fontSize: '30px',
-                color: 'white',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '60px',
-              }}
-            >
+            <div id='isLoading'>
               <FaSpinner className="loadingIcon" />
             </div>
           ) : (
             <div></div>
           )
           }
-
         </>
       )
-        
-
       }
-      
-      
       </>
-      
     );
   }
 
@@ -180,19 +155,17 @@ function MainWebtoonList() {
         <div className='mainWebtoonList'>
             {listCreator()}
         </div>
-        
+
         {showNavigationToScrollTop ? (
-          <div 
-          onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' })}}
-          style={{width:'50px',height:'50px',
-          position:'fixed', bottom:'10%', right:'5%',opacity:'70%'}}>
+          <div id='showNavigationToScrollTop'
+          onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' })}}>
             <img src={toTop} alt="To Top" style={{height:'100%', wigth:'100%'}}/>
         </div>):
         null}
-        
-      
+
+
       </MainBackSmall>
-      
+
     </MainBackgorund>
     </>
   );

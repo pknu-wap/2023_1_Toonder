@@ -64,7 +64,7 @@ function MainBackSmall(props) {
   }, []);
 
   return (
-    <div className="mainBackSmall">
+    <div className="mainBackSmall"  setSearchTitle={props.setSearchTitle} handleSearch={props.handleSearch}>
       <div className="mainInfo">
         <div onClick={openModal}>
           <img id="infoimg" src={loggedUserImage} alt="image error" />
@@ -192,7 +192,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
   }, []);
 
   return (
-    <div className="profilechangeback">
+    <div className="profilechangeback" >
       <div className="profilechange" ref={modalRef}>
         <img id="changeinfoimg" src={selectedImage} alt="image error" />
         <div id="changeFile">
