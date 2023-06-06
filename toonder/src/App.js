@@ -12,6 +12,7 @@ import Mypage from './component/main/mypage';
 import Freeboard from './component/freeboard/freeboard';
 import InfoC from './component/main/infoChange';
 import Write from './component/freeboard/write';
+import PostView from './component/freeboard/postview';
 import axios from 'axios';
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/newpw" element={<Newpw />} />
           <Route path="/join" element={<Join />} />
           <Route path="/write" element={<Write />} />
+          <Route path="/postview" element={<PostView />} />
         </Routes>
       </BrowserRouter>
     </div>

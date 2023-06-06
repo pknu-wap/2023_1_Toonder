@@ -45,8 +45,11 @@ function Write() {
   return (
     <MainBackgorund>
       <div className="writeboard">
+        <br />
         <h2>글쓰기</h2>
+        <br />
         <input
+          style={{ fontSize: '20px' }}
           className="title"
           type="text"
           placeholder="제목을 작성해주세요"
@@ -54,14 +57,36 @@ function Write() {
           onChange={handleTitleChange}
         />
         <textarea
+          style={{ fontSize: '17px' }}
           placeholder="내용을 작성해주세요."
           value={content}
           onChange={handleContentChange}
         ></textarea>
       </div>
-      <button id="save" type="submit" onClick={handleSubmit}>
-        저장
-      </button>
+      <div style={{ position: 'relative' }}>
+        <button
+          id="save"
+          style={{
+            position: 'absolute',
+            fontSize: '20px',
+            height: '36px',
+            color: 'rgb(255, 147, 147)',
+            display: 'flex',
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '22px',
+            width: '80px',
+            borderRadius: '10px',
+            top: '-690px',
+            right: '65px',
+          }}
+          type="submit"
+          onClick={handleSubmit}
+        >
+          저장
+        </button>
+      </div>
     </MainBackgorund>
   );
 }
