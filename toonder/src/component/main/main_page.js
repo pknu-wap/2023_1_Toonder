@@ -46,7 +46,9 @@ function Mainpage(props) {
     setIsLoading(true); // 새로운 추천 웹툰 이미지를 가져오기 전에 로딩 상태를 true로 설정
 
     const fetchData = async () => {
-      const email = sessionStorage.getItem('loggedUserEmail');
+      const { data, error } = await supabase.auth.getSession();
+      const session = data.session;
+      const email = session.user.email;
       const requestData = {
         email: email,
       };
