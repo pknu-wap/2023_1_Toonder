@@ -91,7 +91,6 @@ function Mainpage(props) {
                 position: 'absolute',
                 color: 'rgb(255, 147, 147)',
                 display: 'flex',
-                zIndex: 1,
                 backgroundColor: 'white',
                 width: '150px',
                 height: '25px',
@@ -130,7 +129,9 @@ function Mainpage(props) {
                         <button
                           className="refresh"
                           onClick={() => {
-                            navigate('/mainwebtooninfo', {state : {mastrId : item.mastrId}});
+                            navigate('/mainwebtooninfo', {
+                              state: { mastrId: item.mastrId },
+                            });
                           }}
                         >
                           <div className="imageContainer">
