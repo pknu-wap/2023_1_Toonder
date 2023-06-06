@@ -10,9 +10,30 @@ function MainWebtoonInfo() {
   
   const {state} = useLocation();
   const {mastrId} = state;
+
+  const [webtoonImage, setWebtoonImage] = useState(ex1);
+  const [webtoonTitle, setWebtoonTitle] = useState("");
+  const [webtoonOutline, setWebtoonOutline] = useState("");
+  const [webtoonAuthors, setWebtoonAuthors] = useState("");
+  const [webtoonPlatform, setWebtoonPlatform] = useState("");
+  const [webtoonGenre, setWebtoonGenre] = useState("");
   useEffect( () => {
-    console.log(mastrId)
-  },[])
+    axios
+      .get('toonder/webtoon/'+mastrId)
+      .then(res => {
+        console.log(mastrId)
+        const webtoonInfo = res.data
+        setWebtoonImage(webtoonInfo.imageDownloadUrl)
+        setWebtoonTitle(webtoonInfo.title)
+        setWebtoonOutline(webtoonInfo.outline)
+        setWebtoonAuthors((webtoonInfo.sntncWritrNm === webtoonInfo.pictrWritrNm 
+          || webtoonInfo.sntncWritrNm ==="" 
+          || webtoonInfo.pictrWritrNm==="") ? 
+          webtoonInfo.pictrWritrNm : webtoonInfo.sntncWritrNm + " / " + webtoonInfo.pictrWritrNm)
+        setWebtoonPlatform(webtoonInfo.pltfomCdNm)
+        setWebtoonGenre(webtoonInfo.mainGenreCdNm)
+      })
+
 
   return (
     <MainBackgorund>
