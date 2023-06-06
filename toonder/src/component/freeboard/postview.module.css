@@ -6,23 +6,23 @@ a:hover {
 }
 
 .commentInput {
-  border-radius: 0px;
+  border-radius: 2px;
   font-size: 18px;
   width: 1000px;
-  height: 30px;
+  height: 40px;
   margin-top: -5px;
 }
 .editedCommentInput {
-  border-radius: 0px;
+  border-radius: 2px;
   font-size: 16px;
-  color: rgb(255, 147, 147);
-  width: 300px;
-  height: 15px;
-  margin-top: -200px;
+  background-color: rgba(255, 147, 147, 0.4);
+  width: 400px;
+  height: 70px;
+  margin-top: 10px;
 }
 .commentSubmit {
   position: relative;
-  top: -25px;
+  top: -37px;
   left: 1010px;
   color: rgb(255, 147, 147);
 }
@@ -33,6 +33,49 @@ a:hover {
 
 .metaData {
   position: absolute;
-  left: 500px;
+  left: 450px;
   top: -16px;
+}
+.wrapContent {
+  width: 380px;
+  margin-left: 54px;
+  margin-top: -16.5px;
+}
+
+.contentButtons {
+  margin-top: -20px;
+  margin-left: 862px;
+  font-size: 20px;
+}
+
+.contentButtons button {
+  font-size: 20px;
+  height: 30px;
+  width: 45px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+}
+.contentButtons button:hover {
+  background-color: rgb(255, 147, 147);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.commentClicker {
+  margin-top: -20px;
+  margin-left: 440px;
+}
+.commentClicker button {
+  font-size: 16px;
+  height: 20px;
+  width: 45px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+}
+.commentClicker button:hover {
+  background-color: rgb(255, 147, 147);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }

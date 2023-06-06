@@ -19,6 +19,10 @@ function Write() {
     setContent(event.target.value);
   };
 
+  const addConvertLine = (text) => {
+    return text.replace(/\n/g, '@d`}');
+  };
+
   const handleSubmit = async () => {
     if (!title || !content) {
       alert('제목과 내용을 작성해주세요.');
@@ -27,7 +31,7 @@ function Write() {
 
     const requestData = {
       brdTitle: title,
-      brdContent: content,
+      brdContent: addConvertLine(content),
       mem_name: loggedUserName,
       mem_email: email,
     };
