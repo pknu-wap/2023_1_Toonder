@@ -24,6 +24,7 @@ function Mainpage(props) {
         navigate('/');
       } else {
         const email = session.user.email;
+        sessionStorage.setItem('loggedUserEmail', email);
         const requestData = {
           email: email,
         };
