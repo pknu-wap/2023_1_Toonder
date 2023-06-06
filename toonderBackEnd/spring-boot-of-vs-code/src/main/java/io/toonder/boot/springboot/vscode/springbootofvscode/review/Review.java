@@ -18,9 +18,6 @@ import javax.persistence.JoinColumn;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.Webtoon;
 import lombok.AllArgsConstructor;

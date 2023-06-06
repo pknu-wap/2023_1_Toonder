@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.review.Review;
 import lombok.Data;
