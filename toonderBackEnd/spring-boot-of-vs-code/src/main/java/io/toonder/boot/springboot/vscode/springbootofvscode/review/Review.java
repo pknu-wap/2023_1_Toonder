@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import io.toonder.boot.springboot.vscode.springbootofvscode.webtoon.Webtoon;
@@ -54,7 +55,7 @@ public class Review {
 	private Double revRating;
 
     @ManyToOne 
-	@JsonIgnore
+	//@JsonManagedReference
 	@JoinColumn(name="mastrId") 
 	private Webtoon webtoon;
 
