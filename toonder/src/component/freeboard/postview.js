@@ -18,6 +18,25 @@ function PostView() {
   const [editingCommentId, setEditingCommentId] = useState('');
   const [comment, setComment] = useState('');
   const [isCommentDelete, setIsCommentDelete] = useState(false);
+  const [isClickLike, setIsClickLike] = useState(false);
+  const [isClickCommentLike, setIsClickCommentLike] = useState(false);
+  //줄바꿈기능
+  const convertLine = (text) => {
+    return text.split('@d`}').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+  const convertLineForTextarea = (text) => {
+    return text.replaceAll('@d`}', '\n');
+  };
+
+  const addConvertLine = (text) => {
+    return text.replace(/\n/g, '@d`}');
+  };
+
   // 게시글 불러오기
   useEffect(() => {
     const fetchData = async () => {
@@ -27,11 +46,13 @@ function PostView() {
       } catch (error) {
         console.log(error);
         alert('게시글을 불러오지 못했습니다.');
+      } finally {
+        setIsClickLike(false);
       }
     };
 
     fetchData();
-  }, [brdNo]);
+  }, [brdNo, isClickLike]);
 
   // 댓글 불러오기
   useEffect(() => {
@@ -44,11 +65,34 @@ function PostView() {
         alert('댓글을 불러오지 못했습니다.');
       } finally {
         setIsCommentDelete(false);
+        setIsClickCommentLike(false);
       }
     };
 
     fetchComments();
-  }, [brdNo, isCommentDelete]);
+  }, [brdNo, isCommentDelete, isClickCommentLike]);
+
+  //댓글 좋아요
+  const handleLikeComment = async (cmtNo) => {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        mem_email: email,
+      };
+      const response = await axios.post(
+        `/toonder/board/${brdNo}/comment/${cmtNo}/like`,
+        null,
+        {
+          headers,
+        }
+      );
+      setIsClickCommentLike(true);
+      console.log(response.data);
+      alert('댓글 좋아요가 반영되었습니다.');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // 게시글 삭제
   const handleDelete = async () => {
@@ -61,6 +105,23 @@ function PostView() {
     } catch (error) {
       console.log(error);
       alert('삭제가 실패했습니다.');
+    }
+  };
+
+  //게시글 좋아요
+  const handleLike = async () => {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        mem_email: email,
+      };
+      const response = await axios.post(`/toonder/board/${brdNo}/like`, null, {
+        headers,
+      });
+      console.log(response.data);
+      alert('좋아요가 반영되었습니다.');
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -92,8 +153,9 @@ function PostView() {
     }
 
     try {
+      const addLineComment = addConvertLine(editedComment);
       await axios.put(`/toonder/board/${brdNo}/comment/${commentId}`, {
-        cmtContent: editedComment,
+        cmtContent: addLineComment,
         mem_email: email,
       });
       alert('댓글이 수정되었습니다.');
@@ -118,8 +180,9 @@ function PostView() {
     }
     const name = localStorage.getItem('loggedUserName');
     try {
+      const addLineComment = addConvertLine(comment);
       await axios.post(`/toonder/board/${brdNo}/comment`, {
-        cmtContent: comment,
+        cmtContent: addLineComment,
         mem_name: name,
         mem_email: email,
       });
@@ -139,7 +202,8 @@ function PostView() {
     return null;
   }
 
-  const { brdTitle, brdContent, mem_name, brdRegDate, brdViewCount } = post;
+  const { brdTitle, brdContent, mem_name, brdRegDate, brdViewCount, brdLike } =
+    post;
   const formattedDate = brdRegDate.split('T')[0];
 
   return (
@@ -152,30 +216,54 @@ function PostView() {
           <h1>{brdTitle}</h1>
           <br />
           <h4>
-            {mem_name} | {brdViewCount} | {formattedDate} | <a>수정</a> |{' '}
-            <a onClick={handleDelete}>삭제</a>
+            {mem_name} &nbsp;|&nbsp; 조회수 : {brdViewCount} &nbsp;|&nbsp;{' '}
+            {formattedDate} &nbsp;|&nbsp; 좋아요 : {brdLike}
+            <div className={styles.contentButtons}>
+              <button
+                onClick={() => {
+                  handleLike();
+                  setIsClickLike(true);
+                }}
+              >
+                ☺︎
+              </button>{' '}
+              &nbsp;|&nbsp; <button>수정</button> &nbsp;|&nbsp;{' '}
+              <button onClick={handleDelete}>삭제</button>
+            </div>
           </h4>
         </div>
         <div id="postcontent">
           <h3>[내용]</h3>
+          <div
+            style={{
+              borderTop: '1px solid rgb(255, 147, 147)',
+              width: '100%',
+              margin: '10px 0',
+            }}
+          />
           <br />
-          <br />
-          <p>&nbsp;&nbsp;{brdContent}</p>
+          <p>{convertLine(brdContent)}</p>
         </div>
         <div id="repl">
           <h3>[댓글]</h3>
-          <br />
+          <div
+            style={{
+              borderTop: '1px solid rgb(255, 147, 147)',
+              width: '100%',
+              margin: '10px 0',
+            }}
+          />
           {comments.map((comment) => (
             <div key={comment.cmtNo}>
               <br />
               {editingCommentId === comment.cmtNo ? (
                 <>
                   &nbsp;&nbsp;
-                  <input
+                  <textarea
                     className={styles.editedCommentInput}
-                    value={editedComment}
+                    value={convertLineForTextarea(editedComment)}
                     onChange={(e) => setEditedComment(e.target.value)}
-                  ></input>
+                  ></textarea>
                   <div className={styles.metaDataWrap}>
                     <div className={styles.metaData}>
                       <a
@@ -190,25 +278,40 @@ function PostView() {
                 </>
               ) : (
                 <>
-                  &nbsp;&nbsp;{comment.memName} :{comment.cmtContent}
+                  {comment.memName} :{' '}
+                  <div className={styles.wrapContent}>
+                    {convertLine(comment.cmtContent)}
+                  </div>
                   <div className={styles.metaDataWrap}>
                     <p className={styles.metaData}>
-                      {comment.cmtRegDate.split('T')[0]} |{' '}
-                      <a
-                        onClick={() =>
-                          handleEditComment(comment.cmtNo, comment.cmtContent)
-                        }
-                      >
-                        수정
-                      </a>{' '}
-                      |{' '}
-                      <a
-                        onClick={() =>
-                          handleDeleteComment(comment.cmtContent, comment.cmtNo)
-                        }
-                      >
-                        삭제
-                      </a>
+                      {comment.cmtRegDate.split('T')[0]} &nbsp;|&nbsp; 좋아요 :{' '}
+                      {comment.cmtLike}
+                      <div className={styles.commentClicker}>
+                        <button
+                          onClick={() => handleLikeComment(comment.cmtNo)}
+                        >
+                          ☺︎
+                        </button>{' '}
+                        |{' '}
+                        <button
+                          onClick={() =>
+                            handleEditComment(comment.cmtNo, comment.cmtContent)
+                          }
+                        >
+                          수정
+                        </button>{' '}
+                        |{' '}
+                        <button
+                          onClick={() =>
+                            handleDeleteComment(
+                              comment.cmtContent,
+                              comment.cmtNo
+                            )
+                          }
+                        >
+                          삭제
+                        </button>{' '}
+                      </div>
                     </p>
                   </div>
                 </>
@@ -218,12 +321,12 @@ function PostView() {
         </div>
         <div id="commentwrite">
           <form onSubmit={handleSubmitComment}>
-            <input
+            <textarea
               className={styles.commentInput}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="댓글을 작성하세요"
-            />
+            ></textarea>
             <div className={styles.commentSubmit}>
               <a
                 style={{
