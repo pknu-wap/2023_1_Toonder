@@ -300,22 +300,25 @@ table button {
 
 .subwtInfo h1 {
   color: white;
+  margin-left: -30px;
 }
 .subwtInfo ul {
-  height: 85px;
-  width: 195px;
+  height: 150px;
+  width: 280px;
   border-radius: 10px;
   background-color: white;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  margin-top: 73px;
-  margin-left: 30px;
+  margin-top: 50px;
+  margin-left: -30px;
+  
 }
 
 .subwtInfo li {
   color: rgb(255, 147, 147);
+  vertical-align:middle;
   margin-left: 28px;
+  margin-top : 20px;
 }
 
 /*줄거리 내용*/
@@ -325,20 +328,22 @@ table button {
   color: white;
 }
 .mainStory ul {
-  height: 85px;
-  width: 255px;
+  height: 200px;
+  width: 265px;
   border-radius: 10px;
   background-color: white;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 74px;
+  margin-top: 20px;
   margin-left: 44px;
 }
 
 .mainStory li {
   color: rgb(255, 147, 147);
   margin-left: 28px;
+  margin-right : 20px;
+  word-break:break-all;
 }
 
 /*mainReview메인 리뷰*/
@@ -359,6 +364,7 @@ table button {
   width: 860px;
   height: 115px;
   border-radius: 10px;
+  overflow-y: scroll;
 }
 
 .mainReview li {
@@ -367,10 +373,20 @@ table button {
 }
 
 .mainReview input {
-  width: 860px;
+  width: 760px;
   height: 58px;
   margin-top: 30px;
   margin-left: 37px;
+}
+
+.mainReview button {
+  border-radius: 10px;
+  margin-left: 13px;
+  width: 90px;
+  height: 45px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  font-size: 20px;
 }
 
 /*My page*/
