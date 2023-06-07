@@ -17,7 +17,7 @@ function Mypage() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [loggedUserImage, setLoggedUserImage] = useState(
-    localStorage.getItem('loggedUserPhoto') || null
+    localStorage.getItem('loggedUserPhoto') || ex1
   );
   const openModal = () => {
     setModalOpen(true);
