@@ -21,136 +21,152 @@ function Search(props) {
   const navigate = useNavigate();
 
   function onScroll() {
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrolledToBottom = Math.ceil(window.scrollY + windowHeight) >= documentHeight;
+    const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrolledToBottom =
+        Math.ceil(window.scrollY + windowHeight) >= documentHeight;
 
-    if (window.scrollY === 0) {
-      setShowNavigationToScrollTop(false);
-    } else {
-      setShowNavigationToScrollTop(true);
-    }
+        //console.log(window.scrollY)
+      if (window.scrollY === 0) {
+        setShowNavigationToScrollTop(false)
+      }
+      else {
+        setShowNavigationToScrollTop(true)
+      }
 
-    if (scrolledToBottom) {
-      setIsLoading(true);
-      setCountPage((prevCount) => prevCount + 1);
-    }
+      if (scrolledToBottom) {
+        setIsLoading(true)
+        setCountPage(countPage+1)
+      }
   }
 
-  useEffect(() => {
-    if (!isLoading) {
-      window.addEventListener('scroll', onScroll);
-      return () => {
-        window.removeEventListener('scroll', onScroll);
-      };
+  useEffect(()=> {
+    //console.log(showNavigationToScrollTop)
+    if (!isLoading){
+      window.addEventListener("scroll", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+    };
     }
-  }, [isLoading]);
+
+
+  })
 
   useEffect(() => {
     axios
-      .get(`/toonder/webtoon?keyword=${searchTitle}&currentPageNum=${countPage}`)
-      .then((res) => {
-        if (res.data && res.data.length > 0) {
-          setWebToonList(res.data);
-          setFirstLoading(false);
+      .get('toonder/webtoon?p_num='+countPage)
+      .then(res => {
+        setCountPage(countPage+1)
+        if (webtoonList.length === 0){
+          setIsLoading(false)
+          setWebToonList(res.data)
+          setFirstLoading(false)
         }
-        setIsLoading(false);
+        else{
+          setIsLoading(false)
+          setWebToonList(webtoonList.concat(res.data))
+          console.log(countPage);
+      }
+
       })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, [searchTitle, countPage]);
-
-
-  console.log(searchTitle);
-  console.log(countPage);
+  },[countPage])
 
   const listCreator = () => {
     var countForTrSplit = 1;
     var trWebtoonList = [];
-
-    return (
+    return(
       <>
-        {firstLoading ? (
-          <div id="firstLoading">
-            <FaSpinner className="loadingIcon" />
-          </div>
-        ) : (
-          <>
-            <table>
-            {webtoonList
-              .filter((webtoonInfo) => webtoonInfo.title.includes(searchTitle) || webtoonInfo.title.includes(searchTitle))
-              .map((webtoonInfo) => {
+      {firstLoading ? (
+         <div id='firstLoading'>
+         <FaSpinner className="loadingIcon" />
+       </div>
+      ) : (
+        <>
+        <table>
+
+          {
+            webtoonList
+              .filter((webtoonInfo) => webtoonInfo.title.includes(searchTitle))
+              .map(
+              (webtoonInfo) => {
                 if (countForTrSplit === 1) {
-                  trWebtoonList = [];
+                  trWebtoonList = []
                 }
-                trWebtoonList.push(webtoonInfo);
-                if (countForTrSplit === 4) {
+
+                trWebtoonList.push(webtoonInfo)
+                if (countForTrSplit > 0){
                   countForTrSplit = 1;
                   return (
                     <tr>
-                      {trWebtoonList.map((trWebtoonInfo) => (
-                        <td>
-                          <tr>
-                            <td>
-                              <button
-                                onClick={() => {
-                                  navigate('/mainwebtooninfo', { state: { mastrId: trWebtoonInfo.mastrId } });
-                                }}
-                              >
-                                <img src={trWebtoonInfo.imageDownloadUrl} alt="image error" />
-                              </button>
-                            </td>
-                          </tr>
-                          <tr style={{ height: '65px' }}>
-                            <td style={{ height: '75px' }}>
-                              <p className="webtoonTitle">{trWebtoonInfo.title}</p>
-                            </td>
-                          </tr>
-                        </td>
-                      ))}
+                      <tr>
+                      {
+                        trWebtoonList.map(trWebtoonInfo => (
+                          <td>
+                            <tr>
+                              <td>
+                                <button onClick={() => {navigate('/mainwebtooninfo', {state : {mastrId : trWebtoonInfo.mastrId}});}}>
+                                  <img src={trWebtoonInfo.imageDownloadUrl} alt="image error" />
+                                </button>
+                              </td>
+                            </tr>
+                            <tr style={{height:'65px'}}>
+                              <td style={{height:'75px'}}>
+                              <p className="webtoonTitle">
+                                {trWebtoonInfo.title}
+                              </p>
+                              </td>
+                            </tr>
+                          </td>
+                        ))
+                      }
+                      </tr>
                     </tr>
-                  );
-                } else {
+
+                  )
+                }
+                else {
                   countForTrSplit += 1;
                 }
-              })}
+              }
+              )
+          }
 
-            </table>
-
-            {isLoading ? (
-              <div id="isLoading">
-                <FaSpinner className="loadingIcon" />
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </>
-        )}
+      </table>
+      {isLoading ? ( // 로딩 중일 때의 화면
+            <div id='isLoading'>
+              <FaSpinner className="loadingIcon" />
+            </div>
+          ) : (
+            <div></div>
+          )
+          }
+        </>
+      )
+      }
       </>
     );
-  };
+  }
 
   return (
     <>
-      <MainBackgorund>
-        <MainBackSmall></MainBackSmall>
-        <div className="webSearch">
-          {listCreator()}
+    <MainBackgorund>
+        <MainBackSmall>
+        <div className='mainWebtoonList'>
+            {listCreator()}
         </div>
 
         {showNavigationToScrollTop ? (
-          <div
-            id="showNavigationToScrollTop"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          >
-            <img src={toTop} alt="To Top" style={{ height: '100%', width: '100%' }} />
-          </div>
-        ) : null}
-      </MainBackgorund>
+          <div id='showNavigationToScrollTop'
+          onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' })}}>
+            <img src={toTop} alt="To Top" style={{height:'100%', wigth:'100%'}}/>
+        </div>):
+        null}
+
+
+      </MainBackSmall>
+
+    </MainBackgorund>
     </>
   );
 }

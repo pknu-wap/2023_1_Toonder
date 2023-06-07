@@ -69,6 +69,7 @@ function MainWebtoonList() {
         else{
           setIsLoading(false)
           setWebToonList(webtoonList.concat(res.data))
+          console.log(countPage);
         }
 
       })
