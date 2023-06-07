@@ -644,5 +644,11 @@ table button {
 .webtoonTitle {
   font-size: 18px;
   color: white;
+  margin-top: 20px;
+}
+
+.titleWrap {
   margin-top: 10px;
+  margin-bottom: 80px;
+  height: 30px;
 }
