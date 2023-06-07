@@ -117,7 +117,7 @@ function MainWebtoonInfo() {
           revContent : inputReviewText,
           revRating : regRateValue,
           memName : localStorage.getItem('loggedUserName'),
-          memEmail : userEmail
+          mem_email : userEmail
         }
 
         console.log(sendingReviewData)
@@ -142,7 +142,7 @@ function MainWebtoonInfo() {
         revContent : textModalForModify,
         revRating : textModalRateValue,
         memName : localStorage.getItem('loggedUserName'),
-        memEmail : userEmail
+        mem_email : userEmail
       }
 
       console.log(sendingReviewData)
@@ -186,7 +186,7 @@ function MainWebtoonInfo() {
         revContent : review.revContent,
         revRating : review.revRating,
         mem_name : review.memName,
-        memEmail : review.memEmail,
+        mem_email : review.memEmail,
     }
     console.log(revNo)
       console.log(sendingData)
@@ -215,8 +215,8 @@ function MainWebtoonInfo() {
             </div>
             </div>
             
-            <button style={{position:'relative', top:'10%', fontSize:'20px'}} onClick={handleConfirmModal}>확인</button>
-            <button style={{position:'relative', top:'20%'}} onClick={closeModal}>취소</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white', position:'relative', top:'0%', fontSize:'20px'}} onClick={handleConfirmModal}>확인</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white',position:'relative', top:'5%'}} onClick={closeModal}>취소</button>
             
           </Modal>
         )}
@@ -228,8 +228,8 @@ function MainWebtoonInfo() {
             <div style={{height:'40%'}}>
               <h2 style={{position:"relative", top:'-20%'}}>리뷰를 등록하시겠습니까?</h2>
             </div>
-            <button style={{position:'relative', top:'10%', fontSize:'20px'}} onClick={sendingReviewToBackEnd}>확인</button>
-            <button style={{position:'relative', top:'20%'}} onClick={closeModal}>취소</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white', position:'relative', top:'0%', fontSize:'20px'}} onClick={sendingReviewToBackEnd}>확인</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white',position:'relative', top:'5%'}} onClick={closeModal}>취소</button>
           </Modal>
         )}
       </div>  
@@ -240,7 +240,7 @@ function MainWebtoonInfo() {
             <div style={{height:'40%'}}>
               <h2 style={{position:"relative", top:'-20%'}}>리뷰가 등록되었습니다.</h2>
             </div>
-            <button style={{position:'relative', top:'10%', fontSize:'20px'}} onClick={closeModal}>확인</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white', position:'relative', top:'0%', fontSize:'20px'}} onClick={closeModal}>확인</button>
           </Modal>
         )}
       </div>
