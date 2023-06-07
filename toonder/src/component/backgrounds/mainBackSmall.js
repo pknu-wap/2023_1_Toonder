@@ -64,12 +64,12 @@ function MainBackSmall(props) {
   }, []);
 
   return (
-    <div className="mainBackSmall">
+    <div className="mainBackSmall"  setSearchTitle={props.setSearchTitle} handleSearch={props.handleSearch}>
       <div className="mainInfo">
         <div onClick={openModal}>
           <img id="infoimg" src={loggedUserImage} alt="image error" />
         </div>
-        <h2 style={{ color: 'white' }}>{loggedUserName}</h2>
+        <h2>{loggedUserName}</h2>
         <button
           id="changeInfo"
           onClick={() => {
@@ -111,7 +111,7 @@ function MainBackSmall(props) {
             localStorage.removeItem('loggedUserName');
             localStorage.removeItem('loggedUserHashTag');
             sessionStorage.removeItem('loggedUserEmail'); // 세션 스토리지에서 loggedUserEmail 제거
-            alert('로그아웃 되었습니다.');
+
             await supabase.auth.signOut();
             navigate('/');
           }}
@@ -192,7 +192,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
   }, []);
 
   return (
-    <div className="profilechangeback">
+    <div className="profilechangeback" >
       <div className="profilechange" ref={modalRef}>
         <img id="changeinfoimg" src={selectedImage} alt="image error" />
         <div id="changeFile">

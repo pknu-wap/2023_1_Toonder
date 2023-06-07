@@ -84,6 +84,7 @@ input {
 .mainSearch input {
   width: 806px;
   height: 64px;
+  padding-left: 10px;
   font-size: 24px;
 }
 

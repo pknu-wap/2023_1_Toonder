@@ -3,7 +3,6 @@ import Background from '../backgrounds/backGround';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import styles from './newpw.module.css';
-import { FaSpinner } from 'react-icons/fa';
 
 function Newpw() {
   useEffect(() => {
@@ -88,17 +87,7 @@ function Newpw() {
     <Background text="New PW" backgroundSize="318px 265px">
       <form onSubmit={handleSubmit}>
         {loading ? (
-          <div
-            style={{
-              fontSize: '80px',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              marginTop: '-100px',
-            }}
-          >
-            <FaSpinner className={styles.loadingIcon} />
-          </div>
+          <div className={styles.loading}>작업을 처리 중 입니다...</div>
         ) : message ? (
           <div className={styles.afterFind}>
             <h1>{message}</h1>

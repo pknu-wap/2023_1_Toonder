@@ -3,7 +3,7 @@ import styles from './login.module.css'; //CSS Module 이라는 기술을 사용
 import IDBackground from '../backgrounds/ID_background';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
-import { FaSpinner } from 'react-icons/fa';
+
 function Login() {
   useEffect(() => {
     document.title = 'Toonder 로그인';
@@ -90,18 +90,7 @@ function Login() {
     <div>
       <IDBackground text="Login">
         {loading ? (
-          <div
-            style={{
-              fontSize: '80px',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              top: '290px',
-              position: 'absolute',
-            }}
-          >
-            <FaSpinner className={styles.loadingIcon} />
-          </div>
+          <div className={styles.Loading}>로그인 중 입니다...</div>
         ) : (
           <form>
             <div className={styles.Login}>
@@ -146,20 +135,29 @@ function Login() {
       <div className={styles.FindnSign}>
         <button
           onClick={() => {
+            navigate('/findid');
+          }}
+          id="find_id_button"
+        >
+          아이디 찾기
+        </button>
+        &nbsp;&nbsp;
+        <button
+          onClick={() => {
             navigate('/findpw');
           }}
           id="find_pw_button"
         >
-          Find
+          비밀번호 찾기
         </button>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
+        &nbsp;&nbsp;
         <button
           onClick={() => {
             navigate('/join');
           }}
           id="join"
         >
-          Join
+          회원가입
         </button>
       </div>
     </div>
