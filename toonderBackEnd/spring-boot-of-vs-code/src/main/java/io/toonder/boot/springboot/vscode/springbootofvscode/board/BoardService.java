@@ -153,6 +153,7 @@ public class BoardService {
 
         Comment comment = commentDto.toEntity();
         comment.setBoard(board);
+		comment.setCmtLike(0);
 
         Comment savedComment = commentRepository.save(comment);
         CommentResponseDto responseDto = new CommentResponseDto(savedComment);
@@ -226,8 +227,6 @@ public class BoardService {
 
 	// 댓글 좋아요 기능
     public CommentResponseDto likeComment(Integer brdNo, Integer cmtNo, String mem_email) {
-        Board board = boardRepository.findById(brdNo)
-                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
         Comment comment = commentRepository.findById(cmtNo)
                 .orElseThrow(() -> new RuntimeException("댓글을 찾을 수 없습니다."));
 

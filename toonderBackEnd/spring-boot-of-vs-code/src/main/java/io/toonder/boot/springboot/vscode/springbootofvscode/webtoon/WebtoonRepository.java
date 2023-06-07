@@ -2,20 +2,16 @@ package io.toonder.boot.springboot.vscode.springbootofvscode.webtoon;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface WebtoonRepository extends JpaRepository<Webtoon, String> {
 
     List<Webtoon> findByMainGenreCdNm(String mainGenreCdNm);
-    //List<Webtoon> findByTitleContaining(String title);
-
-    int countByTitleContaining(String keyword);
-
-    Page<Webtoon> findByTitleContaining(String keyword, PageRequest pageable);
     
+    List<Webtoon> findByTitleContaining(String keyword, Pageable pageable);
+
 	public final static String SELECT_WEBTOON_LIST_PAGED = ""
 			+ "SELECT "
 			+ "mastrId,"
