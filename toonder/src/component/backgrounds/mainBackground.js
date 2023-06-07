@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../images/logoimage.png';
 import './backGround.module.css';
 import axios from 'axios';
 
 function MainBackgorund(props) {
   const navigate = useNavigate();
+  /*
+    onClick={() => {
+      navigate('위치', {
+      state: { 넘겨줄 변수이름: 실제값 },
+    }); 
+    
+    
+    */
+
+  const [searchContent, setSearchContent] = useState('');
+  const handleInputChange = (event) => {
+    setSearchContent(event.target.value);
+  };
 
   return (
     <div className="mainPageBack">
@@ -27,13 +40,25 @@ function MainBackgorund(props) {
           <input
             id="mainSearchInput"
             type="text"
-            placeholder="    찾고싶은 웹툰 검색!"
+            placeholder="    찾고싶은 웹툰 제목 검색!"
+            value={searchContent}
+            onChange={handleInputChange}
           />
-          <button id="mainSearchButton">검색</button>
+          <button
+            id="mainSearchButton"
+            onClick={() => {
+              navigate('/search', {
+                state: { searchContent: searchContent },
+              });
+            }}
+          >
+            검색
+          </button>
         </div>
       </div>
       {props.children} {/* props.children 렌더링 */}
     </div>
   );
 }
+
 export default MainBackgorund;

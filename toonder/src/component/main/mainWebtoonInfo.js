@@ -5,7 +5,7 @@ import './mainPage.css';
 import MainBackgorund from '../backgrounds/mainBackground';
 import Modal from './modal';
 
-import ex1 from '../../images/ex1.png';
+import logo2 from '../../images/logo2.png';
 
 import zero from '../../images/zero.png';
 import one from '../../images/one.png';
@@ -29,7 +29,7 @@ function MainWebtoonInfo() {
 
   const [userEmail, setUserEmail] = useState('');
 
-  const [webtoonImage, setWebtoonImage] = useState(ex1);
+  const [webtoonImage, setWebtoonImage] = useState(logo2);
   const [webtoonTitle, setWebtoonTitle] = useState('');
   const [webtoonOutline, setWebtoonOutline] = useState('');
   const [webtoonAuthors, setWebtoonAuthors] = useState('');

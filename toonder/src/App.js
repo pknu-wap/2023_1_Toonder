@@ -14,6 +14,7 @@ import InfoC from './component/main/infoChange';
 import Write from './component/freeboard/write';
 import PostView from './component/freeboard/postview';
 import Edit from './component/freeboard/edit';
+import SearchWebtoonList from './component/main/searchWebtoonList';
 import axios from 'axios';
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/write" element={<Write />} />
           <Route path="/postview" element={<PostView />} />
           <Route path="/edit" element={<Edit />} />
+          <Route path="/search" element={<SearchWebtoonList />} />
         </Routes>
       </BrowserRouter>
     </div>
