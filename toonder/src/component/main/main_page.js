@@ -32,7 +32,6 @@ function Mainpage(props) {
         axios
           .post('toonder/recommand', requestData)
           .then((res) => {
-            console.log(res.data);
             setResData(res.data);
             setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
           })

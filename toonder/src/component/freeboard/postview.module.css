@@ -16,9 +16,10 @@ a:hover {
   border-radius: 2px;
   font-size: 16px;
   background-color: rgba(255, 147, 147, 0.4);
-  width: 400px;
-  height: 70px;
+  width: 448px;
+  height: 73px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .commentSubmit {
   position: relative;
@@ -32,8 +33,10 @@ a:hover {
 }
 
 .metaData {
-  position: absolute;
-  left: 450px;
+  position: relative;
+  font-size: 13px;
+  margin-left: 350px;
+  margin-top: 10px;
   top: -16px;
 }
 .wrapContent {
@@ -64,10 +67,10 @@ a:hover {
 
 .commentClicker {
   margin-top: -20px;
-  margin-left: 440px;
+  margin-left: 545px;
 }
 .commentClicker button {
-  font-size: 16px;
+  font-size: 13px;
   height: 20px;
   width: 45px;
   background-color: white;

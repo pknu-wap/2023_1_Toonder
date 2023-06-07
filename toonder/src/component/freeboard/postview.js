@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MainBackground from '../backgrounds/mainBackground';
 import styles from './postview.module.css';
-
+import supabase from '../supabase';
 function PostView() {
   // 라우터
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function PostView() {
   // state
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
-  const email = sessionStorage.getItem('loggedUserEmail');
+  const [email, setEmail] = useState();
   const [editedComment, setEditedComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState('');
   const [comment, setComment] = useState('');
@@ -37,6 +37,23 @@ function PostView() {
     return text.replace(/\n/g, '@d`}');
   };
 
+  //이메일 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      const session = data.session;
+
+      if (session === null) {
+        alert('로그인을 먼저 해주세요.');
+        navigate('/');
+      } else {
+        const email = session.user.email;
+        setEmail(email);
+      }
+    };
+    fetchData();
+  }, []);
+
   // 게시글 불러오기
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +70,17 @@ function PostView() {
 
     fetchData();
   }, [brdNo, isClickLike]);
+
+  const handleEditContent = () => {
+    if (post.mem_email !== email) {
+      alert('본인의 게시글만 수정이 가능합니다.');
+      return;
+    } else {
+      navigate('/edit', {
+        state: { brdNo: post.brdNo },
+      });
+    }
+  };
 
   // 댓글 불러오기
   useEffect(() => {
@@ -76,7 +104,6 @@ function PostView() {
   const handleLikeComment = async (cmtNo) => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
         mem_email: email,
       };
       const response = await axios.post(
@@ -87,10 +114,10 @@ function PostView() {
         }
       );
       setIsClickCommentLike(true);
-      console.log(response.data);
       alert('댓글 좋아요가 반영되었습니다.');
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      alert('좋아요가 실패 했습니다.');
     }
   };
 
@@ -104,7 +131,7 @@ function PostView() {
       navigate('/freeboard');
     } catch (error) {
       console.log(error);
-      alert('삭제가 실패했습니다.');
+      alert('본인의 게시글만 삭제가 가능합니다.');
     }
   };
 
@@ -112,16 +139,15 @@ function PostView() {
   const handleLike = async () => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
         mem_email: email,
       };
-      const response = await axios.post(`/toonder/board/${brdNo}/like`, null, {
+      await axios.post(`/toonder/board/${brdNo}/like`, null, {
         headers,
       });
-      console.log(response.data);
       alert('좋아요가 반영되었습니다.');
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      alert('좋아요가 실패 했습니다.');
     }
   };
 
@@ -227,8 +253,15 @@ function PostView() {
               >
                 ☺︎
               </button>{' '}
-              &nbsp;|&nbsp; <button>수정</button> &nbsp;|&nbsp;{' '}
-              <button onClick={handleDelete}>삭제</button>
+              &nbsp;|&nbsp;{' '}
+              <button
+                onClick={() => {
+                  handleEditContent();
+                }}
+              >
+                수정
+              </button>{' '}
+              &nbsp;|&nbsp; <button onClick={handleDelete}>삭제</button>
             </div>
           </h4>
         </div>
@@ -244,7 +277,7 @@ function PostView() {
           <br />
           <p>{convertLine(brdContent)}</p>
         </div>
-        <div id="repl">
+        <div id="repl2">
           <h3>[댓글]</h3>
           <div
             style={{
@@ -278,9 +311,10 @@ function PostView() {
                 </>
               ) : (
                 <>
-                  {comment.memName} :{' '}
+                  {' '}
+                  {comment.memName}
                   <div className={styles.wrapContent}>
-                    {convertLine(comment.cmtContent)}
+                    : {convertLine(comment.cmtContent)}
                   </div>
                   <div className={styles.metaDataWrap}>
                     <p className={styles.metaData}>

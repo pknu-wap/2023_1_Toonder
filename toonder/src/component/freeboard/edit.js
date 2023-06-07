@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './freeboard.css';
 import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
 import supabase from '../supabase';
-
-function Write() {
+function Edit() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loggedUserName, setLoggedUserName] = useState();
   const [email, setEmail] = useState();
   const navigate = useNavigate();
+  const location = useLocation();
+  const brdNo = location.state?.brdNo;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +35,29 @@ function Write() {
             setLoggedUserName(loggedUserData.data.mem_name);
           })
           .catch((error) => console.log(error));
+
+        try {
+          const response = await axios.get(`/toonder/board/${brdNo}`);
+          const postData = response.data;
+          setTitle(postData.brdTitle);
+          setContent(convertLineForTextarea(postData.brdContent));
+          if (postData.mem_email !== email) {
+            alert('본인의 게시글만 수정이 가능합니다.');
+            navigate(-1);
+          }
+        } catch (error) {
+          console.log(error);
+          alert('게시글을 불러오지 못했습니다.');
+          navigate(-1);
+        }
       }
     };
     fetchData();
   }, []);
+
+  const convertLineForTextarea = (text) => {
+    return text.replaceAll('@d`}', '\n');
+  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -50,27 +70,27 @@ function Write() {
   const addConvertLine = (text) => {
     return text.replace(/\n/g, '@d`}');
   };
-  //서브밋
+
   const handleSubmit = async () => {
     if (!title || !content) {
       alert('제목과 내용을 작성해주세요.');
       return;
     }
 
-    const requestData = {
-      brdTitle: title,
-      brdContent: addConvertLine(content),
-      mem_name: loggedUserName,
-      mem_email: email,
-    };
-
     try {
-      await axios.post('/toonder/board', requestData);
-      alert('글이 저장되었습니다.');
+      const addLineContent = addConvertLine(content);
+      await axios.put(`/toonder/board/${brdNo}`, {
+        brdTitle: title,
+        brdContent: addLineContent,
+        mem_name: loggedUserName,
+        mem_email: email,
+      });
+      alert('게시글이 수정되었습니다.');
       navigate(-1);
     } catch (error) {
       console.log(error);
-      alert('글을 저장하지 못했습니다.');
+      alert('게시글 수정이 실패했습니다.');
+      navigate(-1);
     }
   };
 
@@ -78,7 +98,7 @@ function Write() {
     <MainBackgorund>
       <div className="writeboard">
         <br />
-        <h2>글쓰기</h2>
+        <h2>수정하기</h2>
         <br />
         <input
           style={{ fontSize: '20px' }}
@@ -123,4 +143,4 @@ function Write() {
   );
 }
 
-export default Write;
+export default Edit;

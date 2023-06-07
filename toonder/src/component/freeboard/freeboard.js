@@ -120,7 +120,9 @@ function Freeboard() {
                     <div className="meta">
                       <span>{post.mem_name}</span>
                       <span>|</span>
-                      <span>{post.brdViewCount}</span>
+                      <span>⚯ {post.brdViewCount}</span>
+                      <span>|</span>
+                      <span>☺ {post.brdLike}</span>
                       <span>|</span>
                       <span>{post.brdRegDate.split('T')[0]}</span>
                     </div>
