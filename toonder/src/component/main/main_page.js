@@ -24,6 +24,7 @@ function Mainpage(props) {
         navigate('/');
       } else {
         const email = session.user.email;
+        sessionStorage.setItem('loggedUserEmail', email);
         const requestData = {
           email: email,
         };
@@ -31,7 +32,6 @@ function Mainpage(props) {
         axios
           .post('toonder/recommand', requestData)
           .then((res) => {
-            console.log(res.data);
             setResData(res.data);
             setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
           })
@@ -91,7 +91,6 @@ function Mainpage(props) {
                 position: 'absolute',
                 color: 'rgb(255, 147, 147)',
                 display: 'flex',
-                zIndex: 1,
                 backgroundColor: 'white',
                 width: '150px',
                 height: '25px',
@@ -130,7 +129,9 @@ function Mainpage(props) {
                         <button
                           className="refresh"
                           onClick={() => {
-                            navigate('/mainwebtooninfo', {state : {mastrId : item.mastrId}});
+                            navigate('/mainwebtooninfo', {
+                              state: { mastrId: item.mastrId },
+                            });
                           }}
                         >
                           <div className="imageContainer">

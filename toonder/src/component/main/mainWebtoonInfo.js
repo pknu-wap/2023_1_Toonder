@@ -1,36 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import "./mainPage.css";
+import './mainPage.css';
 
 import MainBackgorund from '../backgrounds/mainBackground';
 import Modal from './modal';
 
-import ex1 from "../../images/ex1.png"
+import ex1 from '../../images/ex1.png';
 
-import zero from "../../images/zero.png"
-import one from "../../images/one.png"
-import two from "../../images/two.png"
-import three from "../../images/three.png"
-import four from "../../images/four.png"
-import five from "../../images/five.png"
-import six from "../../images/six.png"
-import seven from "../../images/seven.png"
-import eight from "../../images/eight.png"
-import nine from "../../images/nine.png"
-import ten from "../../images/ten.png"
+import zero from '../../images/zero.png';
+import one from '../../images/one.png';
+import two from '../../images/two.png';
+import three from '../../images/three.png';
+import four from '../../images/four.png';
+import five from '../../images/five.png';
+import six from '../../images/six.png';
+import seven from '../../images/seven.png';
+import eight from '../../images/eight.png';
+import nine from '../../images/nine.png';
+import ten from '../../images/ten.png';
 
 import MainBackSmall from '../backgrounds/mainBackSmall';
 import axios from 'axios';
 import supabase from '../supabase';
 
 function MainWebtoonInfo() {
-  
-  const {state} = useLocation();
-  const {mastrId} = state;
+  const { state } = useLocation();
+  const { mastrId } = state;
 
-  const [userEmail, setUserEmail] = useState('')
+  const [userEmail, setUserEmail] = useState('');
 
   const [webtoonImage, setWebtoonImage] = useState(ex1);
+
   const [webtoonTitle, setWebtoonTitle] = useState("");
   const [webtoonOutline, setWebtoonOutline] = useState("");
   const [webtoonAuthors, setWebtoonAuthors] = useState("");
@@ -101,7 +101,10 @@ function MainWebtoonInfo() {
         setOpenModalForRefRating(true)         
       }
 
+
     }
+  };
+
 
     
     const handleConfirmModal = () => {
@@ -163,7 +166,21 @@ function MainWebtoonInfo() {
     const handleChange = (event) => {
       console.log(event.target)
       setInputReviewText(event.target.value)
+
     }
+    setRegRateValue(5.0);
+  };
+
+  const handleChange = (event) => {
+    console.log(event.target);
+    setInputReviewText(event.target.value);
+  };
+
+  const closeModal = () => {
+    setOpenModalForRefRating(false);
+    setRegRateValue(5.0);
+  };
+
 
     const handleChangeForModal = (event) => {
       console.log(event.target)
@@ -201,10 +218,12 @@ function MainWebtoonInfo() {
     }
 
   
+
   return (
     <>
-    <div>
+      <div>
         {openModalForRegRating && (
+
           <Modal>
             <div style={{height:'40%'}}>
               <h2 style={{position:"relative", top:'-20%'}}>⭐별점 주기⭐</h2>
@@ -212,6 +231,7 @@ function MainWebtoonInfo() {
               <div onClick={() => {setRegRateValue(regRateValue-0.5 >=0 ? regRateValue-0.5 : 0)}} style={{marginRight:'10px'}}>-</div>
               <img style={{position:"relative", top:'-10%'}} src={imageForRateStar[rateToInteger[regRateValue]]} alt={regRateValue}/>
               <div onClick={() => {setRegRateValue(regRateValue+0.5 <=5 ? regRateValue+0.5 : 5)}}style={{marginLeft :'10px'}}>+</div>
+
             </div>
             </div>
             
@@ -224,6 +244,7 @@ function MainWebtoonInfo() {
 
       <div>
         {openModalForConfirm && (
+
           <Modal>
             <div style={{height:'40%'}}>
               <h2 style={{position:"relative", top:'-20%'}}>리뷰를 등록하시겠습니까?</h2>
@@ -351,11 +372,47 @@ function MainWebtoonInfo() {
         
       </div>
 
-      </MainBackSmall>
-    </MainBackgorund>
+
+            <div className="mainStory">
+              <h1>줄거리</h1>
+              <ul>
+                <li>{webtoonOutline}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mainReview">
+            <h1>리뷰</h1>
+            <section>
+              <ul>
+                {[...reviewList].reverse().map((review) => (
+                  <li>
+                    {review.revContent}{' '}
+                    <img
+                      src={imageForRateStar[rateToInteger[review.revRating]]}
+                      alt={review.revRating}
+                    />{' '}
+                    - {review.memName}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <input
+              id="reviewInputBox"
+              type="text"
+              value={inputReviewText}
+              onChange={handleChange}
+              placeholder="    리뷰를 달아보세요!"
+            />
+
+            <button onClick={() => handleRegReview()} id="reviewRegButton">
+              등록
+            </button>
+          </div>
+        </MainBackSmall>
+      </MainBackgorund>
     </>
-
   );
-
 }
 export default MainWebtoonInfo;

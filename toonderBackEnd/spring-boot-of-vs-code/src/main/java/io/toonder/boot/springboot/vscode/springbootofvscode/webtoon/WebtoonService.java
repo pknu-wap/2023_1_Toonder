@@ -13,8 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -77,39 +76,33 @@ public class WebtoonService {
         return new WebtoonResponseDto(webtoon);
     }
 
-    /* 
-    //키워드로 제목 비교해서 search
-    public List<Webtoon> searchWebtoonsByTitle(String keyword) {
-        return webtoonRepository.findByTitleContaining(keyword);
-    }*/
-    // 키워드로 제목 비교해서 search
-    public ResponseEntity<Map<String, Object>> searchWebtoonsByTitle(String keyword, int currentPageNum) {
-        int totalCount = webtoonRepository.countByTitleContaining(keyword);
+    //웹툰 제목으로 검색 (페이징 처리)
+    @Transactional
+    public ResponseEntity<Map<String, Object>> search(String keyword, Pageable pageable) {
+        Map<String, Object> result = new HashMap<>();
 
-        PagingUtil pagingUtil = new PagingUtil(currentPageNum, 64, 10, totalCount);
-        pagingUtil.setCalcForPaging();
-
-        PageRequest pageable = PageRequest.of(pagingUtil.getCurrentPage() - 1, pagingUtil.getObjectCountPerPage());
-
-        Page<Webtoon> webtoonPage = webtoonRepository.findByTitleContaining(keyword, pageable);
-
-        List<WebtoonResponseDto> webtoonResponseList = webtoonPage.getContent().stream()
-                .map(WebtoonResponseDto::new)
-                .collect(Collectors.toList());
-
-        if (webtoonResponseList.isEmpty()) {
+        if (keyword == null || keyword.isEmpty()) {
             Map<String, Object> emptyResponse = new HashMap<>();
-            emptyResponse.put("message", "검색 결과가 없습니다.");
+            emptyResponse.put("message", "키워드를 입력하세요");
             return ResponseEntity.ok(emptyResponse);
         }
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("webtoonList", webtoonResponseList);
-        response.put("pagingUtil", pagingUtil);
+        List<Webtoon> webtoonList = webtoonRepository.findByTitleContaining(keyword, pageable);
+        if (webtoonList == null || webtoonList.isEmpty()) {
+            Map<String, Object> emptyResponse = new HashMap<>();
+            emptyResponse.put("message", "검색 결과가 없습니다");
+            return ResponseEntity.ok(emptyResponse);
+        }
 
-        return ResponseEntity.ok(response);
+        List<WebtoonResponseDto> dtoList = new ArrayList<>();
+        for (Webtoon webtoon : webtoonList) {
+            WebtoonResponseDto dto = new WebtoonResponseDto(webtoon);
+            dtoList.add(dto);
+        }
+
+        result.put("list", dtoList);
+        return ResponseEntity.ok(result);
     }
-    
 
 
 	// --- 리뷰 ---
@@ -207,7 +200,6 @@ public class WebtoonService {
 
 	// 댓글 좋아요 기능
     public ReviewResponseDto likeReview(String mastrId, Integer revNo,String mem_email) {
-        //Webtoon webtoon = webtoonRepository.findById(mastrId).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
         Review review = reviewRepository.findById(revNo)
                 .orElseThrow(() -> new RuntimeException("댓글을 찾을 수 없습니다."));
 

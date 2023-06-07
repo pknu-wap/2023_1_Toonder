@@ -1,4 +1,28 @@
 /*Freeboard*/
+.postboard {
+  width: 1224px;
+  height: 790px;
+  background-color: rgb(255, 147, 147);
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.postboard h2 {
+  padding: 8px 58px;
+  color: white;
+  margin-left: 8px;
+}
+#commentwrite {
+  width: 1062px;
+  height: 25px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  margin-left: 66px;
+}
+
 .mainboard,
 .writeboard {
   width: 1224px;
@@ -27,11 +51,6 @@
   text-decoration: none;
 }
 
-.subbuttons {
-  display: flex;
-  justify-content: space-between;
-}
-
 #freewrite,
 #save {
   background-color: rgb(255, 147, 147);
@@ -47,7 +66,7 @@
 .pagination {
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 5px;
 }
 
 .pagination a {
@@ -94,6 +113,34 @@
 }
 
 /*Freeboard writing*/
+#repl2 {
+  overflow: auto;
+  width: 1062px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  margin-left: 66px;
+  height: 170px;
+}
+#repl2::-webkit-scrollbar {
+  width: 6px;
+}
+
+#repl2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#repl2::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+#repl2::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 #postinfo,
 #postcontent,
 #repl {
@@ -139,4 +186,66 @@
   color: rgb(255, 147, 147);
   font-size: 15px;
   margin-right: 10px;
+}
+
+#freewrite {
+  font-size: 20px;
+  position: relative;
+  height: 40px;
+  left: -65px;
+  width: 80px;
+  height: 35px;
+  margin-top: -535px;
+  margin-bottom: 20px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+}
+button:hover {
+  cursor: pointer;
+}
+
+loadingIcon {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* freeboard.css */
+#postcontent {
+  height: 249px;
+  overflow: auto;
+}
+
+#repl {
+  height: 120px;
+  overflow: auto;
+}
+
+/* Scrollbar Styles */
+#postcontent::-webkit-scrollbar,
+#repl::-webkit-scrollbar {
+  width: 6px;
+}
+
+#postcontent::-webkit-scrollbar-track,
+#repl::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#postcontent::-webkit-scrollbar-thumb,
+#repl::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+#postcontent::-webkit-scrollbar-thumb:hover,
+#repl::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
