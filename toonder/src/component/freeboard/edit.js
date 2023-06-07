@@ -14,6 +14,10 @@ function Edit() {
   const brdNo = location.state?.brdNo;
 
   useEffect(() => {
+    document.title = 'Toonder 게시글수정';
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.auth.getSession();
       const session = data.session;

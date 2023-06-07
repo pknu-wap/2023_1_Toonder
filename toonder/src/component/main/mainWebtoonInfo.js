@@ -24,6 +24,9 @@ import axios from 'axios';
 import supabase from '../supabase';
 
 function MainWebtoonInfo() {
+  useEffect(() => {
+    document.title = 'Toonder 웹툰 정보';
+  }, []);
   const { state } = useLocation();
   const { mastrId } = state;
 
