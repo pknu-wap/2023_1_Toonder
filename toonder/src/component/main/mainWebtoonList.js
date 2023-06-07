@@ -8,6 +8,9 @@ import MainBackSmall from '../backgrounds/mainBackSmall';
 import { FaSpinner } from 'react-icons/fa'; // 로딩 아이콘 추가
 
 function MainWebtoonList() {
+  useEffect(() => {
+    document.title = 'Toonder 웹툰 목록';
+  }, []);
   const [webtoonList, setWebToonList] = useState([]);
   const [countPage, setCountPage] = useState(1);
   const [firstLoading, setFirstLoading] = useState(true);

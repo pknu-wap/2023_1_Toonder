@@ -13,6 +13,10 @@ function Freeboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Toonder 자유게시판';
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/toonder/board?p_num=${pageNum}`);
