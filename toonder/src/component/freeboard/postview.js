@@ -18,7 +18,6 @@ function PostView() {
   const [editingCommentId, setEditingCommentId] = useState('');
   const [comment, setComment] = useState('');
   const [isCommentDelete, setIsCommentDelete] = useState(false);
-  const [isClickLike, setIsClickLike] = useState(false);
   const [isClickCommentLike, setIsClickCommentLike] = useState(false);
   //줄바꿈기능
   const convertLine = (text) => {
@@ -64,12 +63,11 @@ function PostView() {
         console.log(error);
         alert('게시글을 불러오지 못했습니다.');
       } finally {
-        setIsClickLike(false);
       }
     };
 
     fetchData();
-  }, [brdNo, isClickLike]);
+  }, [brdNo]);
 
   const handleEditContent = () => {
     if (post.mem_email !== email) {
@@ -106,14 +104,9 @@ function PostView() {
       const headers = {
         mem_email: email,
       };
-      const response = await axios.post(
-        `/toonder/board/${brdNo}/comment/${cmtNo}/like`,
-        null,
-        {
-          headers,
-        }
-      );
-      setIsClickCommentLike(true);
+      await axios.post(`/toonder/board/${brdNo}/comment/${cmtNo}/like`, null, {
+        headers,
+      });
       alert('댓글 좋아요가 반영되었습니다.');
     } catch (error) {
       console.log(error);
@@ -145,6 +138,7 @@ function PostView() {
         headers,
       });
       alert('좋아요가 반영되었습니다.');
+      window.location.reload();
     } catch (error) {
       console.log(error);
       alert('좋아요가 실패 했습니다.');
@@ -248,7 +242,6 @@ function PostView() {
               <button
                 onClick={() => {
                   handleLike();
-                  setIsClickLike(true);
                 }}
               >
                 ☺︎
