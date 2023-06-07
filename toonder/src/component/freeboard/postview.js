@@ -315,7 +315,10 @@ function PostView() {
                       {comment.cmtLike}
                       <div className={styles.commentClicker}>
                         <button
-                          onClick={() => handleLikeComment(comment.cmtNo)}
+                          onClick={() => {
+                            handleLikeComment(comment.cmtNo);
+                            setIsClickCommentLike(true);
+                          }}
                         >
                           ☺︎
                         </button>{' '}
