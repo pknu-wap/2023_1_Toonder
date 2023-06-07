@@ -16,6 +16,7 @@ public class ReviewResponseDto {
     private Integer revLike; 
     private Double revRating;
     private String memName;
+    private String memEmail;
     private String mastrId;
  
 
@@ -28,6 +29,7 @@ public class ReviewResponseDto {
     this.revLike = review.getRevLike();
     this.revRating = review.getRevRating();
     this.memName = review.getMember().getMem_name(); 
+    this.memEmail = review.getMember().getMem_email();
     this.mastrId = review.getWebtoon().getMastrId();
     }
 }
