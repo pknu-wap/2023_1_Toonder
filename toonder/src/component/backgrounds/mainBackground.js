@@ -6,15 +6,6 @@ import axios from 'axios';
 
 function MainBackgorund(props) {
   const navigate = useNavigate();
-  /*
-    onClick={() => {
-      navigate('위치', {
-      state: { 넘겨줄 변수이름: 실제값 },
-    }); 
-    
-    
-    */
-
   const [searchContent, setSearchContent] = useState('');
   const handleInputChange = (event) => {
     setSearchContent(event.target.value);

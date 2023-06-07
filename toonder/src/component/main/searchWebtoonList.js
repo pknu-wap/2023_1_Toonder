@@ -18,6 +18,7 @@ function SearchWebtoonList() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchContent = location.state?.searchContent;
+  console.log(searchContent);
 
   function onScroll() {
     const windowHeight =
@@ -51,6 +52,11 @@ function SearchWebtoonList() {
   });
 
   useEffect(() => {
+    setWebToonList([]);
+    setCountPage(1);
+    setFirstLoading(true);
+    setIsLoading(true);
+
     axios
       .get(
         `toonder/webtoon/search?keyword=${encodeURIComponent(
@@ -59,17 +65,14 @@ function SearchWebtoonList() {
       )
       .then((res) => {
         console.log(res.data);
-        if (res.data.length == 0) {
+        if (res.data.length === 0) {
           alert('검색어에 일치하는 웹툰이 없습니다.');
           navigate(-1);
         }
-        if (webtoonList.length === 0 && res.data.length > 0) {
+        if (res.data.length > 0) {
           setIsLoading(false);
           setWebToonList(res.data);
           setFirstLoading(false);
-        } else {
-          setIsLoading(false);
-          setWebToonList((prevWebtoonList) => prevWebtoonList.concat(res.data));
         }
       })
       .catch((error) => {
@@ -77,7 +80,8 @@ function SearchWebtoonList() {
         setIsLoading(false);
         // 에러 처리를 원하는 대로 수행하세요.
       });
-  }, [countPage, searchContent]);
+  }, [searchContent]);
+
   const listCreator = () => {
     var countForTrSplit = 1;
     var trWebtoonList = [];
@@ -124,9 +128,11 @@ function SearchWebtoonList() {
                                 alt="image error"
                               />
                             </button>
-                            <p className="webtoonTitle">
-                              {trWebtoonInfo.title}
-                            </p>
+                            <div className="titleWrap">
+                              <p className="webtoonTitle">
+                                {trWebtoonInfo.title}
+                              </p>
+                            </div>
                           </div>
                         </td>
                       ))}

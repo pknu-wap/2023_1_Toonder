@@ -96,7 +96,7 @@ function Freeboard() {
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              top: '30%',
+              top: '40%',
             }}
           >
             <FaSpinner className="loadingIcon" />
@@ -130,32 +130,20 @@ function Freeboard() {
                 </li>
               ))}
             </ul>
-            <button
-              id="freewrite"
-              onClick={() => {
-                navigate('/write');
-              }}
-            >
-              글쓰기
-            </button>
           </>
         )}
       </div>
-      <div className="pagination">
-        <a href="#" onClick={goToFirstPage}>
-          &lt;&lt;
-        </a>
-        <a href="#" onClick={goToPrevPage}>
-          &lt;
-        </a>
-        {paginationButtons}
-        <a href="#" onClick={goToNextPage}>
-          &gt;
-        </a>
-        <a href="#" onClick={goToLastPage}>
-          &gt;&gt;
-        </a>
-      </div>
+      {!loading && (
+        <button
+          id="freewrite"
+          style={{ marginTop: '-590px' }}
+          onClick={() => {
+            navigate('/write');
+          }}
+        >
+          글쓰기
+        </button>
+      )}
     </MainBackgorund>
   );
 }
