@@ -1,7 +1,7 @@
 /*Freeboard*/
 .postboard {
   width: 1224px;
-  height: 750px;
+  height: 790px;
   background-color: rgb(255, 147, 147);
   border-radius: 10px;
   margin-top: 50px;
@@ -113,6 +113,34 @@
 }
 
 /*Freeboard writing*/
+#repl2 {
+  overflow: auto;
+  width: 1062px;
+  background-color: white;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  margin-left: 66px;
+  height: 170px;
+}
+#repl2::-webkit-scrollbar {
+  width: 6px;
+}
+
+#repl2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#repl2::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+#repl2::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 #postinfo,
 #postcontent,
 #repl {
