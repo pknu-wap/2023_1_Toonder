@@ -47,11 +47,9 @@ function Search(props) {
   }, [isLoading]);
 
   useEffect(() => {
-    console.log(props.webtoontitle);
-  }, [props.webtoontitle]);
-
-  useEffect(() => {
-    axios.get(`/toonder/webtoon/search?keyword=${searchTitle}&currentPageNum=${countPage}`).then((res) => {
+    axios
+      .get(`/toonder/webtoon?keyword=${searchTitle}&currentPageNum=${countPage}`)
+      .then((res) => {
         if (res.data && res.data.length > 0) {
           setWebToonList(res.data);
           setFirstLoading(false);
@@ -62,9 +60,11 @@ function Search(props) {
         console.error(error);
         setIsLoading(false);
       });
-  }, [searchTitle]);
+  }, [searchTitle, countPage]);
+
 
   console.log(searchTitle);
+  console.log(countPage);
 
   const listCreator = () => {
     var countForTrSplit = 1;
@@ -80,42 +80,43 @@ function Search(props) {
           <>
             <table>
             {webtoonList
-                .filter((webtoonInfo) => webtoonInfo.title.includes(searchTitle))
-                .map((webtoonInfo) => {
-                  if (countForTrSplit === 1) {
-                    trWebtoonList = [];
-                  }
-                  trWebtoonList.push(webtoonInfo);
-                  if (countForTrSplit === 4) {
-                    countForTrSplit = 1;
-                    return (
-                      <tr>
-                        {trWebtoonList.map((trWebtoonInfo) => (
-                          <td>
-                            <tr>
-                              <td>
-                                <button
-                                  onClick={() => {
-                                    navigate('/mainwebtooninfo', { state: { mastrId: trWebtoonInfo.mastrId } });
-                                  }}
-                                >
-                                  <img src={trWebtoonInfo.imageDownloadUrl} alt="image error" />
-                                </button>
-                              </td>
-                            </tr>
-                            <tr style={{ height: '65px' }}>
-                              <td style={{ height: '75px' }}>
-                                <p className="webtoonTitle">{trWebtoonInfo.title}</p>
-                              </td>
-                            </tr>
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  } else {
-                    countForTrSplit += 1;
-                  }
-                })}
+              .filter((webtoonInfo) => webtoonInfo.title.includes(searchTitle) || webtoonInfo.title.includes(searchTitle))
+              .map((webtoonInfo) => {
+                if (countForTrSplit === 1) {
+                  trWebtoonList = [];
+                }
+                trWebtoonList.push(webtoonInfo);
+                if (countForTrSplit === 4) {
+                  countForTrSplit = 1;
+                  return (
+                    <tr>
+                      {trWebtoonList.map((trWebtoonInfo) => (
+                        <td>
+                          <tr>
+                            <td>
+                              <button
+                                onClick={() => {
+                                  navigate('/mainwebtooninfo', { state: { mastrId: trWebtoonInfo.mastrId } });
+                                }}
+                              >
+                                <img src={trWebtoonInfo.imageDownloadUrl} alt="image error" />
+                              </button>
+                            </td>
+                          </tr>
+                          <tr style={{ height: '65px' }}>
+                            <td style={{ height: '75px' }}>
+                              <p className="webtoonTitle">{trWebtoonInfo.title}</p>
+                            </td>
+                          </tr>
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                } else {
+                  countForTrSplit += 1;
+                }
+              })}
+
             </table>
 
             {isLoading ? (

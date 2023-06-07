@@ -10,7 +10,7 @@
     const [webtoontitle, setWebtoontitle] = useState('');
 
     const handleSearch = () => {
-      navigate(`/webtoonsearch?title=${webtoontitle}`);
+      navigate(`/search?title=${webtoontitle}`);
     };
 
     return (

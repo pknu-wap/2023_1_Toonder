@@ -34,7 +34,7 @@ function App() {
           <Route path="/infochange" element={<InfoC />} />
           <Route path="/newpw" element={<Newpw />} />
           <Route path="/join" element={<Join />} />
-          <Route path="/webtoonsearch" element={<Search />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>
