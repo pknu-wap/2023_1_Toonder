@@ -1,15 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './freeboard.css';
 import MainBackgorund from '../backgrounds/mainBackground';
 import axios from 'axios';
+import supabase from '../supabase';
 
 function Write() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const loggedUserName = localStorage.getItem('loggedUserName');
-  const email = sessionStorage.getItem('loggedUserEmail');
+  const [loggedUserName, setLoggedUserName] = useState();
+  const [email, setEmail] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      const session = data.session;
+
+      if (session === null) {
+        alert('로그인을 먼저 해주세요.');
+        navigate('/');
+      } else {
+        const email = session.user.email;
+        setEmail(email);
+
+        const rdata = {
+          email: email,
+        };
+
+        axios
+          .post('toonder/name', rdata)
+          .then((loggedUserData) => {
+            setLoggedUserName(loggedUserData.data.mem_name);
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -19,6 +47,10 @@ function Write() {
     setContent(event.target.value);
   };
 
+  const addConvertLine = (text) => {
+    return text.replace(/\n/g, '@d`}');
+  };
+  //서브밋
   const handleSubmit = async () => {
     if (!title || !content) {
       alert('제목과 내용을 작성해주세요.');
@@ -27,7 +59,7 @@ function Write() {
 
     const requestData = {
       brdTitle: title,
-      brdContent: content,
+      brdContent: addConvertLine(content),
       mem_name: loggedUserName,
       mem_email: email,
     };
