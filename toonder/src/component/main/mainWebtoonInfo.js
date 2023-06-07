@@ -45,18 +45,19 @@ function MainWebtoonInfo() {
   const [openModalForRegRating, setOpenModalForRefRating] = useState(false)
   const [openModalForConfirm, setOpenModalForConfirm] = useState(false)
   const [openModalConfirmMessage, setOpenModalConfirmMessage] = useState(false)
+  const [openModalForModify, setOpenModalForModify] = useState(false)
 
   const [regRateValue, setRegRateValue] = useState(5.0)
   const imageForRateStar = [zero,one,two,three,four,five,six,seven,eight,nine,ten]
   const rateToInteger = {0 : 0, 0.5 : 1, 1.0 : 2, 1.5 : 3,
     2.0 : 4, 2.5 : 5, 3.0 : 6, 3.5 : 7, 4.0 : 8, 4.5 : 9, 5.0 : 10}  
 
-  
+  const [textModalForModify, setTextModalForModify] = useState('')
+  const [textModalRateValue,setTextModalRateValue] = useState(0.5)
+  const [textModalRevNo, setTextModalRevNo] = useState()
 
-  useEffect( async() => {
-    const { data, error } = await supabase.auth.getSession();
-    const session = data.session;
-    setUserEmail(session.user.email)
+  useEffect( () => {
+    setUserEmailForStart()
 
     axios
       .get('toonder/webtoon/'+mastrId)
@@ -83,7 +84,14 @@ function MainWebtoonInfo() {
 
     },[])
 
-    const handleRegReview = async () => {
+    const setUserEmailForStart = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      const session = data.session;
+      setUserEmail(session.user.email)
+
+    }
+
+    const handleRegReview = () => {
       
       
       if (inputReviewText === ""){
@@ -103,6 +111,7 @@ function MainWebtoonInfo() {
     }
 
     const sendingReviewToBackEnd = () => {
+      
 
         const sendingReviewData = {
           revContent : inputReviewText,
@@ -114,10 +123,13 @@ function MainWebtoonInfo() {
         console.log(sendingReviewData)
 
         axios.post('toonder/webtoon/'+mastrId+'/review',sendingReviewData)
-          .then(res => console.log(res))
+          .then(res => {
+            console.log(res.data)
+            setReviewList(reviewList.concat(res.data))
+          })
           .catch(error => console.log(error))
 
-        setReviewList(reviewList.concat(sendingReviewData))
+        
         setInputReviewText('')
       
       setRegRateValue(5.0)
@@ -125,16 +137,46 @@ function MainWebtoonInfo() {
       setOpenModalConfirmMessage(true);
     }
     
+    const sendingModifiedReviewToBackEnd = () => {
+      const sendingReviewData = {
+        revContent : textModalForModify,
+        revRating : textModalRateValue,
+        memName : localStorage.getItem('loggedUserName'),
+        memEmail : userEmail
+      }
+
+      console.log(sendingReviewData)
+      
+      axios.put('toonder/webtoon/'+mastrId+'/review/'+textModalRevNo,sendingReviewData)
+      .then(res => {
+        console.log(res.data)
+        setReviewList(reviewList.map(review => review.revNo === textModalRevNo ? res.data : review))
+      })
+      .catch(error => console.log(error))
+      
+      
+
+      setOpenModalForModify(false)
+      
+    }
     
     const handleChange = (event) => {
       console.log(event.target)
       setInputReviewText(event.target.value)
     }
 
+    const handleChangeForModal = (event) => {
+      console.log(event.target)
+      setTextModalForModify(event.target.value)
+    }
+
+
+
     const closeModal = () => {
       setOpenModalForRefRating(false);
       setOpenModalForConfirm(false);
       setOpenModalConfirmMessage(false);
+      setOpenModalForModify(false)
       setRegRateValue(5.0)
     }
 
@@ -153,8 +195,12 @@ function MainWebtoonInfo() {
       axios
         .delete('toonder/webtoon/' + mastrId + '/review/' + revNo, {data:sendingData})
         .catch(error => console.log(error))
+
+      setReviewList(reviewList.filter(review => review.revNo !== revNo))
+        
     }
-    
+
+  
   return (
     <>
     <div>
@@ -197,7 +243,25 @@ function MainWebtoonInfo() {
             <button style={{position:'relative', top:'10%', fontSize:'20px'}} onClick={closeModal}>확인</button>
           </Modal>
         )}
-      </div> 
+      </div>
+
+      <div>
+        {openModalForModify && (
+          <Modal>
+            <div style={{height:'40%'}}>
+              <h2 style={{backgroundColor:'#FF9393', color : 'white', position:"relative", top:'-10%'}}>리뷰 수정</h2>
+            </div>
+            <input type ="text" onChange={handleChangeForModal} value={textModalForModify} style={{position:"relative", top:'-15%', width : '90%', height:"30%"}}/>
+            <div style = {{position:"relative", top:'-5%', display:'flex', flexDirection:'row'}}>
+              <div onClick={() => {setTextModalRateValue(textModalRateValue-0.5 >=0 ? textModalRateValue-0.5 : 0)}} style={{marginRight:'10px'}}>-</div>
+              <img style={{position:"relative", top:'-10%'}} src={imageForRateStar[rateToInteger[textModalRateValue]]} alt={textModalRateValue}/>
+              <div onClick={() => {setTextModalRateValue(textModalRateValue+0.5 <=5 ? textModalRateValue+0.5 : 5)}}style={{marginLeft :'10px'}}>+</div>
+            </div>
+            <button style={{backgroundColor:'#FF9393', color : 'white', position:'relative', top:'0%', fontSize:'20px'}} onClick={sendingModifiedReviewToBackEnd}>수정</button>
+            <button style={{backgroundColor:'#FF9393', color : 'white',position:'relative', top:'5%'}} onClick={closeModal}>취소</button>
+          </Modal>
+        )}
+      </div>
 
     <MainBackgorund>
       <MainBackSmall>
@@ -231,7 +295,7 @@ function MainWebtoonInfo() {
         <div className='mainStory'>
             <h1>줄거리</h1>
             <ul>
-              <li>{webtoonOutline}</li>
+              <li>{webtoonOutline.length > 200 ? webtoonOutline.substring(0,200) + "..." : webtoonOutline}</li>
             </ul>
         </div>
       </div>
@@ -242,26 +306,34 @@ function MainWebtoonInfo() {
           <ul>
             {
               [...reviewList].reverse().map(review => (
-                <li>
+                <li key={review.revNo}>
                   <div style={{display:'flex', flexDirection:'row'}}>
                     {review.revContent} 
                       <img src={imageForRateStar[rateToInteger[review.revRating]]} alt = {review.revRating} style={{height:'15px', margin:'5px'}}/> 
                       <text style={{marginRight:'5px'}}> - </text> 
                     
-                    {review.memName}
+                    {review.memName === null ? localStorage.getItem('loggedUserName') : review.memName}
                     
                     
                     {
                         review.memEmail === userEmail ? (
-                          <>
-                          <text style={{marginLeft : '10px'}}>[  </text>
+                          <div>
+                          
                           <div className="mainWebtoonReview" style={{display:'flex', flexDirection:'row'}}>
-                            <button >수정</button>
+                          <text style={{marginLeft : '10px'}}>[  </text>
+                            <button onClick = {() => {
+                              setTextModalForModify(review.revContent)
+                              setTextModalRevNo(review.revNo)
+                              setTextModalRateValue(review.revRating)
+                              console.log(review.revNo)
+                              setOpenModalForModify(true)
+                            }}>수정</button>
                             <text>|</text>
                             <button onClick = {() => deleteReview(review.revNo, review)}>삭제</button>
+                            <text>]</text>
                           </div>
-                          <text>]</text>
-                          </>
+                          
+                          </div>
                         ) : null
                       }
                       
