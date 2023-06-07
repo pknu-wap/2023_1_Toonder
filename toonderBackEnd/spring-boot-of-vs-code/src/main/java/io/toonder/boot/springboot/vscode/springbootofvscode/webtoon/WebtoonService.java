@@ -152,7 +152,7 @@ public class WebtoonService {
 					.findFirst()
 					.orElseThrow(() -> new ResourceNotFoundException(revNo + "번 댓글이 존재하지 않습니다"));
 
-			if (!review.getMember().getMem_email().equals(reviewDto.getMem_email())) {
+			if (!review.getMember().getMem_email().equals(reviewDto.getMemEmail())) {
 				throw new AccessDeniedException("댓글 수정 권한이 없습니다");
 			}
 
@@ -184,7 +184,7 @@ public class WebtoonService {
 					.findFirst()
 					.orElseThrow(() -> new ResourceNotFoundException(revNo + "번 댓글이 존재하지 않습니다"));
 	
-			if (!review.getMember().getMem_email().equals(reviewDto.getMem_email())) {
+			if (!review.getMember().getMem_email().equals(reviewDto.getMemEmail())) {
 				throw new AccessDeniedException("댓글 삭제 권한이 없습니다");
 			}
 	

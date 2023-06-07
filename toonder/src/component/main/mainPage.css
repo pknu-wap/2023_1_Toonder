@@ -611,3 +611,18 @@ table button {
   border-radius: 4px;
   z-index: 1; /* 다른 요소 위로 올리기 */
 }
+
+
+.mainWebtoonReview button {
+  width:40px;
+  height:20px;
+  font-size:12px;
+  display: flex;
+  flex-direction: center;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-right:5px;
+  margin-left:5px;
+  margin-top:2px;
+}
