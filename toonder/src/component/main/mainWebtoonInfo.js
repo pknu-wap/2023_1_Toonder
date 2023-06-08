@@ -383,17 +383,19 @@ function MainWebtoonInfo() {
                 리뷰 수정
               </h2>
             </div>
+            <div style={{backgroundColor : 'white', borderRadius:'10px', position: 'relative',top: '-15%',
+            width: '90%',height: '30%', alignItems:'center',justifyItems:'center'}}>
             <input
               type="text"
               onChange={handleChangeForModal}
               value={textModalForModify}
               style={{
-                position: 'relative',
-                top: '-15%',
-                width: '90%',
-                height: '30%',
+               height:'100%',
+               marginLeft:'10px',
+                
               }}
             />
+            </div>
             <div
               style={{
                 position: 'relative',
@@ -574,18 +576,24 @@ function MainWebtoonInfo() {
                 ))}
               </ul>
             </section>
+            
+            <div style={{ marginTop:'30px',display:'flex' ,flexDirection:'row', alignItems:'center', justifyItems:'center'}}>
+              <div style={{borderRadius:'10px',backgroundColor:'white' ,marginLeft : '37px', width: '760px' ,height: '58px'}}>
+              <input
+                id="reviewInputBox"
+                type="text"
+                value={inputReviewText}
+                onChange={handleChange}
+                placeholder="리뷰를 달아보세요!"
+                style={{marginTop : '10px', marginLeft:'10px',height:'60%', width:'90%'}}
+                
+              />
+              </div>
 
-            <input
-              id="reviewInputBox"
-              type="text"
-              value={inputReviewText}
-              onChange={handleChange}
-              placeholder="    리뷰를 달아보세요!"
-            />
-
-            <button onClick={() => handleRegReview()} id="reviewRegButton">
-              등록
-            </button>
+              <button onClick={() => handleRegReview()} id="reviewRegButton">
+                등록
+              </button>
+            </div>
           </div>
         </MainBackSmall>
       </MainBackgorund>

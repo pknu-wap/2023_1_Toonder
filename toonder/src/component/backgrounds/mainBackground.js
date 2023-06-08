@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../images/logoimage.png';
 import './backGround.module.css';
 import axios from 'axios';
 
 function MainBackgorund(props) {
+  const inputRef = useRef(null);
+  
   const navigate = useNavigate();
   const [searchContent, setSearchContent] = useState('');
   const handleInputChange = (event) => {
     setSearchContent(event.target.value);
   };
+
 
   return (
     <div className="mainPageBack">
@@ -28,13 +31,18 @@ function MainBackgorund(props) {
           </button>
         </div>
         <div className="mainSearch">
-          <input
-            id="mainSearchInput"
-            type="text"
-            placeholder="    찾고싶은 웹툰 제목 검색!"
-            value={searchContent}
-            onChange={handleInputChange}
-          />
+          <div className="mainSearch" style={{marginLeft:'5px',height:'60%',width:'87%',backgroundColor:'white', }}>
+            <input
+              ref={inputRef}
+              id="mainSearchInput"
+              type="text"
+              placeholder="찾고싶은 웹툰 제목 검색!"
+              value={searchContent}
+              onChange={handleInputChange}
+              style={{height:'100%'}}
+            />
+          </div>
+          
           <button
             id="mainSearchButton"
             onClick={() => {
@@ -45,6 +53,7 @@ function MainBackgorund(props) {
           >
             검색
           </button>
+          
         </div>
       </div>
       {props.children} {/* props.children 렌더링 */}
