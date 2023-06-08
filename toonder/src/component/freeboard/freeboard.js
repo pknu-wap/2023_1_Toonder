@@ -13,10 +13,6 @@ function Freeboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Toonder 자유게시판';
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/toonder/board?p_num=${pageNum}`);
@@ -100,7 +96,7 @@ function Freeboard() {
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              top: '40%',
+              top: '30%',
             }}
           >
             <FaSpinner className="loadingIcon" />
@@ -134,20 +130,32 @@ function Freeboard() {
                 </li>
               ))}
             </ul>
+            <button
+              id="freewrite"
+              onClick={() => {
+                navigate('/write');
+              }}
+            >
+              글쓰기
+            </button>
           </>
         )}
       </div>
-      {!loading && (
-        <button
-          id="freewrite"
-          style={{ marginTop: '-590px' }}
-          onClick={() => {
-            navigate('/write');
-          }}
-        >
-          글쓰기
-        </button>
-      )}
+      <div className="pagination">
+        <a href="#" onClick={goToFirstPage}>
+          &lt;&lt;
+        </a>
+        <a href="#" onClick={goToPrevPage}>
+          &lt;
+        </a>
+        {paginationButtons}
+        <a href="#" onClick={goToNextPage}>
+          &gt;
+        </a>
+        <a href="#" onClick={goToLastPage}>
+          &gt;&gt;
+        </a>
+      </div>
     </MainBackgorund>
   );
 }
