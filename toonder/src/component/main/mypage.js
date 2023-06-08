@@ -7,6 +7,9 @@ import supabase from '../supabase';
 import ex1 from '../../images/ex1.png';
 
 function Mypage() {
+  useEffect(() => {
+    document.title = 'Toonder 마이페이지';
+  }, []);
   const navigate = useNavigate();
   const [loggedUserName, setLoggedUserName] = useState(
     localStorage.getItem('loggedUserName')
