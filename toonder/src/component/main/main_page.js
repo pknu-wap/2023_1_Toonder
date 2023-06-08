@@ -13,7 +13,9 @@ function Mainpage(props) {
   const navigate = useNavigate();
   const [resdata, setResData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  useEffect(() => {
+    document.title = 'Toonder';
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.auth.getSession();

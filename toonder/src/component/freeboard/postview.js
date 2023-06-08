@@ -36,6 +36,10 @@ function PostView() {
     return text.replace(/\n/g, '@d`}');
   };
 
+  useEffect(() => {
+    document.title = 'Toonder 자유게시판';
+  }, []);
+
   //이메일 불러오기
   useEffect(() => {
     const fetchData = async () => {

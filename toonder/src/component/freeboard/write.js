@@ -13,6 +13,10 @@ function Write() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Toonder 게시글 작성';
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.auth.getSession();
       const session = data.session;
