@@ -68,3 +68,139 @@
     transform: rotate(360deg);
   }
 }
+.name {
+  transform: translateX(4.5%);
+  display: flex;
+  position: relative;
+  top: -80px;
+}
+
+.name input {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+  margin-right: 50px;
+  font-family: sans-serif;
+}
+
+.password {
+  transform: translateX(4.5%);
+  display: flex;
+  position: absolute;
+  top: 315px;
+}
+
+.password input {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  width: 220px;
+  box-sizing: border-box;
+  margin-right: 50px;
+  font-family: sans-serif;
+}
+
+.textBox {
+  transform: translateX(5%);
+  display: flex;
+  position: absolute;
+  top: 390px;
+}
+
+.submit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 705px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 28px;
+  transition: background-color 0.3s ease;
+  font-family: 'BMHANNAPro' !important;
+  width: 150px;
+}
+
+.loadingIcon {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.findPw {
+  transform: translateX(4.5%);
+  display: flex;
+  position: relative;
+  top: -30px;
+  left: -95px;
+}
+.afterFind {
+  transform: translateX(4.5%);
+  display: flex;
+  position: relative;
+  top: -30px;
+  left: -95px;
+}
+
+.findPw form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  top: -130px;
+  color: #fff;
+}
+
+.findPw h1 {
+  position: relative;
+  color: white;
+  font-size: 15px;
+  left: 5%;
+  margin-bottom: 50px;
+}
+
+.findPw button {
+  position: relative;
+  left: 280px;
+  top: -40px;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  font-family: 'BMHANNAPro' !important;
+}
+
+.findPw input {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 13px;
+  width: 370px;
+  box-sizing: border-box;
+  margin-right: -38px;
+}
+
+.pwSpinner {
+  position: relative;
+  color: white;
+  font-size: 15px;
+  left: 5%;
+  animation: spin 1s infinite linear;
+  margin-bottom: 50px;
+}

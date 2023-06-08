@@ -13,9 +13,15 @@ function Mainpage(props) {
   const navigate = useNavigate();
   const [resdata, setResData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reviewContent, setReviewContent] = useState([]);
+  const [reviewName, setReviewName] = useState([]);
+  const [webTitile, setWebTitle] = useState([]);
+  const [webId, setwebId] = useState([]);
+
   useEffect(() => {
     document.title = 'Toonder';
   }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.auth.getSession();
@@ -36,6 +42,27 @@ function Mainpage(props) {
           .then((res) => {
             setResData(res.data);
             setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
+          })
+          .catch((error) => console.log(error));
+
+        axios
+          .get('toonder/recentReviews')
+          .then((res) => {
+            const data = res.data;
+            console.log(data);
+            const webId = data.map((review) => review.webtoon.mastrId);
+            const webTitile = data.map((review) => review.webtoon.title);
+
+            const content = data.map((review) => review.revContent);
+            const userName = data.map((review) => review.member.mem_name);
+
+            console.log(content);
+            console.log(userName);
+
+            setWebTitle(webTitile);
+            setReviewContent(content);
+            setReviewName(userName);
+            setwebId(webId);
           })
           .catch((error) => console.log(error));
       }
@@ -164,16 +191,65 @@ function Mainpage(props) {
             </main>
           )}
           <div className="botPage">
-            <section>
-              <ul>
-                <li>
-                  사람의 감정과 이성의 중도를 너무 간결하게 이해시켜주는 작품인
-                  거 같습니다!” - Hanna Lee
-                </li>
-                <li>네이버 웹툰 중에서 제일 재밌음! - Stephan Lee</li>
-                <li>
-                  설레는 포인트도 많고, 정주행 10번은 해야지~ - Howard Wolowitz
-                </li>
+            <h2
+              style={{
+                marginLeft: '50px',
+                marginTop: '16px',
+                marginBottom: '15px',
+              }}
+            >
+              최근 리뷰
+            </h2>
+            <section
+              style={{
+                overflowY: 'scroll',
+                overflowX: 'hidden',
+                maxHeight: '500px',
+              }}
+            >
+              <ul
+                style={{
+                  marginTop: '40px',
+                  marginLeft: '10px',
+                }}
+              >
+                {reviewContent.slice(0, 3).map((content, index) => (
+                  <div
+                    style={{
+                      marginTop: '15px',
+                    }}
+                    key={index}
+                  >
+                    <div
+                      style={{
+                        width: '820px',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                        minHeight: '30px',
+                      }}
+                    >
+                      <div style={{ marginBottom: '6px' }}>
+                        <a
+                          onClick={() => {
+                            navigate('/mainwebtooninfo', {
+                              state: { mastrId: webId[index] },
+                            });
+                          }}
+                        >
+                          📖 {webTitile[index]}
+                        </a>
+                      </div>
+                      {reviewName[index]} : {content}
+                      <div
+                        style={{
+                          borderTop: '1px solid rgb(255, 147, 147)',
+                          width: '100%',
+                          margin: '10px 0 ',
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </ul>
             </section>
           </div>
