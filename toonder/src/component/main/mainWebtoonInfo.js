@@ -463,9 +463,12 @@ function MainWebtoonInfo() {
               취소
             </button>
           </Modal>
+          
         )}
       </div>
 
+
+  
       <MainBackgorund>
         <MainBackSmall>
           <div className="mainWebtoonInfo">
@@ -500,10 +503,10 @@ function MainWebtoonInfo() {
                   </text>
                 </div>
                 <ul>
-                  <div style={{ marginTop: '-20px' }}>
-                    <li>제목 : {webtoonTitle}</li>
-                    <li>글 / 그림 : {webtoonAuthors}</li>
-                    <li>연재처 : {webtoonPlatform}</li>
+                  <div style={{overflow : 'auto'}}>
+                    <li style={{marginTop:'5px'}}>제목 : <div style ={{marginLeft : '10px',marginTop : '10px'}}>- {webtoonTitle}</div></li>
+                    <li>글 / 그림 : <div style ={{marginTop : '10px'}}><div style ={{marginLeft : '10px',marginTop : '10px'}}>- {webtoonAuthors}</div></div></li>
+                    <li>연재처 : <div style ={{marginLeft : '10px',marginTop : '10px'}}>- {webtoonPlatform}</div></li>
                   </div>
                 </ul>
               </div>
@@ -511,11 +514,9 @@ function MainWebtoonInfo() {
 
             <div className="mainStory">
               <h1>줄거리</h1>
-              <ul>
-                <li>
-                  {webtoonOutline.length > 200
-                    ? webtoonOutline.substring(0, 200) + '...'
-                    : webtoonOutline}
+              <ul style={{overflow : 'auto'}}>
+                <li style ={{margin:'10px'}}>
+                  {webtoonOutline}
                 </li>
               </ul>
             </div>
