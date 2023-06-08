@@ -10,6 +10,7 @@
 ## <strong>목차</strong>
 - [Member](#member)
 - [Tech](#tech)
+- [Function](#function)
 
 ## <strong>Member</strong>
 - 장홍준 (BE)
@@ -34,4 +35,24 @@
   <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/>
 </div>
+
+## <strong>Function</strong>
+
+
+### <strong>1. WEBTOON
+- Search
+- Freeboard
+- Comment / Like / Rating
+- Sorted by Category
+- Find Category by Hash Tag
+
+### <strong>2. USER
+- Log in
+- Join
+- find ID,PW
+- Change User info.
+</strong>
+
 </div>
+
+
