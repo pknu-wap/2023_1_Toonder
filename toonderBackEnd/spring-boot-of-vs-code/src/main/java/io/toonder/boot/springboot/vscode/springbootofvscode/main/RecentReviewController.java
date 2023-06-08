@@ -1,5 +1,6 @@
 package io.toonder.boot.springboot.vscode.springbootofvscode.main;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,12 @@ public class RecentReviewController {
     private ReviewRepository reviewRepository;
     
     @RequestMapping(value = "/recentReviews", method = {RequestMethod.GET, RequestMethod.POST})
-    public List<Review> getMemberReview() { 
-        return reviewRepository.findAll();
+    public List<Review> getMemberReview() {
+        List<Review> reviewList = reviewRepository.findAll();
+        List<Review> result = reviewList.subList(reviewList.size()-5, reviewList.size());
+        Collections.reverse(result);
+        
+        return result;
         
     }
 }
