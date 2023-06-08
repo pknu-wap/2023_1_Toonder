@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface BoardRepository extends JpaRepository<Board, Integer>{
 
@@ -21,8 +22,10 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 			+ "ORDER BY brdNo DESC LIMIT ?1, ?2";
 	
 	
+
 	@Query(value = SELECT_BOARD_LIST_PAGED, nativeQuery = true)
 	List<Board> findFromTo(
 			final Integer objectStartNum,
 			final Integer objectEndNum);
+
 }
