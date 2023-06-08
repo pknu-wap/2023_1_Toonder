@@ -1,7 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=white&height=200&section=header&text=Toonder&fontSize=90" />
-
 
 <span style="color=white;background=rgb(255, 147, 147);">다양한 플랫폼에 있는 웹툰을 한 플랫폼에서 검색하고 추천 받을 수 있는 서비스를 제공하는 웹 사이트를 만드는 프로젝트입니다.</span>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=white&height=200&section=header&text=Toonder&fontSize=90" />
+
 
 <br>
 
