@@ -64,6 +64,7 @@ public class BoardService {
 		return ResponseEntity.ok(result);
 	}
 
+
     // 게시글 생성 (create)
     public BoardResponseDto createBoard(BoardRequestDto boardRequestDto) {
         Board board = boardRequestDto.toEntity();

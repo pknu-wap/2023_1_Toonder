@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("/toonder")
+@RequestMapping("/toonder") 
 public class BoardController {
     
     @Autowired
     private BoardService boardService;
+    
 
     @GetMapping("/board")
     public ResponseEntity<List<BoardResponseDto>> getAllBoards(@RequestParam(value = "p_num", required = false) Integer p_num) {
@@ -33,7 +35,7 @@ public class BoardController {
         if (response == null || response.getBody() == null) {
             return ResponseEntity.ok(Collections.emptyList());
         }
-    
+        
         List<BoardResponseDto> boardResponseDtoList = (List<BoardResponseDto>) response.getBody().get("list");
     
         return ResponseEntity.ok(boardResponseDtoList);

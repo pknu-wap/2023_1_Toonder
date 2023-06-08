@@ -33,13 +33,17 @@ import io.toonder.boot.springboot.vscode.springbootofvscode.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder 
 @Entity
 @Data
+@Getter
+@Setter
 @Table(name = "board")
 @DynamicInsert  //Insert시 Null인 필드를 제외하기위해 사용
 @DynamicUpdate //update시 Null인 필드를 제외하기위해 사용
