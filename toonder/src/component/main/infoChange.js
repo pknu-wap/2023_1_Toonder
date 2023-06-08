@@ -11,17 +11,18 @@ function InfoC() {
   useEffect(() => {
     document.title = 'Toonder 정보변경';
   }, []); //페이지 타이틀
-
+  //이메일관련
+  const [email, setEmail] = useState('');
+  const [emailValid, setEmailValid] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [pwLoading, setPwLoading] = useState(false);
   const [firstName, setFirstName] = useState(''); //이름 값
   const [lastName, setLastName] = useState(''); //성씨 값
-  const [pw, setPw] = useState(''); //비밀번호 값
-  const [pwc, setPwc] = useState(''); //비밀번호 확인 값
-  const [isPwCheck, setIsPwCheck] = useState(false); //비밀번호 확인 여부
-  const [isPwValid, setIsPwValid] = useState(false); //비밀번호 유효성 여부
   const navigate = useNavigate();
   const [notAllow, setNotAllow] = useState(true); //회원가입 버튼 활성화 여부
   const [selectedHashtags, setSelectedHashtags] = useState('');
   const [loading, setLoading] = useState(false);
+  const [pwNotAllow, setPwNotAllow] = useState(false);
   useEffect(() => {
     const storedHashtags = localStorage.getItem('loggedUserHashTag');
     if (storedHashtags) {
@@ -30,6 +31,48 @@ function InfoC() {
     }
   }, []); //사용자 해시태그 정보 가져옴
 
+  useEffect(() => {
+    //이메일 유효성과 비밀번호 유효성이 바꼈을때 둘다 유효한 경우만 login버튼 활성화 해주는 기능
+    if (emailValid) setPwNotAllow(false);
+    else setPwNotAllow(true);
+    return;
+  }, [emailValid]);
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    const regex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regex.test(e.target.value)) {
+      setEmailValid(true);
+    } else {
+      setEmailValid(false);
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setPwLoading(true);
+    setMessage('');
+    try {
+      await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:3000/newpw',
+      });
+      const [id, domain] = email.split('@');
+      const hiddenID = id.slice(0, 3) + id.slice(3).replace(/./g, '*');
+      const hiddenEmail = hiddenID + '@' + domain;
+      setMessage(
+        <div>비밀번호 재설정 링크가 {hiddenEmail}로 보내졌습니다</div>
+      );
+    } catch (error) {
+      console.error(error);
+      setMessage(
+        <div>비밀번호 재설정이 실패하였습니다. 다시 시도해 주세요</div>
+      );
+    } finally {
+      setPwLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -37,8 +80,6 @@ function InfoC() {
     const email = sessionStorage.getItem('loggedUserEmail');
 
     try {
-      await supabase.auth.updateUser({ password: pw });
-
       axios
         .post('toonder/update', {
           mem_email: email,
@@ -66,8 +107,6 @@ function InfoC() {
 
   useEffect(() => {
     if (
-      isPwCheck &&
-      isPwValid &&
       firstName.length > 0 &&
       lastName.length > 0 &&
       selectedHashtags.length > 0
@@ -76,7 +115,7 @@ function InfoC() {
     else setNotAllow(true);
 
     return;
-  }, [isPwValid, isPwCheck, firstName, lastName, selectedHashtags]);
+  }, [firstName, lastName, selectedHashtags]);
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -84,32 +123,6 @@ function InfoC() {
 
   const handleLastName = (e) => {
     setLastName(e.target.value);
-  };
-
-  const handlePW = (e) => {
-    setPw(e.target.value);
-
-    const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    if (regex.test(e.target.value)) {
-      setIsPwValid(true);
-    } else {
-      setIsPwValid(false);
-    }
-
-    if (e.target.value === pwc) {
-      setIsPwCheck(true);
-    } else {
-      setIsPwCheck(false);
-    }
-  };
-
-  const handleCheckPw = (e) => {
-    setPwc(e.target.value);
-    if (pw === e.target.value) {
-      setIsPwCheck(true);
-    } else {
-      setIsPwCheck(false);
-    }
   };
 
   const handleCheckboxChange = (event) => {
@@ -162,8 +175,8 @@ function InfoC() {
   ];
 
   return (
-    <Background text="Info Change" backgroundSize="600px 500px">
-      {loading ? ( // 로딩 중일 때의 화면
+    <Background text="Info Change" backgroundSize="600px 580px">
+      {loading ? (
         <div
           style={{
             fontSize: '100px',
@@ -177,106 +190,152 @@ function InfoC() {
           <FaSpinner className={styles.loadingIcon} />
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div className={styles.name}>
-            <input
-              type="text"
-              onChange={handleFirstName}
-              id="firstName"
-              placeholder="이름"
-              autoComplete="off"
-            />
-            <input
-              type="text"
-              onChange={handleLastName}
-              id="lastName"
-              placeholder="성"
-              autoComplete="off"
-            />
-          </div>
-
-          <div className={styles.password}>
-            {!isPwValid && pw.length > 0 && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-20px',
-                  color: 'white',
-                  fontSize: '15px',
-                }}
-              >
-                영문, 숫자 포함 8~10자 이상 입력해주세요
-              </div>
-            )}
-            <input
-              type="password"
-              onChange={handlePW}
-              value={pw}
-              placeholder="비밀번호"
-              autoComplete="off"
-            />
-            {!isPwCheck && pw.length > 0 && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-20px',
-                  color: 'white',
-                  fontSize: '15px',
-                  left: '270px',
-                  fontWeight: 'normal',
-                }}
-              >
-                비밀번호를 한번 더 정확히 입력해주세요
-              </div>
-            )}
-            <input
-              type="password"
-              onChange={handleCheckPw}
-              value={pwc}
-              placeholder="비밀번호 확인"
-              autoComplete="off"
-            />
-          </div>
-
-          {!selectedHashtags.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-              }}
-            >
-              <div
-                style={{
-                  position: 'relative',
-                  color: 'white',
-                  fontSize: '15px',
-                  left: '70%',
-                  top: '-50px',
-                }}
-              >
-                좋아하는 만화 장르를 1개 이상 선택
-              </div>
+        <>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.name}>
+              <input
+                type="text"
+                onChange={handleFirstName}
+                id="firstName"
+                placeholder="이름"
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                onChange={handleLastName}
+                id="lastName"
+                placeholder="성"
+                autoComplete="off"
+              />
             </div>
-          )}
+            {!selectedHashtags.length > 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'relative',
+                    color: 'white',
+                    fontSize: '15px',
+                    left: '75%',
+                    top: '40px',
+                  }}
+                >
+                  좋아하는 만화 장르를 1개 이상 선택
+                </div>
+              </div>
+            )}
 
-          <CheckboxContainer>
-            {hashtagOptions.map((hashtag) => (
-              <CheckboxLabel key={hashtag}>
-                <CheckboxInput
-                  type="checkbox"
-                  value={hashtag}
-                  onChange={handleCheckboxChange}
-                  checked={selectedHashtags.includes(hashtag)}
+            <CheckboxContainer>
+              {hashtagOptions.map((hashtag) => (
+                <CheckboxLabel key={hashtag}>
+                  <CheckboxInput
+                    type="checkbox"
+                    value={hashtag}
+                    onChange={handleCheckboxChange}
+                    checked={selectedHashtags.includes(hashtag)}
+                  />
+                  {hashtag}
+                </CheckboxLabel>
+              ))}
+            </CheckboxContainer>
+            <div>
+              <button
+                className={styles.submit}
+                disabled={notAllow}
+                type="submit"
+              >
+                <strong>Info Change</strong>
+              </button>
+            </div>
+          </form>
+
+          <div className={styles.findPw}>
+            {pwLoading ? (
+              <div
+                style={{
+                  fontSize: '30px',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  position: 'absolute',
+                }}
+              >
+                <FaSpinner
+                  style={{
+                    marginLeft: '75px',
+                    animation: 'spin 1s linear infinite',
+                  }}
                 />
-                {hashtag}
-              </CheckboxLabel>
-            ))}
-          </CheckboxContainer>
-          <div>
-            <button className={styles.submit} disabled={notAllow} type="submit">
-              <strong>Info Change</strong>
-            </button>
+              </div>
+            ) : message ? (
+              <>
+                <h1
+                  style={{
+                    position: 'relative',
+                    color: 'white',
+                    fontSize: '15px',
+
+                    left: '305px',
+                    top: '-0px',
+                    width: '500px',
+                  }}
+                >
+                  {message}
+                </h1>
+                <button
+                  style={{
+                    position: 'relative',
+                    color: 'white',
+
+                    left: '30px',
+                    top: '-10px',
+                    width: '500px',
+                  }}
+                  onClick={() => setMessage(false)}
+                >
+                  확인
+                </button>
+              </>
+            ) : (
+              <form onSubmit={handleResetPassword}>
+                <div>
+                  {!emailValid && email.length > 0 && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: 'relative',
+                          color: 'white',
+                          fontSize: '15px',
+                          left: '-90%',
+                          top: '-20px',
+                          width: '180px',
+                        }}
+                      >
+                        올바른 이메일을 입력해주세요
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <input
+                  id="enter_email"
+                  onChange={handleEmail}
+                  type="text"
+                  placeholder="Enter your E-mail"
+                />
+                <button disabled={pwNotAllow} type="submit">
+                  Send Code
+                </button>
+              </form>
+            )}
           </div>
-        </form>
+        </>
       )}
     </Background>
   );
@@ -294,7 +353,7 @@ const CheckboxContainer = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 391px;
+  top: 450px;
   border-radius: 10px;
   background-color: white;
   color: grey;
