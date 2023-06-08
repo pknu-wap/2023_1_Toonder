@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './backGround.module.css';
-import ex1 from '../../images/ex1.png';
+import userImage from '../../images/userImage.png';
 import axios from 'axios';
 import supabase from '../supabase';
+
 
 function MainBackSmall(props) {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function MainBackSmall(props) {
     localStorage.getItem('loggedUserName')
   );
   const [loggedUserImage, setLoggedUserImage] = useState(
-    localStorage.getItem('loggedUserPhoto') || ex1
+    localStorage.getItem('loggedUserPhoto') || userImage
   );
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -133,7 +134,7 @@ function MainBackSmall(props) {
 
 function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
   const [selectedImage, setSelectedImage] = useState(
-    localStorage.getItem('loggedUserPhoto') || ex1
+    localStorage.getItem('loggedUserPhoto') || userImage
   );
   const [newImage, setNewImage] = useState(null);
 
