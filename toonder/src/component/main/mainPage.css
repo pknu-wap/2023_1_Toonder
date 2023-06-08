@@ -195,39 +195,6 @@ main {
   float: right;
 }
 /*밑의 부분이 나타날 부분*/
-.botPage {
-  position: absolute;
-  top: 552px;
-  width: 953px;
-  height: 149px;
-  background-color: rgb(255, 147, 147);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 10px;
-  color: white;
-}
-
-.botPage section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  width: 860px;
-  height: 115px;
-  color: rgb(255, 147, 147);
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.botPage li {
-  margin-left: 30px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-}
 
 /*웹툰 목록*/
 .mainWebtoonList {
@@ -651,4 +618,64 @@ table button {
   margin-top: 10px;
   margin-bottom: 80px;
   height: 30px;
+}
+.myReview section,
+.myPost section {
+  max-height: 200px; /* 스크롤바가 보이는 영역의 최대 높이 */
+  overflow-y: scroll; /* 수직 스크롤바 활성화 */
+  overflow-x: hidden; /* 가로 스크롤바 비활성화 */
+}
+.botPage section::-webkit-scrollbar .myReview section::-webkit-scrollbar,
+.myPost section::-webkit-scrollbar {
+  width: 10px; /* 스크롤바의 너비 */
+}
+.botPage section::-webkit-scrollbar .myReview section::-webkit-scrollbar-track,
+.myPost section::-webkit-scrollbar-track {
+  background: #888; /* 스크롤바 트랙의 배경색 */
+}
+.botPage section::-webkit-scrollbar .myReview section::-webkit-scrollbar-thumb,
+.myPost section::-webkit-scrollbar-thumb {
+  background: #888; /* 스크롤바의 색상 */
+  border-radius: 3px; /* 스크롤바의 모서리 둥글기 */
+  margin-top: -50px;
+}
+
+.myReview section::-webkit-scrollbar-thumb:hover,
+.myPost section::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 스크롤바의 색상 (마우스 호버 시) */
+}
+
+.botPage {
+  position: absolute;
+  top: 552px;
+  width: 953px;
+  height: 300px;
+  background-color: rgb(255, 147, 147);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  color: white;
+}
+
+.botPage section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  width: 860px;
+  height: 400px;
+  color: rgb(255, 147, 147);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.botPage li {
+  margin-left: 30px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
 }
