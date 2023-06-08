@@ -84,7 +84,6 @@ function MainWebtoonInfo() {
     setUserEmailForStart();
 
     axios.get('toonder/webtoon/' + mastrId).then((res) => {
-      console.log(mastrId);
       const webtoonInfo = res.data;
       setWebtoonImage(webtoonInfo.imageDownloadUrl);
       setWebtoonTitle(webtoonInfo.title);
@@ -104,6 +103,8 @@ function MainWebtoonInfo() {
       console.log(res.data);
       setReviewList(res.data);
     });
+
+    
   }, []);
 
   const setUserEmailForStart = async () => {
@@ -475,7 +476,10 @@ function MainWebtoonInfo() {
         <MainBackSmall>
           <div className="mainWebtoonInfo">
             <div className="mainwtInfo">
-              <img src={webtoonImage} alt="image error" />
+              <img src={webtoonImage} alt="image error" onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = logo2;
+                              }}/>
               <div className="subwtInfo">
                 <h1>웹툰 정보</h1>
                 <div>
