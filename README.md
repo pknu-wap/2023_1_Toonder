@@ -1,26 +1,27 @@
+<div style="color:rgb(255, 147, 147);">
 
-<span style="color=white;background=rgb(255, 147, 147);">다양한 플랫폼에 있는 웹툰을 한 플랫폼에서 검색하고 추천 받을 수 있는 서비스를 제공하는 웹 사이트를 만드는 프로젝트입니다.</span>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=TOONDER&fontSize=90" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=white&height=200&section=header&text=Toonder&fontSize=90" />
 
+<p style="color:rgb(255, 147, 147);">다양한 플랫폼에 있는 웹툰을 한 플랫폼에서 검색하고 추천 받을 수 있는 서비스를 제공하는 웹 사이트를 만드는 프로젝트입니다.</p>
 
 <br>
 
-## 목차
-- [Team Member](#team-member)
+## <strong>목차</strong>
+- [Member](#member)
 - [Tech](#tech)
 
-## Team Member
+## <strong>Member</strong>
 - 장홍준 (BE)
 - 이승엽 (FE)
 - 김주희 (BE)
 - 박연수 (FE)
 
 
-## Tech
+## <strong>Tech</strong>
 
-### FrontEnd
-<div id="tech">
+- ###  FrontEnd
+<div>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/>
@@ -28,8 +29,9 @@
 </div>
 <br>
 
-### BackEnd
+- ### BackEnd
 <div>
   <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/>
+</div>
 </div>
