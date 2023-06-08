@@ -7,6 +7,7 @@ import supabase from '../supabase';
 
 
 function MainBackSmall(props) {
+
   const navigate = useNavigate();
   const [loggedUserName, setLoggedUserName] = useState(
     localStorage.getItem('loggedUserName')
@@ -133,6 +134,8 @@ function MainBackSmall(props) {
 }
 
 function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
+
+
   const [selectedImage, setSelectedImage] = useState(
     localStorage.getItem('loggedUserPhoto') || userImage
   );
@@ -177,6 +180,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
   };
 
   const modalRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const handler = (event) => {
@@ -195,7 +199,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
   return (
     <div className="profilechangeback">
       <div className="profilechange" ref={modalRef}>
-        <img id="changeinfoimg" src={selectedImage} alt="image error" />
+        <img style={{marginBottom:'5px'}} id="changeinfoimg" src={selectedImage} alt="image error" />
         <div id="changeFile">
           <label htmlFor="chooseFile">
             <h3>프로필 사진 변경</h3>
@@ -209,21 +213,26 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
             accept="image/*"
             onChange={handleFileChange}
             style={{
-              position: 'absolute',
-              right: '-200px',
-              top: '0px',
-              marginTop: '10px',
+              display:'none'
             }}
+            ref={fileInputRef}
           />
+          <button style ={{marginTop:'20px'}} onClick={() => fileInputRef.current.click()}>이미지 검색</button>
         </div>
-        <div id="changeButtonSet" style={{ marginTop: '25px' }}>
-          <button id="submitButton" type="submit" onClick={handleSave}>
-            <h3>저장</h3>
-          </button>
-          <br />
+        <div id="changeButtonSet" style={{ marginTop: '5px' }}>
+          
+          
+                    
+          
           <button id="cancel" onClick={closeModal}>
             <h3>취소</h3>
           </button>
+          
+          <button id="submitButton" type="submit" onClick={handleSave} style={{marginLeft: '10px'}}>
+            <h3>저장</h3>
+          </button>
+          
+
         </div>
       </div>
     </div>
