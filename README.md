@@ -1,9 +1,22 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=white&height=200&section=header&text=Toonder&fontSize=90" />
-## PKNU WAP
 
-<p>다양한 플랫폼에 있는 웹툰을 한 플랫폼에서 검색하고 추천 받을 수 있는 서비스를 제공하는 웹 사이트를 만드는 프로젝트입니다.</p>
+
+<span style="color=white;background=rgb(255, 147, 147);">다양한 플랫폼에 있는 웹툰을 한 플랫폼에서 검색하고 추천 받을 수 있는 서비스를 제공하는 웹 사이트를 만드는 프로젝트입니다.</span>
+
 <br>
 
+## 목차
+- [Team Member](#team-member)
+- [Tech](#tech)
+
+## Team Member
+- 장홍준 (BE)
+- 이승엽 (FE)
+- 김주희 (BE)
+- 박연수 (FE)
+
+
+## Tech
 
 ### FrontEnd
 <div id="tech">
@@ -13,6 +26,7 @@
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/>
 </div>
 <br>
+
 ### BackEnd
 <div>
   <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"/>
