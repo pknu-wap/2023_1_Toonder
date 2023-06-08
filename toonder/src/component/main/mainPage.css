@@ -26,6 +26,7 @@ textarea {
   margin-top: 60px;
   width: 1224px;
   border-radius: 10px;
+  height: 1100px;
 }
 
 .logoSearch {
@@ -381,7 +382,7 @@ table button {
   background-color: rgb(255, 147, 147);
   color: white;
   width: 602px;
-  height: 293px;
+  height: 400px;
   border-radius: 10px;
 }
 
@@ -396,7 +397,7 @@ table button {
 
 .subUserInfo section {
   width: 523px;
-  height: 184px;
+  height: 204px;
   background-color: white;
   color: rgb(255, 147, 147);
   border-radius: 10px;
@@ -621,7 +622,8 @@ table button {
 }
 .myReview section,
 .myPost section {
-  max-height: 200px; /* 스크롤바가 보이는 영역의 최대 높이 */
+  height: 255px;
+  max-height: 400px; /* 스크롤바가 보이는 영역의 최대 높이 */
   overflow-y: scroll; /* 수직 스크롤바 활성화 */
   overflow-x: hidden; /* 가로 스크롤바 비활성화 */
 }
