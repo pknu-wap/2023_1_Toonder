@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/toonder',
     createProxyMiddleware({
-        target: 'http://localhost:8080',
+        target: 'http://15.164.55.83:8080',
       changeOrigin: true,
     })
   );
