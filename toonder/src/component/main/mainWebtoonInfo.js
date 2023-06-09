@@ -100,7 +100,7 @@ function MainWebtoonInfo() {
     });
 
     axios.get('toonder/webtoon/' + mastrId + '/review').then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       setReviewList(res.data);
     });
 
@@ -134,12 +134,12 @@ function MainWebtoonInfo() {
       mem_email: userEmail,
     };
 
-    console.log(sendingReviewData);
+    //console.log(sendingReviewData);
 
     axios
       .post('toonder/webtoon/' + mastrId + '/review', sendingReviewData)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setReviewList(reviewList.concat(res.data));
       })
       .catch((error) => console.log(error));
@@ -159,7 +159,7 @@ function MainWebtoonInfo() {
       mem_email: userEmail,
     };
 
-    console.log(sendingReviewData);
+    //console.log(sendingReviewData);
 
     axios
       .put(
@@ -167,7 +167,7 @@ function MainWebtoonInfo() {
         sendingReviewData
       )
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setReviewList(
           reviewList.map((review) =>
             review.revNo === textModalRevNo ? res.data : review
@@ -180,12 +180,12 @@ function MainWebtoonInfo() {
   };
 
   const handleChange = (event) => {
-    console.log(event.target);
+    //console.log(event.target);
     setInputReviewText(event.target.value);
   };
 
   const handleChangeForModal = (event) => {
-    console.log(event.target);
+    //console.log(event.target);
     setTextModalForModify(event.target.value);
   };
 
@@ -204,9 +204,9 @@ function MainWebtoonInfo() {
       mem_name: review.memName,
       mem_email: review.memEmail,
     };
-    console.log(revNo);
-    console.log(sendingData);
-    console.log('toonder/webtoon/' + mastrId + '/review/' + revNo);
+    //console.log(revNo);
+    //console.log(sendingData);
+    //console.log('toonder/webtoon/' + mastrId + '/review/' + revNo);
 
     axios
       .delete('toonder/webtoon/' + mastrId + '/review/' + revNo, {
@@ -559,7 +559,7 @@ function MainWebtoonInfo() {
                                 setTextModalForModify(review.revContent);
                                 setTextModalRevNo(review.revNo);
                                 setTextModalRateValue(review.revRating);
-                                console.log(review.revNo);
+                                //console.log(review.revNo);
                                 setOpenModalForModify(true);
                               }}
                             >

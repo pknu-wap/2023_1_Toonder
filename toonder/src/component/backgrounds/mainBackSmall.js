@@ -37,7 +37,7 @@ function MainBackSmall(props) {
         axios
           .post('toonder/name', requestData)
           .then((loggedUserData) => {
-            console.log(loggedUserData.data.mem_name);
+            //console.log(loggedUserData.data.mem_name);
             setLoggedUserName(loggedUserData.data.mem_name);
             localStorage.setItem(
               'loggedUserName',
@@ -51,7 +51,7 @@ function MainBackSmall(props) {
         axios
           .post('toonder/photo', requestData)
           .then((loggedUserData) => {
-            console.log(loggedUserData.data.mem_photo);
+            //console.log(loggedUserData.data.mem_photo);
             setLoggedUserImage(loggedUserData.data.mem_photo);
             localStorage.setItem(
               'loggedUserPhoto',
@@ -161,7 +161,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
 
   const handleSave = async () => {
     if (newImage) {
-      console.log('새 이미지 저장:', newImage);
+      //console.log('새 이미지 저장:', newImage);
 
       const { data } = await supabase.auth.getSession();
       axios
@@ -169,7 +169,6 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
           email: data.session.user.email,
           image: selectedImage,
         })
-        .then((res) => console.log(res))
         .catch((error) => console.log(error));
 
       localStorage.setItem('loggedUserPhoto', selectedImage);

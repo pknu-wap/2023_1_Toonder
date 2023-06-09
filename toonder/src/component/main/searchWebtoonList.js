@@ -21,7 +21,7 @@ function SearchWebtoonList() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchContent = location.state?.searchContent;
-  console.log(searchContent);
+  //console.log(searchContent);
 
   function onScroll() {
     const windowHeight =
@@ -67,7 +67,7 @@ function SearchWebtoonList() {
         )}&page=${countPage}`
       )
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         if (res.data.length === 0) {
           alert('검색어에 일치하는 웹툰이 없습니다.');
           navigate(-1);
