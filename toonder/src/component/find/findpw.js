@@ -40,7 +40,7 @@ function Findpw() {
     setMessage('');
     try {
       await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:3000/newpw',
+        redirectTo: 'http://ec2-15-164-55-83.ap-northeast-2.compute.amazonaws.com/newpw',
       });
       const [id, domain] = email.split('@');
       const hiddenID = id.slice(0, 3) + id.slice(3).replace(/./g, '*');
