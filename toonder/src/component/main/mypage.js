@@ -96,6 +96,7 @@ function Mypage() {
         .post('toonder/mypage/board/', requestData)
         .then((boardRes) => {
           const data = boardRes.data; // 받아온 게시글 데이터
+          //console.log(data);
           const reversedData = [...data].reverse();
           const titles = reversedData.map((review) => review.brdTitle);
           const brdNo = reversedData.map((review) => review.brdNo);
@@ -112,6 +113,7 @@ function Mypage() {
         .post('/toonder/mypage/review', requestData)
         .then((reviewRes) => {
           const data = reviewRes.data; // 받아온 리뷰 데이터
+          //console.log(data);
           const reversedData = [...data].reverse();
           const titles = reversedData.map((review) => review.webtoon.title);
           const contents = reversedData.map((review) => review.revContent);
@@ -233,7 +235,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: '#FF9393',
                 width: '40px',
                 marginLeft: '450px',
                 marginRight: '0px',
@@ -254,7 +256,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: '#FF9393',
                 width: '40px',
                 marginLeft: '530px',
                 marginRight: '0px',
@@ -326,7 +328,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: '#FF9393',
                 width: '40px',
                 marginLeft: '450px',
                 marginRight: '0px',
@@ -346,7 +348,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: '#FF9393',
                 width: '40px',
                 marginLeft: '530px',
                 marginRight: '0px',
@@ -398,7 +400,7 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
 
   const handleSave = async () => {
     if (newImage) {
-      console.log('새 이미지 저장:', newImage);
+      //console.log('새 이미지 저장:', newImage);
 
       const { data } = await supabase.auth.getSession();
       axios
@@ -406,7 +408,6 @@ function ModalBasic({ setModalOpen, setLoggedUserImage, openModal }) {
           email: data.session.user.email,
           image: selectedImage,
         })
-        .then((res) => console.log(res))
         .catch((error) => console.log(error));
 
       localStorage.setItem('loggedUserPhoto', selectedImage);
