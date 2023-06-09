@@ -77,7 +77,7 @@ function Practice() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const hashtag = selectedHashtags.join(' ');
-    console.log(hashtag);
+    //console.log(hashtag);
   };
 
   return (
