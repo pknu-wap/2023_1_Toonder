@@ -115,7 +115,7 @@ function Mypage() {
           const reversedData = [...data].reverse();
           const titles = reversedData.map((review) => review.webtoon.title);
           const contents = reversedData.map((review) => review.revContent);
-          const webId = data.map((review) => review.webtoon.mastrId);
+          const webId = reversedData.map((review) => review.webtoon.mastrId);
           setwebId(webId.reverse());
           setWebtoonTitles(titles);
           setReviewData(contents);
@@ -233,7 +233,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: 'rgb(255, 147, 147)',
                 width: '40px',
                 marginLeft: '450px',
                 marginRight: '0px',
@@ -254,7 +254,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: 'rgb(255, 147, 147)',
                 width: '40px',
                 marginLeft: '530px',
                 marginRight: '0px',
@@ -326,7 +326,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: 'rgb(255, 147, 147)',
                 width: '40px',
                 marginLeft: '450px',
                 marginRight: '0px',
@@ -346,7 +346,7 @@ function Mypage() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '40px',
-                color: 'white',
+                color: 'rgb(255, 147, 147)',
                 width: '40px',
                 marginLeft: '530px',
                 marginRight: '0px',
