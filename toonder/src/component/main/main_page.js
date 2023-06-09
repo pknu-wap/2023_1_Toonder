@@ -153,7 +153,7 @@ function Mainpage(props) {
               <table>
                 <tbody>
                   <tr>
-                    {res.data.map((item, index) => (
+                    {resdata.map((item, index) => (
                       <td key={index}>
                         <button
                           className="refresh"
