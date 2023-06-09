@@ -49,15 +49,15 @@ function Mainpage(props) {
           .get('toonder/recentReviews')
           .then((res) => {
             const data = res.data;
-            console.log(data);
+            //console.log(data);
             const webId = data.map((review) => review.webtoon.mastrId);
             const webTitile = data.map((review) => review.webtoon.title);
 
             const content = data.map((review) => review.revContent);
             const userName = data.map((review) => review.member.mem_name);
 
-            console.log(content);
-            console.log(userName);
+            //console.log(content);
+            //console.log(userName);
 
             setWebTitle(webTitile);
             setReviewContent(content);
@@ -85,7 +85,7 @@ function Mainpage(props) {
       axios
         .post('toonder/recommand', requestData)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setResData(res.data);
           setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 변경
         })
