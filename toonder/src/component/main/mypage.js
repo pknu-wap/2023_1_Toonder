@@ -198,7 +198,7 @@ function Mypage() {
                       <a
                         onClick={() => {
                           navigate('/mainwebtooninfo', {
-                            state: { mastrId: webId[key] },
+                            state: { mastrId: webId[index] },
                           });
                         }}
                         style={{
