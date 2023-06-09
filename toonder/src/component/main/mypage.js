@@ -116,7 +116,7 @@ function Mypage() {
           const titles = reversedData.map((review) => review.webtoon.title);
           const contents = reversedData.map((review) => review.revContent);
           const webId = reversedData.map((review) => review.webtoon.mastrId);
-          setwebId(webId.reverse());
+          setwebId(webId);
           setWebtoonTitles(titles);
           setReviewData(contents);
 
