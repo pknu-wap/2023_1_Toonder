@@ -62,6 +62,17 @@
   ![Search Page](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/2c94a9d5-0521-47af-9579-e33ec8022725)
   <br>
   ![Bulliten Board Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/c863d286-84bf-4159-b3e6-d258effb30ef)
+  
+  <br>
+  <br>
+  
+  ![Login Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/fc73e9ed-4ad5-4ab2-a897-e450fcf786a0)
+<br>
+  ![Join Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/882799bb-767c-475e-9772-e7ca4c9b6472)
+<br>
+  ![Finding Password Page](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/f19c2dc2-2e17-45ef-9572-88b700410c55)
+<br>
+  ![Info Changing Page (2)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/009078a1-7060-44aa-98f0-c0eabd2f71a1)
 
 
 
