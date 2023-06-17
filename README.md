@@ -56,6 +56,13 @@
   <br>
   
   ![Main Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/ccbb30f0-682c-4fb3-8aea-dbdee604d8a4)
+  <br>
+  ![Webtoon Info And List Page](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/da2372fc-e4b3-47eb-b142-2dba66f91140)
+  <br>
+  ![Search Page](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/2c94a9d5-0521-47af-9579-e33ec8022725)
+  <br>
+  ![Bulliten Board Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/c863d286-84bf-4159-b3e6-d258effb30ef)
+
 
 
 </div>
