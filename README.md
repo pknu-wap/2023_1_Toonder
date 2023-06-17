@@ -53,8 +53,9 @@
 - find ID,PW
 - Change User info.
 </strong>
+  <br>
   
-  ![Main Page](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/e7c36e52-a982-4df2-9534-812d51750bd0)
+  ![Main Page (1)](https://github.com/pknu-wap/2023_1_Toonder/assets/35947667/ccbb30f0-682c-4fb3-8aea-dbdee604d8a4)
 
 
 </div>
